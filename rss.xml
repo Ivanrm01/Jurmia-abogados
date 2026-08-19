@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog jurídico de JURMIA Abogados</title>
+    <link>https://www.jurmiabogados.es/blog</link>
+    <atom:link href="https://www.jurmiabogados.es/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Novedades y análisis en derecho civil, penal, laboral y tributario.</description>
+    <language>es-ES</language>
+    <lastBuildDate>Wed, 19 Aug 2026 18:03:23 GMT</lastBuildDate>
+    <item>
+      <title>Le llega una liquidación de Hacienda: tiene un mes y tres decisiones que tomar</title>
+      <link>https://www.jurmiabogados.es/blog/como-recurrir-una-liquidacion-de-hacienda</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/como-recurrir-una-liquidacion-de-hacienda</guid>
+      <description>Reposición o reclamación económico-administrativa, con o sin suspensión, y qué hacer con la sanción que llega después. Guía práctica de los primeros treinta días.</description>
+      <category>Tributario</category>
+      <pubDate>Tue, 04 Aug 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Veinte días hábiles: el plazo que hace perder más despidos de lo que parece</title>
+      <link>https://www.jurmiabogados.es/blog/plazo-para-impugnar-un-despido</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/plazo-para-impugnar-un-despido</guid>
+      <description>El plazo para impugnar un despido es de veinte días hábiles y es de caducidad, no de prescripción. Explicamos cómo se cuenta, qué lo suspende y qué hacer en los primeros días.</description>
+      <category>Laboral</category>
+      <pubDate>Tue, 28 Jul 2026 09:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

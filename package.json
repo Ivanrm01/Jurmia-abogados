@@ -1,0 +1,13 @@
+{
+  "name": "jurmia-abogados",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && python3 -m http.server 8000"
+  },
+  "dependencies": {
+    "marked": "^12.0.2"
+  }
+}
