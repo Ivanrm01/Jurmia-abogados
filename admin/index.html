@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel del blog — JURMIA Abogados</title>
+<link rel="icon" href="/assets/img/jurmia-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tinta: #06365a;
+    --tinta-oscura: #042439;
+    --tinta-media: #35617f;
+    --piedra: #c3ced2;
+    --piedra-clara: #e6ebed;
+    --papel: #f4f6f7;
+    --blanco: #fff;
+    --verde: #1c6b4b;
+    --ambar: #8a5a12;
+    --rojo: #a12a2a;
+    --display: "Archivo", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--papel); color: var(--tinta-oscura);
+    font-family: var(--display); font-size: 15px; line-height: 1.55;
+  }
+  a { color: var(--tinta); }
+  .barra {
+    position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 1rem;
+    justify-content: space-between; padding: .75rem 1.25rem; background: var(--tinta-oscura); color: #fff;
+  }
+  .barra img { height: 26px; filter: brightness(0) invert(1); }
+  .barra-titulo { font-family: var(--mono); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--piedra); }
+  .barra-acciones { display: flex; gap: .5rem; align-items: center; }
+
+  button {
+    font-family: var(--display); font-size: .8125rem; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--tinta); background: var(--tinta); color: #fff;
+    padding: .55rem 1rem; border-radius: 2px; transition: background .15s ease;
+  }
+  button:hover:not(:disabled) { background: #000; border-color: #000; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  button.secundario { background: transparent; color: var(--tinta); }
+  button.secundario:hover:not(:disabled) { background: var(--tinta); color: #fff; }
+  button.claro { background: #fff; color: var(--tinta-oscura); border-color: #fff; }
+  button.peligro { background: transparent; border-color: var(--rojo); color: var(--rojo); }
+  button.peligro:hover:not(:disabled) { background: var(--rojo); color: #fff; }
+
+  .caja { max-width: 420px; margin: 12vh auto; background: #fff; border: 1px solid var(--piedra); padding: 2rem; }
+  .caja h1 { font-size: 1.35rem; margin: 0 0 .5rem; }
+  .caja p { color: var(--tinta-media); font-size: .875rem; margin: 0 0 1.5rem; }
+
+  label { display: block; font-family: var(--mono); font-size: .65rem; letter-spacing: .12em;
+          text-transform: uppercase; color: var(--tinta-media); margin-bottom: .35rem; }
+  input, select, textarea {
+    width: 100%; font-family: inherit; font-size: .9375rem; color: var(--tinta-oscura);
+    background: var(--papel); border: 1px solid var(--piedra); border-radius: 2px; padding: .6rem .7rem;
+  }
+  textarea { resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--tinta); background: #fff; }
+  .campo { margin-bottom: 1rem; }
+  .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .disposicion { display: grid; grid-template-columns: 280px minmax(0,1fr) 300px; gap: 1px; background: var(--piedra); min-height: calc(100vh - 50px); }
+  .panel { background: #fff; padding: 1.25rem; overflow-y: auto; max-height: calc(100vh - 50px); }
+  .panel h2 { font-size: .7rem; font-family: var(--mono); letter-spacing: .14em; text-transform: uppercase;
+              color: var(--tinta-media); margin: 0 0 1rem; font-weight: 500; }
+
+  .lista { list-style: none; margin: 0; padding: 0; }
+  .lista li { border-bottom: 1px solid var(--piedra-clara); }
+  .lista button {
+    width: 100%; text-align: left; background: none; border: none; color: inherit;
+    padding: .75rem .5rem; font-weight: 400; border-radius: 0;
+  }
+  .lista button:hover { background: var(--piedra-clara); }
+  .lista button.activo { background: var(--piedra-clara); box-shadow: inset 3px 0 0 var(--tinta); }
+  .lista strong { display: block; font-size: .875rem; font-weight: 600; margin-bottom: .2rem; }
+  .lista span { font-family: var(--mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-media); }
+  .borrador { color: var(--ambar); }
+
+  .contador { font-family: var(--mono); font-size: .65rem; float: right; letter-spacing: .06em; }
+  .ok { color: var(--verde); } .aviso { color: var(--ambar); } .mal { color: var(--rojo); }
+
+  .revision { list-style: none; margin: 0; padding: 0; font-size: .8125rem; }
+  .revision li { display: flex; gap: .5rem; padding: .45rem 0; border-bottom: 1px solid var(--piedra-clara); align-items: baseline; }
+  .revision .marca { font-family: var(--mono); font-weight: 500; }
+
+  .vista-google { border: 1px solid var(--piedra); padding: .9rem; background: #fff; margin-bottom: 1.25rem; }
+  .vista-google .url { font-size: .75rem; color: #4d6b32; word-break: break-all; }
+  .vista-google .titulo { color: #1a0dab; font-size: 1rem; line-height: 1.3; margin: .2rem 0; }
+  .vista-google .desc { font-size: .8125rem; color: #4d5156; }
+
+  .mensaje { padding: .7rem .9rem; font-size: .8125rem; margin-bottom: 1rem; border-left: 3px solid var(--tinta); background: var(--piedra-clara); }
+  .mensaje.error { border-left-color: var(--rojo); color: var(--rojo); background: #fdf1f1; }
+  .mensaje.bien { border-left-color: var(--verde); color: var(--verde); background: #f0f7f3; }
+
+  .ayuda { font-size: .75rem; color: var(--tinta-media); margin-top: .35rem; }
+  .oculto { display: none !important; }
+  .previsualizacion { border: 1px solid var(--piedra); padding: 1rem; background: #fff; font-family: Georgia, serif; font-size: .9rem; }
+  .previsualizacion h2 { font-family: var(--display); font-size: 1.1rem; color: var(--tinta-oscura); letter-spacing: 0; text-transform: none; margin: 1rem 0 .4rem; }
+  .previsualizacion h3 { font-family: var(--display); font-size: .95rem; margin: .9rem 0 .3rem; }
+
+  @media (max-width: 1100px) {
+    .disposicion { grid-template-columns: 1fr; }
+    .panel { max-height: none; }
+  }
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    input, select, textarea { font-size: 16px; padding: .7rem; }
+    .fila { grid-template-columns: 1fr; gap: 0; }
+    .barra { flex-wrap: wrap; gap: .5rem; padding: .6rem .9rem; }
+    .barra img { height: 22px; }
+    button { min-height: 46px; padding: .6rem 1rem; }
+    .caja { margin: 6vh 1rem; padding: 1.5rem; }
+    #cuerpo { min-height: 45vh; }
+    .lista button { padding: .9rem .5rem; }
+    /* los botones de guardar quedan siempre al alcance */
+    .acciones-editor {
+      position: sticky; bottom: 0; background: #fff; padding: .75rem 0;
+      border-top: 1px solid var(--piedra); margin: 0 -1.25rem; padding-inline: 1.25rem;
+      padding-bottom: calc(.75rem + env(safe-area-inset-bottom, 0));
+    }
+    .revision li { padding: .6rem 0; }
+  }
+</style>
+</head>
+<body class="sin-barra-movil">
+
+<!-- ============ acceso ============ -->
+<div id="acceso">
+  <div class="caja">
+    <h1>Panel del blog</h1>
+    <p>JURMIA Abogados. Acceda con su correo del despacho para gestionar los artículos.</p>
+    <div id="mensaje-acceso"></div>
+    <div class="campo">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="campo">
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" autocomplete="current-password">
+    </div>
+    <button id="btn-entrar">Entrar</button>
+  </div>
+</div>
+
+<!-- ============ panel ============ -->
+<div id="panel" class="oculto">
+  <div class="barra">
+    <div style="display:flex;align-items:center;gap:1rem">
+      <img src="/assets/img/jurmia-logo.png" alt="JURMIA Abogados">
+      <span class="barra-titulo">Panel del blog</span>
+      <span class="barra-titulo" id="sesion-nombre" style="color:#fff;letter-spacing:.02em;text-transform:none"></span>
+    </div>
+    <div class="barra-acciones">
+      <button class="claro" id="btn-nuevo">Nuevo artículo</button>
+      <button class="secundario" id="btn-salir" style="color:#fff;border-color:rgba(255,255,255,.4)">Salir</button>
+    </div>
+  </div>
+
+  <div class="disposicion">
+
+    <!-- lista -->
+    <aside class="panel">
+      <h2>Artículos</h2>
+      <ul class="lista" id="lista"></ul>
+      <p class="ayuda" id="lista-vacia">Todavía no hay artículos. Empiece con «Nuevo artículo».</p>
+    </aside>
+
+    <!-- editor -->
+    <section class="panel">
+      <h2>Editor</h2>
+      <div id="mensaje-editor"></div>
+
+      <div class="campo">
+        <label for="titulo">Titular <span class="contador" id="c-titulo"></span></label>
+        <input id="titulo" placeholder="Ej.: El Supremo fija cuándo prescribe la acción de reclamación de gastos hipotecarios">
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label for="area">Área</label>
+          <select id="area">
+            <option>Civil</option><option>Penal</option><option>Laboral</option><option>Tributario</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="fecha">Fecha de publicación</label>
+          <input type="date" id="fecha">
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label for="autor">Autor</label>
+          <input id="autor" placeholder="Nombre del abogado que firma">
+        </div>
+        <div class="campo">
+          <label for="slug">URL <span class="contador" id="c-slug"></span></label>
+          <input id="slug" placeholder="se-genera-desde-el-titular">
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="resumen">Resumen <span class="contador" id="c-resumen"></span></label>
+        <textarea id="resumen" rows="2" placeholder="Una o dos frases. Aparece en el listado y, si no rellena la meta description, también en Google."></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="cuerpo">Cuerpo del artículo (Markdown)</label>
+        <textarea id="cuerpo" rows="20" placeholder="## Subtítulo&#10;&#10;Texto del artículo. Use **negrita**, listas con guion y enlaces [así](/areas/civil)."></textarea>
+        <p class="ayuda"><code>## Subtítulo</code> · <code>**negrita**</code> · <code>- lista</code> · <code>[texto](/areas/civil)</code> · <code>&gt; cita</code></p>
+      </div>
+
+      <details>
+        <summary style="cursor:pointer;font-size:.8125rem;margin-bottom:.75rem">Ajustes avanzados de SEO e imagen</summary>
+        <div class="campo">
+          <label for="metaTitulo">Meta title <span class="contador" id="c-metaTitulo"></span></label>
+          <input id="metaTitulo" placeholder="Si lo deja vacío se usa el titular + el nombre del despacho">
+        </div>
+        <div class="campo">
+          <label for="metaDescripcion">Meta description <span class="contador" id="c-metaDescripcion"></span></label>
+          <textarea id="metaDescripcion" rows="2" placeholder="Si lo deja vacío se usa el resumen"></textarea>
+        </div>
+        <div class="campo">
+          <label for="archivoImagen">Imagen destacada</label>
+          <input type="file" id="archivoImagen" accept="image/*">
+          <p class="ayuda" id="estado-imagen">Se usa en Google, en el listado y al compartir en redes. Recomendado 1200×630 px.</p>
+        </div>
+        <div class="campo">
+          <label for="imagen">Ruta de la imagen</label>
+          <input id="imagen" placeholder="/assets/img/blog/...">
+        </div>
+        <div class="campo">
+          <label for="imagenAlt">Texto alternativo de la imagen</label>
+          <input id="imagenAlt" placeholder="Describa la imagen para quien no puede verla">
+        </div>
+      </details>
+
+      <div class="campo" style="display:flex;align-items:center;gap:.6rem;margin-top:1rem">
+        <input type="checkbox" id="publicado" checked style="width:auto">
+        <label for="publicado" style="margin:0">Publicado (si lo desmarca queda como borrador y no se publica)</label>
+      </div>
+
+      <div class="acciones-editor" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem">
+        <button id="btn-guardar">Guardar y publicar</button>
+        <button class="secundario" id="btn-previsualizar">Previsualizar</button>
+        <button class="peligro" id="btn-borrar">Eliminar</button>
+      </div>
+      <p class="ayuda">Al guardar se crea un commit en GitHub y Vercel republica el blog. Tarda alrededor de un minuto en verse en la web.</p>
+
+      <div id="previsualizacion" class="previsualizacion oculto" style="margin-top:1.25rem"></div>
+    </section>
+
+    <!-- revisión SEO -->
+    <aside class="panel">
+      <h2>Revisión SEO</h2>
+
+      <div class="vista-google">
+        <div class="url" id="g-url">jurmiabogados.es › blog › …</div>
+        <div class="titulo" id="g-titulo">Titular del artículo</div>
+        <div class="desc" id="g-desc">Así se verá en los resultados de Google.</div>
+      </div>
+
+      <ul class="revision" id="revision"></ul>
+
+      <p class="ayuda" style="margin-top:1.25rem">
+        Estas comprobaciones son orientativas. Lo que más pesa es que el artículo responda de verdad
+        a lo que la gente busca y que enlace a las páginas de área.
+      </p>
+    </aside>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var token = sessionStorage.getItem("jurmia_token") || null;
+  var usuario = JSON.parse(sessionStorage.getItem("jurmia_usuario") || "null");
+  var archivoActual = null, shaActual = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var campos = ["titulo","slug","fecha","autor","area","resumen","metaTitulo","metaDescripcion","imagen","imagenAlt","cuerpo"];
+
+  function mensaje(destino, texto, tipo) {
+    $(destino).innerHTML = texto ? '<div class="mensaje ' + (tipo || "") + '">' + texto + "</div>" : "";
+  }
+
+  function api(cuerpo) {
+    return fetch("/api/admin", {
+      method: "POST",
+      headers: Object.assign({ "Content-Type": "application/json" }, token ? { Authorization: "Bearer " + token } : {}),
+      body: JSON.stringify(cuerpo)
+    }).then(function (r) {
+      return r.json().then(function (d) {
+        if (!r.ok) throw new Error(d.error || "Error " + r.status);
+        return d;
+      });
+    });
+  }
+
+  function alSlug(t) {
+    return (t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+  }
+
+  /* ---------- acceso ---------- */
+
+  function entrar() {
+    mensaje("mensaje-acceso", "");
+    if (!$("correo").value.trim()) {
+      mensaje("mensaje-acceso", "Escriba su correo electrónico.", "error");
+      return;
+    }
+    $("btn-entrar").disabled = true;
+    api({ accion: "entrar", correo: $("correo").value.trim(), clave: $("clave").value })
+      .then(function (d) {
+        token = d.token;
+        usuario = { nombre: d.nombre, correo: d.correo };
+        sessionStorage.setItem("jurmia_token", token);
+        sessionStorage.setItem("jurmia_usuario", JSON.stringify(usuario));
+        abrirPanel();
+      })
+      .catch(function (e) { mensaje("mensaje-acceso", e.message, "error"); })
+      .then(function () { $("btn-entrar").disabled = false; });
+  }
+
+  $("btn-entrar").addEventListener("click", entrar);
+  $("correo").addEventListener("keydown", function (e) { if (e.key === "Enter") $("clave").focus(); });
+  $("clave").addEventListener("keydown", function (e) { if (e.key === "Enter") entrar(); });
+
+  $("btn-salir").addEventListener("click", function () {
+    sessionStorage.removeItem("jurmia_token");
+    sessionStorage.removeItem("jurmia_usuario");
+    location.reload();
+  });
+
+  function abrirPanel() {
+    $("acceso").classList.add("oculto");
+    $("panel").classList.remove("oculto");
+    if (usuario) $("sesion-nombre").textContent = usuario.nombre;
+    nuevo();
+    cargarLista();
+  }
+
+  /* ---------- lista ---------- */
+
+  function cargarLista() {
+    api({ accion: "listar" })
+      .then(function (d) {
+        var ul = $("lista");
+        ul.innerHTML = "";
+        $("lista-vacia").style.display = d.articulos.length ? "none" : "block";
+        d.articulos.forEach(function (a) {
+          var li = document.createElement("li");
+          var b = document.createElement("button");
+          b.innerHTML = "<strong>" + a.titulo + "</strong><span>" + (a.fecha || "") + " · " + a.area +
+            (a.publicado ? "" : ' · <span class="borrador">borrador</span>') + "</span>";
+          b.addEventListener("click", function () { abrir(a.archivo, b); });
+          li.appendChild(b); ul.appendChild(li);
+        });
+      })
+      .catch(function (e) {
+        if (/Sesión|acceso/.test(e.message)) {
+          sessionStorage.removeItem("jurmia_token");
+          sessionStorage.removeItem("jurmia_usuario");
+          location.reload();
+        }
+        mensaje("mensaje-editor", e.message, "error");
+      });
+  }
+
+  function abrir(archivo, boton) {
+    api({ accion: "abrir", archivo: archivo }).then(function (d) {
+      archivoActual = d.archivo; shaActual = d.sha;
+      campos.forEach(function (c) { $(c).value = d.articulo[c] || ""; });
+      $("publicado").checked = d.articulo.publicado !== false;
+      Array.prototype.forEach.call(document.querySelectorAll(".lista button"), function (b) { b.classList.remove("activo"); });
+      if (boton) boton.classList.add("activo");
+      mensaje("mensaje-editor", "");
+      revisar();
+      window.scrollTo(0, 0);
+    }).catch(function (e) { mensaje("mensaje-editor", e.message, "error"); });
+  }
+
+  function nuevo() {
+    archivoActual = null; shaActual = null;
+    campos.forEach(function (c) { $(c).value = ""; });
+    $("fecha").value = new Date().toISOString().slice(0, 10);
+    $("area").value = "Civil";
+    if (usuario) $("autor").value = usuario.nombre;
+    $("publicado").checked = true;
+    Array.prototype.forEach.call(document.querySelectorAll(".lista button"), function (b) { b.classList.remove("activo"); });
+    mensaje("mensaje-editor", "");
+    revisar();
+  }
+  $("btn-nuevo").addEventListener("click", nuevo);
+
+  /* ---------- guardar y borrar ---------- */
+
+  $("btn-guardar").addEventListener("click", function () {
+    var articulo = {};
+    campos.forEach(function (c) { articulo[c] = $(c).value.trim(); });
+    articulo.publicado = $("publicado").checked;
+    if (!articulo.slug) articulo.slug = alSlug(articulo.titulo);
+
+    $("btn-guardar").disabled = true;
+    mensaje("mensaje-editor", "Guardando…");
+    api({ accion: "guardar", articulo: articulo, archivo: archivoActual, sha: shaActual })
+      .then(function (d) {
+        archivoActual = d.archivo; shaActual = d.sha;
+        mensaje("mensaje-editor",
+          "Guardado. La web se republica sola en un minuto aproximadamente: <a href=\"/blog/" +
+          articulo.slug + "\" target=\"_blank\" rel=\"noopener\">ver el artículo</a>.", "bien");
+        cargarLista();
+      })
+      .catch(function (e) { mensaje("mensaje-editor", e.message, "error"); })
+      .then(function () { $("btn-guardar").disabled = false; });
+  });
+
+  $("btn-borrar").addEventListener("click", function () {
+    if (!archivoActual) { mensaje("mensaje-editor", "Este artículo todavía no se ha guardado.", "error"); return; }
+    if (!confirm("¿Eliminar este artículo? La acción queda registrada en el historial de GitHub, pero desaparece de la web.")) return;
+    api({ accion: "borrar", archivo: archivoActual })
+      .then(function () { nuevo(); cargarLista(); mensaje("mensaje-editor", "Artículo eliminado.", "bien"); })
+      .catch(function (e) { mensaje("mensaje-editor", e.message, "error"); });
+  });
+
+  /* ---------- imagen ---------- */
+
+  $("archivoImagen").addEventListener("change", function (e) {
+    var f = e.target.files[0];
+    if (!f) return;
+    $("estado-imagen").textContent = "Subiendo…";
+    var lector = new FileReader();
+    lector.onload = function () {
+      api({ accion: "subirImagen", nombre: f.name, base64: lector.result.split(",")[1] })
+        .then(function (d) {
+          $("imagen").value = d.ruta;
+          $("estado-imagen").textContent = "Imagen subida: " + d.ruta;
+          revisar();
+        })
+        .catch(function (err) { $("estado-imagen").textContent = err.message; });
+    };
+    lector.readAsDataURL(f);
+  });
+
+  /* ---------- previsualización ---------- */
+
+  function aHtml(md) {
+    var h = md
+      .replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; })
+      .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+      .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+      .replace(/^&gt; (.*)$/gm, "<blockquote>$1</blockquote>")
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
+      .replace(/^- (.*)$/gm, "<li>$1</li>");
+    return h.split(/\n{2,}/).map(function (b) {
+      return /^<(h2|h3|li|blockquote)/.test(b.trim()) ? (b.indexOf("<li>") === 0 ? "<ul>" + b + "</ul>" : b) : "<p>" + b.replace(/\n/g, "<br>") + "</p>";
+    }).join("");
+  }
+
+  $("btn-previsualizar").addEventListener("click", function () {
+    var p = $("previsualizacion");
+    p.classList.toggle("oculto");
+    p.innerHTML = "<h1 style='font-size:1.4rem;font-family:var(--display)'>" + ($("titulo").value || "Sin titular") + "</h1>" + aHtml($("cuerpo").value);
+  });
+
+  /* ---------- revisión SEO ---------- */
+
+  function contador(id, valor, min, max) {
+    var e = $("c-" + id); if (!e) return;
+    var n = valor.length;
+    e.textContent = n + (max ? "/" + max : "");
+    e.className = "contador " + (n === 0 ? "" : n < min ? "aviso" : n > max ? "mal" : "ok");
+  }
+
+  function revisar() {
+    var t = $("titulo").value.trim();
+    var slug = $("slug").value.trim() || alSlug(t);
+    var resumen = $("resumen").value.trim();
+    var metaT = $("metaTitulo").value.trim() || (t ? t + " | Blog jurídico de JURMIA Abogados" : "");
+    var metaD = $("metaDescripcion").value.trim() || resumen;
+    var cuerpo = $("cuerpo").value;
+    var palabras = cuerpo.split(/\s+/).filter(Boolean).length;
+
+    contador("titulo", t, 25, 70);
+    contador("slug", slug, 3, 75);
+    contador("resumen", resumen, 80, 300);
+    contador("metaTitulo", metaT, 30, 60);
+    contador("metaDescripcion", metaD, 120, 160);
+
+    $("g-url").textContent = "jurmiabogados.es › blog › " + (slug || "…");
+    $("g-titulo").textContent = metaT.length > 60 ? metaT.slice(0, 57) + "…" : (metaT || "Titular del artículo");
+    $("g-desc").textContent = metaD.length > 160 ? metaD.slice(0, 157) + "…" : (metaD || "Así se verá en los resultados de Google.");
+
+    var pruebas = [
+      [metaT.length >= 30 && metaT.length <= 60, "Meta title entre 30 y 60 caracteres", "Ahora " + metaT.length],
+      [metaD.length >= 120 && metaD.length <= 160, "Meta description entre 120 y 160", "Ahora " + metaD.length],
+      [slug.length > 0 && slug.length <= 60 && slug.split("-").length <= 8, "URL corta y legible", "Acorte el slug"],
+      [palabras >= 600, "Al menos 600 palabras", "Ahora " + palabras],
+      [/^##\s/m.test(cuerpo), "Tiene subtítulos H2", "Añada ## Subtítulo"],
+      [/\]\(\/(areas|despachos|blog)\//.test(cuerpo), "Enlaza a una página del sitio", "Enlace a /areas/…"],
+      [$("imagen").value.trim().length > 0, "Tiene imagen destacada", "Sube una imagen"],
+      [!$("imagen").value.trim() || $("imagenAlt").value.trim().length > 0, "La imagen tiene texto alternativo", "Falta el alt"],
+      [/\b(art\.|artículo|STS|Ley|sentencia)\b/i.test(cuerpo), "Cita normas o sentencias concretas", "Añada referencias"],
+      [$("autor").value.trim().length > 0, "Artículo firmado por un abogado", "Añada el autor"]
+    ];
+
+    $("revision").innerHTML = pruebas.map(function (p) {
+      return '<li><span class="marca ' + (p[0] ? "ok" : "aviso") + '">' + (p[0] ? "✓" : "!") + "</span><span>" +
+        p[1] + (p[0] ? "" : ' <span class="ayuda">— ' + p[2] + "</span>") + "</span></li>";
+    }).join("");
+  }
+
+  campos.forEach(function (c) { $(c).addEventListener("input", revisar); });
+  $("titulo").addEventListener("blur", function () {
+    if (!$("slug").value.trim()) { $("slug").value = alSlug($("titulo").value); revisar(); }
+  });
+
+  if (token) abrirPanel();
+})();
+</script>
+</body>
+</html>
