@@ -15,7 +15,7 @@ const RAIZ = path.dirname(new URL(import.meta.url).pathname);
 const DOMINIO = (process.env.SITIO_URL || "https://www.jurmiabogados.es").replace(/\/$/, "");
 const ORIGEN = path.join(RAIZ, "contenido", "blog");
 const DESTINO = path.join(RAIZ, "blog");
-const POR_PAGINA = 9;
+const POR_PAGINA = 8;
 
 marked.setOptions({ gfm: true, breaks: false });
 
