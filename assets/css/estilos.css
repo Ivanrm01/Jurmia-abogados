@@ -948,9 +948,34 @@ p:last-child { margin-bottom: 0; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.paginacion a { text-decoration: none; color: var(--tinta); }
-.paginacion a:hover { text-decoration: underline; }
-.paginacion-estado { color: var(--tinta-media); }
+.paginacion a,
+.paginacion span.pagina-actual {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0 0.7rem;
+  text-decoration: none;
+  color: var(--tinta);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.paginacion a:hover { background: var(--piedra-clara); border-color: var(--linea-fuerte); }
+.paginacion span.pagina-actual {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--blanco);
+  font-weight: 600;
+}
+.paginacion .salto { border: none; color: var(--tinta-media); min-width: 24px; }
+.paginacion-estado {
+  width: 100%;
+  text-align: center;
+  color: var(--tinta-media);
+  margin-top: 0.75rem;
+}
 
 /* --- artículo --- */
 
