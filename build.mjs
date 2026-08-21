@@ -340,12 +340,32 @@ async function escribir(rutaRelativa, contenido) {
 }
 
 function listado({ articulos, titulo, h1, descripcion, url, ruta, pagina, paginas, migasItems, intro }) {
+    const enlacePagina = (n) => (n === 1 ? ruta.replace(/\/$/, "") || "/" : `${ruta}pagina/${n}`);
+
+  function numeros(actual, total) {
+    const lista = [];
+    for (let n = 1; n <= total; n++) {
+      if (n === 1 || n === total || Math.abs(n - actual) <= 1) lista.push(n);
+      else if (lista[lista.length - 1] !== "…") lista.push("…");
+    }
+    return lista;
+  }
+
   const navPaginas =
     paginas > 1
       ? `<nav class="paginacion" aria-label="Paginación">
-      ${pagina > 1 ? `<a href="${pagina === 2 ? ruta : ruta + "pagina/" + (pagina - 1)}">← Anterior</a>` : "<span></span>"}
+      ${pagina > 1 ? `<a href="${enlacePagina(pagina - 1)}" rel="prev" aria-label="Página anterior">←</a>` : ""}
+      ${numeros(pagina, paginas)
+        .map((n) =>
+          n === "…"
+            ? '<span class="salto" aria-hidden="true">…</span>'
+            : n === pagina
+              ? `<span class="pagina-actual" aria-current="page">${n}</span>`
+              : `<a href="${enlacePagina(n)}" aria-label="Página ${n}">${n}</a>`
+        )
+        .join("\n      ")}
+      ${pagina < paginas ? `<a href="${enlacePagina(pagina + 1)}" rel="next" aria-label="Página siguiente">→</a>` : ""}
       <span class="paginacion-estado">Página ${pagina} de ${paginas}</span>
-      ${pagina < paginas ? `<a href="${ruta}pagina/${pagina + 1}">Siguiente →</a>` : "<span></span>"}
     </nav>`
       : "";
 
