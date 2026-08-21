@@ -936,9 +936,10 @@ p:last-child { margin-bottom: 0; }
 
 .paginacion {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   margin-top: 2.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--linea);
