@@ -237,8 +237,7 @@ const PIE = `<footer class="pie">
       </div>
     </div>
     <div class="pie-legal">
-      <span>© <span id="anio">2026</span> JURMIA Abogados</span>
-      <span>Colegiados en el <span class="pendiente">añadir colegio y n.º de colegiado</span></span>
+      <span>© <span id="anio">2026</span> JURMIA Abogados. Todos los derechos reservados</span>
     </div>
   </div>
 </footer>`;
