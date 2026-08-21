@@ -205,7 +205,7 @@ const PIE = `<footer class="pie">
   <div class="envoltura">
     <div class="pie-rejilla">
       <div>
-        <p class="pie-marca">JURMIA<small>Abogados</small></p>
+        <img src="/assets/img/jurmia-logo-blanco.png" alt="JURMIA Abogados" width="1290" height="446" style="width:150px;height:auto">
         <p style="margin-top:1.25rem;max-width:34ch">Despacho de abogados en Madrid, Valencia y Castellón, con actuación en toda España.</p>
       </div>
       <div>
