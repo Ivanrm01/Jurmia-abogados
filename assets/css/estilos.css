@@ -1072,7 +1072,9 @@ p:last-child { margin-bottom: 0; }
 .barra-movil a.destacada { background: var(--tinta); color: var(--blanco); }
 .barra-movil svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.7; }
 
-body.con-barra-movil { padding-bottom: 62px; }
+@media (max-width: 720px) {
+  body.con-barra-movil { padding-bottom: 62px; }
+}
 
 @media (max-width: 720px) {
   .barra-movil { display: block; }
