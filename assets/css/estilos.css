@@ -1474,3 +1474,8 @@ address { font-style: normal; }
   .cookies-texto p { font-size: 0.8125rem; }
   .cookies-acciones { flex-direction: column; }
 }
+
+/* --- artículo: columna centrada y aire antes de la banda final --- */
+
+.articulo .envoltura { max-width: 780px; }
+.articulo { padding-bottom: clamp(3rem, 6vw, 5rem); }
