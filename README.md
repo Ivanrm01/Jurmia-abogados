@@ -1,6 +1,6 @@
 # JURMIA Abogados — sitio web
 
-> El repositorio conserva el nombre `JRM-abogados` por motivos históricos.
+> El repositorio conserva el nombre `JURMIA-abogados` por motivos históricos.
 > El nombre comercial y el dominio son JURMIA Abogados / jurmiabogados.es.
 
 Sitio estático (HTML, CSS y JavaScript, sin dependencias) preparado para desplegarse en Vercel
@@ -48,7 +48,7 @@ git init
 git add .
 git commit -m "Primera versión de la web de JURMIA Abogados"
 git branch -M main
-git remote add origin https://github.com/USUARIO/jrm-abogados.git
+git remote add origin https://github.com/USUARIO/jurmia-abogados.git
 git push -u origin main
 ```
 
@@ -59,7 +59,7 @@ Cree antes el repositorio vacío en github.com (sin README ni .gitignore, ya est
 ## 3. Desplegar en Vercel
 
 1. Entre en [vercel.com](https://vercel.com) con la cuenta de GitHub.
-2. **Add New → Project** y seleccione el repositorio `jrm-abogados`.
+2. **Add New → Project** y seleccione el repositorio `jurmia-abogados`.
 3. Framework Preset: **Other**. No hay comando de build ni carpeta de salida que indicar.
 4. **Deploy**.
 
@@ -227,7 +227,7 @@ El panel está bloqueado a buscadores con `noindex` y con `Disallow` en `robots.
 | `ADMIN_CLAVE` | contraseña de acceso al panel |
 | `ADMIN_SECRETO` | cadena larga y aleatoria (`openssl rand -base64 32`) |
 | `GITHUB_TOKEN` | *fine-grained token* con permiso **Contents: Read and write** sobre este repositorio |
-| `GITHUB_REPO` | `usuario/jrm-abogados` |
+| `GITHUB_REPO` | `usuario/jurmia-abogados` |
 | `GITHUB_RAMA` | `main` |
 
 El token se crea en GitHub → Settings → Developer settings → Personal access tokens → Fine-grained
