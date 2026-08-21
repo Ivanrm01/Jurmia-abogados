@@ -662,6 +662,10 @@ p:last-child { margin-bottom: 0; }
 
 /* ---------- adaptación a pantallas pequeñas ---------- */
 
+@media (max-width: 1080px) {
+  .rejilla-articulos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 960px) {
   .portada-rejilla { grid-template-columns: 1fr; }
   .portada-texto { padding-bottom: 2.5rem; }
