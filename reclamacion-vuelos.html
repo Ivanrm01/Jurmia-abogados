@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reclamar un vuelo retrasado o cancelado | Hasta 600 € | JURMIA Abogados</title>
+<meta name="description" content="Compruebe en un minuto si su vuelo retrasado, cancelado o con overbooking da derecho a indemnización conforme al Reglamento (CE) 261/2004. Lo lleva un abogado, no una plataforma.">
+<link rel="canonical" href="https://www.jurmiabogados.es/reclamacion-vuelos">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="JURMIA Abogados">
+<meta property="og:title" content="Reclamar un vuelo retrasado o cancelado | JURMIA Abogados">
+<meta property="og:description" content="Compruebe si su vuelo da derecho a indemnización de 250, 400 o 600 euros. Valoración gratuita por abogado.">
+<meta property="og:url" content="https://www.jurmiabogados.es/reclamacion-vuelos">
+<meta property="og:image" content="https://www.jurmiabogados.es/assets/img/jurmia-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#06365a">
+<meta name="format-detection" content="telephone=yes">
+<link rel="apple-touch-icon" href="/assets/img/icono-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/estilos.css">
+<style>
+  /* Complementos propios de la calculadora. Reutiliza las variables del sitio. */
+  .paso { border-top: 1px solid var(--linea); padding-block: clamp(1.75rem, 4vw, 2.5rem); }
+  .paso:first-of-type { border-top: 0; padding-top: 0; }
+  .paso-cabecera { display: flex; align-items: baseline; gap: 0.9rem; margin-bottom: 1.5rem; }
+  .paso-numero {
+    font-family: var(--mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    color: var(--tinta-media); border: 1px solid var(--linea-fuerte); padding: 0.25rem 0.5rem;
+  }
+  .paso-cabecera h2 { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem); }
+  .paso-cabecera p { font-size: 0.875rem; color: var(--tinta-media); margin: 0.35rem 0 0; }
+
+  .buscador { position: relative; }
+  .sugerencias {
+    position: absolute; z-index: 40; inset-inline: 0; margin: 2px 0 0; padding: 0; list-style: none;
+    background: var(--blanco); border: 1px solid var(--tinta); max-height: 16rem; overflow: auto;
+    box-shadow: 0 12px 28px rgba(6, 54, 90, 0.14);
+  }
+  .sugerencias button {
+    display: flex; align-items: baseline; gap: 0.7rem; width: 100%; padding: 0.65rem 0.8rem;
+    border: 0; background: none; cursor: pointer; text-align: left; font-family: var(--display); font-size: 0.9375rem;
+  }
+  .sugerencias button:hover, .sugerencias button.activa { background: var(--piedra-clara); }
+  .sug-codigo { font-family: var(--mono); font-size: 0.8125rem; color: var(--tinta); min-width: 2.4rem; }
+  .sug-nombre { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sug-pais { font-family: var(--mono); font-size: 0.6875rem; color: var(--tinta-media); }
+
+  .elegido {
+    display: flex; align-items: center; gap: 0.7rem; width: 100%; padding: 0.7rem 0.9rem;
+    border: 1px solid var(--tinta); background: var(--blanco); cursor: pointer; text-align: left;
+    font-family: var(--display); font-size: 0.9375rem;
+  }
+  .elegido b { font-family: var(--mono); color: var(--tinta); }
+  .elegido span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .elegido em {
+    font-family: var(--mono); font-style: normal; font-size: 0.6875rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--tinta-media);
+  }
+
+  .opciones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .opciones button {
+    font-family: var(--display); font-size: 0.875rem; padding: 0.6rem 0.9rem; cursor: pointer;
+    border: 1px solid var(--linea-fuerte); background: var(--papel); color: var(--tinta-oscura);
+    border-radius: var(--radio); min-height: 44px;
+  }
+  .opciones button[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: var(--blanco); }
+
+  .lectura { font-family: var(--mono); font-size: 1.375rem; color: var(--tinta); margin: 0.35rem 0 0.2rem; }
+  input[type="range"] { width: 100%; accent-color: var(--tinta); min-height: 44px; }
+
+  .tarjeta-leida {
+    font-family: var(--mono); font-size: 0.8125rem; line-height: 1.6; color: var(--tinta);
+    background: var(--piedra-clara); border-left: 3px solid var(--tinta); padding: 0.8rem 1rem; margin-top: 0.9rem;
+  }
+  .tarjeta-leida.error { border-left-color: #a12a2a; color: #a12a2a; background: #fbf1f1; }
+
+  .resultado { border: 1px solid var(--tinta); background: var(--blanco); padding: clamp(1.5rem, 4vw, 2.25rem); margin-top: 2rem; }
+  .resultado-cifra {
+    font-family: var(--mono); font-size: clamp(2.25rem, 8vw, 3.25rem); line-height: 1; color: var(--tinta);
+    letter-spacing: -0.03em;
+  }
+  .resultado-nota { color: var(--tinta-media); font-size: 0.9375rem; margin-top: 0.75rem; max-width: 52ch; }
+  .oculto { display: none !important; }
+
+  @media (max-width: 720px) {
+    .paso-cabecera { flex-direction: column; gap: 0.5rem; }
+    body { padding-bottom: 5.5rem; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Reclamación de indemnizaciones por vuelo retrasado o cancelado",
+  "serviceType": "Reclamación de compensación aérea (Reglamento CE 261/2004)",
+  "provider": { "@type": "Attorney", "name": "JURMIA Abogados", "url": "https://www.jurmiabogados.es/" },
+  "areaServed": { "@type": "Country", "name": "España" },
+  "audience": { "@type": "Audience", "audienceType": "Pasajeros aéreos" },
+  "url": "https://www.jurmiabogados.es/reclamacion-vuelos"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.jurmiabogados.es/" },
+    { "@type": "ListItem", "position": 2, "name": "Reclamación de vuelos", "item": "https://www.jurmiabogados.es/reclamacion-vuelos" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuándo tengo derecho a indemnización por un vuelo retrasado?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cuando llega a su destino final con tres horas o más de retraso y el vuelo sale de un aeropuerto de la Unión Europea, o llega a ella operado por una aerolínea comunitaria. La cuantía es de 250, 400 o 600 euros según la distancia del trayecto." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tiempo tengo para reclamar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cinco años desde la fecha del vuelo, conforme al artículo 1964.2 del Código Civil para las acciones personales sin plazo especial." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué pasa si la aerolínea alega mal tiempo o una avería?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La carga de la prueba es suya. El Tribunal de Justicia de la Unión Europea ha declarado que las averías técnicas ordinarias y las huelgas del propio personal no son circunstancias extraordinarias, de modo que no eximen del pago." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
+
+<header class="cabecera fijada">
+  <div class="envoltura cabecera-fila">
+    <a class="marca" href="/" aria-label="JURMIA Abogados, inicio">
+      <img src="/assets/img/jurmia-logo.png" alt="JURMIA Abogados" width="1290" height="446"
+           style="height: 50px; width: auto; max-width: none; display: block;">
+    </a>
+    <button class="abrir-menu" id="abrir-menu" aria-expanded="false" aria-controls="navegacion">Menú</button>
+    <nav class="navegacion" id="navegacion" aria-label="Principal">
+      <a href="/areas/civil">Civil</a>
+      <a href="/areas/penal">Penal</a>
+      <a href="/areas/laboral">Laboral</a>
+      <a href="/areas/tributario">Tributario</a>
+      <a href="/blog">Blog</a>
+      <a href="/reclamacion-vuelos">Vuelos</a>
+      <a href="/#despachos">Despachos</a>
+      <a class="boton" href="/#contacto">Plantear mi consulta</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+  <nav class="miga" aria-label="Ruta de navegación" style="padding-top: 25px;">
+    <div class="envoltura"><ol>
+      <li><a href="/">Inicio</a></li>
+      <li>Reclamación de vuelos</li>
+    </ol></div>
+  </nav>
+
+  <section class="interior-portada">
+    <div class="envoltura">
+      <span class="rotulo">Derecho del transporte aéreo</span>
+      <h1>Su vuelo se retrasó. Vamos a ver cuánto le deben.</h1>
+      <p class="entradilla">
+        El Reglamento (CE) 261/2004 reconoce entre 250 y 600 euros por pasajero cuando el vuelo llega
+        con tres horas o más de retraso, se cancela sin preaviso suficiente o le deniegan el embarque.
+        Rellene los tres pasos y le decimos si su caso tiene recorrido. Sin coste y sin compromiso.
+      </p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="envoltura" style="max-width: 62rem;">
+      <div class="formulario" id="calculadora">
+
+        <!-- 01 ------------------------------------------------------------ -->
+        <div class="paso">
+          <div class="paso-cabecera">
+            <span class="paso-numero">01</span>
+            <div>
+              <h2>Su tarjeta de embarque</h2>
+              <p>Si conserva la tarjeta, pegue aquí el texto del código de barras y rellenamos el
+                resto por usted. Si no la tiene a mano, pase al paso siguiente.</p>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="bcbp">Contenido del código de barras (opcional)</label>
+            <textarea id="bcbp" rows="3" spellcheck="false" autocapitalize="characters"
+              placeholder="M1PEREZ/ANA           EABC123 MADBCNIB 03401210Y012C0045 100"></textarea>
+          </div>
+          <div style="margin-top: 0.9rem;">
+            <button type="button" class="boton boton-linea" id="btn-tarjeta">Leer la tarjeta</button>
+          </div>
+          <div id="tarjeta-salida"></div>
+        </div>
+
+        <!-- 02 ------------------------------------------------------------ -->
+        <div class="paso">
+          <div class="paso-cabecera">
+            <span class="paso-numero">02</span>
+            <div>
+              <h2>Datos del vuelo</h2>
+              <p>El destino final es el del billete completo, no el de la escala.</p>
+            </div>
+          </div>
+
+          <div class="campo-doble">
+            <div class="campo buscador" id="caja-origen">
+              <label for="origen">Aeropuerto de salida</label>
+              <input id="origen" autocomplete="off" placeholder="Ciudad o código, p. ej. Valencia o VLC">
+              <button type="button" class="elegido oculto" id="origen-elegido"></button>
+              <ul class="sugerencias oculto" id="origen-lista"></ul>
+            </div>
+            <div class="campo buscador" id="caja-destino">
+              <label for="destino">Aeropuerto de destino final</label>
+              <input id="destino" autocomplete="off" placeholder="Ciudad o código, p. ej. París o CDG">
+              <button type="button" class="elegido oculto" id="destino-elegido"></button>
+              <ul class="sugerencias oculto" id="destino-lista"></ul>
+            </div>
+          </div>
+
+          <div class="campo-doble" style="margin-top: 1.15rem;">
+            <div class="campo">
+              <label for="fecha">Fecha del vuelo</label>
+              <input type="date" id="fecha">
+            </div>
+            <div class="campo">
+              <label for="vuelo">Número de vuelo</label>
+              <input id="vuelo" placeholder="IB3401" autocapitalize="characters" spellcheck="false">
+            </div>
+          </div>
+
+          <div class="campo-doble" style="margin-top: 1.15rem;">
+            <div class="campo">
+              <label for="aerolinea">Aerolínea</label>
+              <input id="aerolinea" placeholder="Iberia, Ryanair, Vueling…">
+            </div>
+            <div class="campo">
+              <label for="pasajeros">Pasajeros en la misma reserva</label>
+              <input type="number" id="pasajeros" min="1" max="20" value="1" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 ------------------------------------------------------------ -->
+        <div class="paso">
+          <div class="paso-cabecera">
+            <span class="paso-numero">03</span>
+            <div>
+              <h2>Qué ocurrió</h2>
+              <p>Con una estimación aproximada basta: lo comprobaremos nosotros con los registros del vuelo.</p>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label id="etiqueta-incidencia">Tipo de incidencia</label>
+            <div class="opciones" id="incidencias" role="group" aria-labelledby="etiqueta-incidencia"></div>
+          </div>
+
+          <div class="campo" style="margin-top: 1.35rem;" id="caja-minutos">
+            <label for="minutos">Retraso al llegar a su destino final</label>
+            <div class="lectura" id="minutos-lectura">3 h 30 min</div>
+            <input type="range" id="minutos" min="0" max="720" step="15" value="210">
+          </div>
+
+          <div class="campo oculto" style="margin-top: 1.35rem;" id="caja-aviso">
+            <label for="aviso">¿Con cuánta antelación le avisaron de la cancelación?</label>
+            <div class="lectura" id="aviso-lectura">3 días</div>
+            <input type="range" id="aviso" min="0" max="21" step="1" value="3">
+          </div>
+
+          <div class="campo oculto" style="margin-top: 1.15rem;" id="caja-reubicacion">
+            <label for="reubicacion">¿Le ofrecieron otro vuelo?</label>
+            <select id="reubicacion">
+              <option value="no">No, o llegué mucho más tarde</option>
+              <option value="ajustada">Sí, y llegué casi a la hora prevista</option>
+            </select>
+          </div>
+
+          <div class="campo" style="margin-top: 1.35rem;">
+            <label for="causa">¿Qué explicación le dio la aerolínea?</label>
+            <select id="causa"></select>
+          </div>
+
+          <div class="campo" style="margin-top: 1.15rem;">
+            <label for="gastos">Gastos que tuvo que adelantar: comidas, hotel, transporte (euros)</label>
+            <input type="number" id="gastos" min="0" step="1" value="0" inputmode="decimal">
+          </div>
+        </div>
+
+        <!-- resultado + contacto ----------------------------------------- -->
+        <div class="resultado oculto" id="resultado" role="status" aria-live="polite">
+          <span class="rotulo" style="margin-bottom: 0.6rem;">Valoración preliminar</span>
+          <div class="resultado-cifra" id="resultado-cifra">—</div>
+          <p class="resultado-nota" id="resultado-nota"></p>
+        </div>
+
+        <div class="paso" id="caja-contacto">
+          <div class="paso-cabecera">
+            <span class="paso-numero">04</span>
+            <div>
+              <h2>Dónde le contamos el resultado</h2>
+              <p>Un abogado del despacho revisa el caso y le responde en 24 horas laborables.</p>
+            </div>
+          </div>
+
+          <div class="campo-doble">
+            <div class="campo">
+              <label for="nombre">Nombre y apellidos</label>
+              <input id="nombre" autocomplete="name" required>
+            </div>
+            <div class="campo">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" type="tel" inputmode="tel" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <div class="campo" style="margin-top: 1.15rem;">
+            <label for="email">Correo electrónico</label>
+            <input id="email" type="email" inputmode="email" autocomplete="email"
+                   autocapitalize="off" spellcheck="false" required>
+          </div>
+
+          <div class="campo" style="margin-top: 1.15rem;">
+            <label for="observaciones">Algo más que debamos saber (opcional)</label>
+            <textarea id="observaciones" rows="3" maxlength="2000"
+              placeholder="Perdí una reunión, viajaba con menores, la aerolínea me ofreció un bono…"></textarea>
+          </div>
+
+          <label class="consentimiento" style="margin-top: 1.35rem;">
+            <input type="checkbox" id="consentimiento">
+            <span>He leído y acepto la <a href="/privacidad">política de privacidad</a>. Autorizo a JURMIA
+              Abogados a tratar mis datos para valorar la viabilidad de la reclamación y ponerse en
+              contacto conmigo.</span>
+          </label>
+
+          <input type="text" id="empresa" class="trampa" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <button type="button" class="boton" id="btn-enviar">Enviar mi caso al despacho</button>
+            <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--tinta-media);">
+              Valoración gratuita
+            </span>
+          </div>
+
+          <div class="aviso-envio" id="aviso-envio-vuelos"></div>
+        </div>
+
+      </div>
+
+      <p style="font-size: 0.8125rem; color: var(--tinta-media); margin-top: 1.5rem; max-width: 62ch;">
+        La cifra que aparece al completar los pasos es una estimación automática conforme al
+        Reglamento (CE) 261/2004 y no constituye asesoramiento jurídico ni garantiza el resultado
+        de la reclamación. La valoración definitiva la realiza un abogado tras comprobar la
+        documentación y los registros del vuelo.
+      </p>
+    </div>
+  </section>
+
+  <section class="franja-cta">
+    <div class="envoltura">
+      <h2>Lo lleva un abogado, no una plataforma.</h2>
+      <p>Las plataformas de reclamación se quedan entre el 19 % y el 44 % de su indemnización y
+        subcontratan a un letrado cuando el asunto llega al juzgado. Aquí el letrado es quien estudia
+        el caso desde el primer día, y si hay que demandar, demandamos.</p>
+      <a class="boton boton-claro" href="/#contacto">Hablar con el despacho</a>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie-rejilla">
+      <div>
+        <img src="/assets/img/jurmia-logo-blanco.png" alt="JURMIA Abogados" width="1290" height="446" style="width:150px;height:auto">
+        <p style="margin-top:1.25rem;max-width:34ch">Despacho de abogados en Madrid, Valencia y Castellón, con actuación en toda España.</p>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+        <ul>
+          <li><a href="/areas/civil">Derecho civil</a></li>
+          <li><a href="/areas/penal">Derecho penal</a></li>
+          <li><a href="/areas/laboral">Derecho laboral</a></li>
+          <li><a href="/areas/tributario">Derecho tributario</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Despachos</h4>
+        <ul>
+          <li><a href="/despachos/madrid">Abogados en Madrid</a></li>
+          <li><a href="/despachos/valencia">Abogados en Valencia</a></li>
+          <li><a href="/despachos/castellon">Abogados en Castellón</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Información legal</h4>
+        <ul>
+          <li><a href="/blog">Blog jurídico</a></li>
+          <li><a href="/reclamacion-vuelos">Reclamar un vuelo</a></li>
+          <li><a href="/aviso-legal">Aviso legal</a></li>
+          <li><a href="/privacidad">Política de privacidad</a></li>
+          <li><a href="/politica-cookies">Política de cookies</a></li>
+          <li><a href="#" data-cookies="configurar">Configurar cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie-legal">
+      <span>© <span id="anio">2026</span> JURMIA Abogados. Todos los derechos reservados</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/cookies.js" defer></script>
+<script src="/assets/js/aeropuertos.js" defer></script>
+<script src="/assets/js/vuelos-motor.js" defer></script>
+<script src="/assets/js/reclamacion-vuelos.js" defer></script>
+</body>
+</html>
