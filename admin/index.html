@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel del blog — JURMIA Abogados</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tinta: #06365a;
+    --tinta-oscura: #042439;
+    --tinta-media: #35617f;
+    --piedra: #c3ced2;
+    --piedra-clara: #e6ebed;
+    --papel: #f4f6f7;
+    --verde: #1c6b4b;
+    --ambar: #8a5a12;
+    --rojo: #a12a2a;
+    --display: "Archivo", system-ui, sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--papel); color: var(--tinta-oscura);
+    font-family: var(--display); font-size: 15px; line-height: 1.55;
+  }
+  a { color: var(--tinta); }
+
+  .barra {
+    position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 1rem;
+    justify-content: space-between; padding: .7rem 1.25rem; background: var(--tinta-oscura); color: #fff;
+  }
+  .barra-izq { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+  .barra img { height: 24px; }
+  .barra-titulo { font-family: var(--mono); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--piedra); white-space: nowrap; }
+  .barra-acciones { display: flex; gap: .5rem; align-items: center; flex-shrink: 0; }
+  .estado-guardado { font-family: var(--mono); font-size: .7rem; color: #e8b96a; white-space: nowrap; }
+
+  button {
+    font-family: var(--display); font-size: .8125rem; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--tinta); background: var(--tinta); color: #fff;
+    padding: .55rem 1rem; border-radius: 2px; transition: background .15s ease;
+  }
+  button:hover:not(:disabled) { background: #000; border-color: #000; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button.secundario { background: transparent; color: var(--tinta); }
+  button.secundario:hover:not(:disabled) { background: var(--tinta); color: #fff; }
+  button.claro { background: #fff; color: var(--tinta-oscura); border-color: #fff; }
+  button.fantasma { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+  button.peligro { background: transparent; border-color: var(--rojo); color: var(--rojo); }
+  button.peligro:hover:not(:disabled) { background: var(--rojo); color: #fff; }
+
+  .caja { max-width: 420px; margin: 10vh auto; background: #fff; border: 1px solid var(--piedra); padding: 2rem; }
+  .caja h1 { font-size: 1.35rem; margin: 0 0 .5rem; }
+  .caja p { color: var(--tinta-media); font-size: .875rem; margin: 0 0 1.5rem; }
+
+  label { display: block; font-family: var(--mono); font-size: .65rem; letter-spacing: .12em;
+          text-transform: uppercase; color: var(--tinta-media); margin-bottom: .35rem; }
+  input, select, textarea {
+    width: 100%; font-family: inherit; font-size: .9375rem; color: var(--tinta-oscura);
+    background: var(--papel); border: 1px solid var(--piedra); border-radius: 2px; padding: .6rem .7rem;
+  }
+  textarea { resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--tinta); background: #fff; }
+  .campo { margin-bottom: 1rem; }
+  .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .fila-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .ayuda { font-size: .75rem; color: var(--tinta-media); margin-top: .35rem; }
+  .oculto { display: none !important; }
+  .casilla { display: flex; align-items: center; gap: .6rem; }
+  .casilla input { width: auto; }
+  .casilla label { margin: 0; }
+
+  .disposicion { display: grid; grid-template-columns: 250px minmax(0,1fr) 340px; gap: 1px; background: var(--piedra); min-height: calc(100vh - 48px); }
+  .panel { background: #fff; padding: 1.1rem; overflow-y: auto; max-height: calc(100vh - 48px); }
+  .panel h2 { font-size: .7rem; font-family: var(--mono); letter-spacing: .14em; text-transform: uppercase;
+              color: var(--tinta-media); margin: 0 0 .9rem; font-weight: 500; }
+
+  .lista { list-style: none; margin: 0; padding: 0; }
+  .lista li { border-bottom: 1px solid var(--piedra-clara); }
+  .lista button {
+    width: 100%; text-align: left; background: none; border: none; color: inherit;
+    padding: .7rem .5rem; font-weight: 400; border-radius: 0;
+  }
+  .lista button:hover { background: var(--piedra-clara); }
+  .lista button.activo { background: var(--piedra-clara); box-shadow: inset 3px 0 0 var(--tinta); }
+  .lista strong { display: block; font-size: .8125rem; font-weight: 600; margin-bottom: .2rem; }
+  .lista span { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-media); }
+  .borrador { color: var(--ambar); }
+  .buscador { margin-bottom: .85rem; }
+
+  .pestanas { display: flex; border-bottom: 1px solid var(--piedra); margin-bottom: 1.1rem; flex-wrap: wrap; }
+  .pestanas button {
+    background: none; border: none; border-bottom: 2px solid transparent; color: var(--tinta-media);
+    border-radius: 0; padding: .6rem .9rem; font-size: .72rem; font-family: var(--mono);
+    letter-spacing: .1em; text-transform: uppercase;
+  }
+  .pestanas button:hover:not(.activa) { background: var(--piedra-clara); color: var(--tinta); }
+  .pestanas button.activa { color: var(--tinta); border-bottom-color: var(--tinta); background: none; }
+
+  .herramientas {
+    display: flex; flex-wrap: wrap; gap: 2px; padding: .4rem; background: var(--papel);
+    border: 1px solid var(--piedra); border-bottom: none;
+  }
+  .herramientas button {
+    background: none; border: 1px solid transparent; color: var(--tinta-oscura);
+    padding: .4rem .55rem; border-radius: 2px; font-size: .8125rem; min-width: 34px; line-height: 1;
+  }
+  .herramientas button:hover { background: var(--piedra-clara); border-color: var(--piedra); color: var(--tinta-oscura); }
+  .herramientas .sep { width: 1px; background: var(--piedra); margin: .2rem .3rem; }
+  .herramientas .grupo-titulo { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--tinta-media); align-self: center; padding: 0 .4rem; }
+
+  #cuerpo { min-height: 440px; font-family: var(--mono); font-size: .875rem; line-height: 1.7; background: #fff; padding: 1rem; }
+
+  .previsualizacion { border: 1px solid var(--piedra); background: #fff; padding: 1.5rem; font-family: var(--serif); }
+  .previsualizacion h1 { font-family: var(--display); font-size: 1.6rem; line-height: 1.15; margin: 0 0 .75rem; }
+  .previsualizacion h2 { font-family: var(--display); font-size: 1.2rem; margin: 1.75rem 0 .5rem; padding-top: 1rem; border-top: 1px solid var(--piedra-clara); }
+  .previsualizacion h3 { font-family: var(--display); font-size: 1rem; margin: 1.25rem 0 .35rem; }
+  .previsualizacion ul, .previsualizacion ol { padding-left: 1.2rem; }
+  .previsualizacion blockquote { margin: 1.25rem 0; padding-left: 1.1rem; border-left: 3px solid var(--piedra); color: var(--tinta-media); font-style: italic; }
+  .previsualizacion .dato-clave { display: block; margin: 1.25rem 0; padding: .85rem 1rem; background: var(--piedra-clara); border-left: 3px solid var(--tinta); font-family: var(--mono); font-size: .78rem; }
+  .previsualizacion table { width: 100%; border-collapse: collapse; font-family: var(--display); font-size: .85rem; margin: 1.25rem 0; }
+  .previsualizacion th, .previsualizacion td { border: 1px solid var(--piedra); padding: .5rem .6rem; text-align: left; }
+  .previsualizacion th { background: var(--piedra-clara); }
+  .previsualizacion img { max-width: 100%; }
+  .previsualizacion hr { border: none; border-top: 1px solid var(--piedra); margin: 1.75rem 0; }
+
+  .vista-google { border: 1px solid var(--piedra); padding: .9rem; background: #fff; margin-bottom: 1rem; }
+  .vista-google .ruta { font-size: .75rem; color: #4d6b32; word-break: break-all; }
+  .vista-google .titulo { color: #1a0dab; font-size: 1.0625rem; line-height: 1.3; margin: .2rem 0; }
+  .vista-google .desc { font-size: .8125rem; color: #4d5156; }
+
+  .tarjeta-social { border: 1px solid var(--piedra); background: #fff; margin-bottom: 1rem; overflow: hidden; }
+  .tarjeta-social .imagen { aspect-ratio: 1200/630; background: var(--piedra-clara) center/cover no-repeat; display: flex;
+    align-items: center; justify-content: center; font-family: var(--mono); font-size: .7rem; color: var(--tinta-media); }
+  .tarjeta-social .cuerpo { padding: .7rem .85rem; }
+  .tarjeta-social .dominio { font-size: .68rem; color: var(--tinta-media); text-transform: uppercase; letter-spacing: .06em; }
+  .tarjeta-social .tit { font-size: .875rem; font-weight: 600; margin: .2rem 0; }
+  .tarjeta-social .des { font-size: .78rem; color: var(--tinta-media); }
+
+  .puntuacion { display: flex; align-items: center; gap: .85rem; padding: .85rem 1rem; border: 1px solid var(--piedra); background: #fff; margin-bottom: 1rem; }
+  .puntuacion .cifra { font-size: 1.9rem; font-weight: 700; line-height: 1; font-family: var(--display); }
+  .puntuacion .detalle { font-size: .78rem; color: var(--tinta-media); }
+  .barra-progreso { height: 4px; background: var(--piedra-clara); margin-top: .5rem; }
+  .barra-progreso div { height: 100%; width: 0; background: var(--verde); transition: width .3s ease; }
+
+  .revision { list-style: none; margin: 0 0 1rem; padding: 0; font-size: .8125rem; }
+  .revision li { display: flex; gap: .55rem; padding: .45rem 0; border-bottom: 1px solid var(--piedra-clara); align-items: baseline; }
+  .revision li.cabecera { border: none; padding: .9rem 0 .2rem; }
+  .revision .marca { font-family: var(--mono); font-weight: 500; flex-shrink: 0; }
+  .grupo-revision { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-media); }
+  .ok { color: var(--verde); } .aviso { color: var(--ambar); } .mal { color: var(--rojo); }
+
+  .contador { font-family: var(--mono); font-size: .65rem; float: right; letter-spacing: .06em; }
+
+  .mensaje { padding: .7rem .9rem; font-size: .8125rem; margin-bottom: 1rem; border-left: 3px solid var(--tinta); background: var(--piedra-clara); }
+  .mensaje.error { border-left-color: var(--rojo); color: var(--rojo); background: #fdf1f1; }
+  .mensaje.bien { border-left-color: var(--verde); color: var(--verde); background: #f0f7f3; }
+
+  .metricas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--piedra); border: 1px solid var(--piedra); margin-top: 1rem; }
+  .metrica { background: #fff; padding: .6rem .5rem; text-align: center; }
+  .metrica strong { display: block; font-size: 1.1rem; font-family: var(--display); }
+  .metrica span { font-family: var(--mono); font-size: .56rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-media); }
+
+  dialog { border: 1px solid var(--piedra); padding: 1.5rem; max-width: 460px; width: 92%; }
+  dialog::backdrop { background: rgba(4,36,57,.55); }
+
+  @media (max-width: 1200px) {
+    .disposicion { grid-template-columns: 1fr; }
+    .panel { max-height: none; }
+  }
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    input, select, textarea { font-size: 16px; padding: .7rem; }
+    .fila, .fila-3 { grid-template-columns: 1fr; gap: 0; }
+    .barra { flex-wrap: wrap; gap: .5rem; padding: .6rem .9rem; }
+    button { min-height: 44px; }
+    .herramientas button { min-height: 40px; }
+    .caja { margin: 6vh 1rem; padding: 1.5rem; }
+    .acciones-editor {
+      position: sticky; bottom: 0; background: #fff; border-top: 1px solid var(--piedra);
+      margin: 0 -1.1rem; padding: .75rem 1.1rem calc(.75rem + env(safe-area-inset-bottom, 0));
+    }
+  }
+</style>
+</head>
+<body class="sin-barra-movil">
+
+<!-- ===================== acceso ===================== -->
+<div id="acceso">
+  <div class="caja">
+    <h1>Panel del blog</h1>
+    <p>JURMIA Abogados. Acceda con su correo del despacho para gestionar los artículos.</p>
+    <div id="mensaje-acceso"></div>
+    <div class="campo">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="campo">
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" autocomplete="current-password">
+    </div>
+    <button id="btn-entrar">Entrar</button>
+  </div>
+</div>
+
+<!-- ===================== panel ===================== -->
+<div id="panel" class="oculto">
+  <div class="barra">
+    <div class="barra-izq">
+      <img src="/assets/img/jurmia-logo-blanco.png" alt="JURMIA Abogados">
+      <span class="barra-titulo">Panel del blog</span>
+      <span class="estado-guardado" id="estado-guardado"></span>
+    </div>
+    <div class="barra-acciones">
+      <span class="barra-titulo" id="sesion-nombre" style="color:#fff;letter-spacing:.02em;text-transform:none"></span>
+      <button class="claro" id="btn-nuevo">Nuevo</button>
+      <a href="/admin/vuelos" style="color:var(--piedra);font-size:.8125rem;text-decoration:none;margin-right:.5rem">Reclamaciones aéreas</a>
+      <button class="fantasma" id="btn-salir">Salir</button>
+    </div>
+  </div>
+
+  <div class="disposicion">
+
+    <aside class="panel">
+      <h2>Artículos</h2>
+      <input class="buscador" id="buscador" placeholder="Buscar por título…">
+      <ul class="lista" id="lista"></ul>
+      <p class="ayuda" id="lista-vacia">Todavía no hay artículos. Empiece con «Nuevo».</p>
+    </aside>
+
+    <section class="panel">
+      <div id="mensaje-editor"></div>
+
+      <nav class="pestanas" id="pestanas">
+        <button class="activa" data-panel="p-contenido">Contenido</button>
+        <button data-panel="p-formato">Formato</button>
+        <button data-panel="p-seo">SEO</button>
+        <button data-panel="p-social">Social</button>
+        <button data-panel="p-previa">Vista previa</button>
+      </nav>
+
+      <!-- ---------- contenido ---------- -->
+      <div id="p-contenido">
+        <div class="campo">
+          <label for="titulo">Titular <span class="contador" id="c-titulo"></span></label>
+          <input id="titulo" placeholder="Ej.: El Supremo aclara cuándo prescribe la reclamación de gastos hipotecarios">
+        </div>
+
+        <div class="fila-3">
+          <div class="campo">
+            <label for="area">Área</label>
+            <select id="area">
+              <option>Civil</option><option>Penal</option><option>Laboral</option><option>Tributario</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="fecha">Publicación</label>
+            <input type="date" id="fecha">
+          </div>
+          <div class="campo">
+            <label for="autor">Autor</label>
+            <input id="autor" placeholder="Nombre del abogado">
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="resumen">Entradilla <span class="contador" id="c-resumen"></span></label>
+          <textarea id="resumen" rows="2" placeholder="Una o dos frases. Aparece bajo el titular y en el listado del blog."></textarea>
+        </div>
+
+        <label>Cuerpo del artículo</label>
+        <div class="herramientas" id="herramientas">
+          <span class="grupo-titulo">Texto</span>
+          <button type="button" data-accion="h2" title="Subtítulo (H2)"><strong>H2</strong></button>
+          <button type="button" data-accion="h3" title="Sub-subtítulo (H3)"><strong>H3</strong></button>
+          <button type="button" data-accion="negrita" title="Negrita · Ctrl+B"><strong>B</strong></button>
+          <button type="button" data-accion="cursiva" title="Cursiva · Ctrl+I"><em>I</em></button>
+          <span class="sep"></span>
+          <span class="grupo-titulo">Bloques</span>
+          <button type="button" data-accion="lista" title="Lista con viñetas">&bull;</button>
+          <button type="button" data-accion="numerada" title="Lista numerada">1.</button>
+          <button type="button" data-accion="cita" title="Cita">&ldquo;</button>
+          <button type="button" data-accion="dato" title="Aviso destacado">!</button>
+          <button type="button" data-accion="tabla" title="Tabla">&#9636;</button>
+          <button type="button" data-accion="separador" title="Separador">&mdash;</button>
+          <span class="sep"></span>
+          <span class="grupo-titulo">Insertar</span>
+          <button type="button" data-accion="enlace" title="Enlace · Ctrl+K">Enlace</button>
+          <button type="button" data-accion="interno" title="Enlace a una página del sitio">Interno</button>
+          <button type="button" data-accion="imagen" title="Insertar imagen">Imagen</button>
+          <button type="button" data-accion="faq" title="Bloque de preguntas frecuentes">FAQ</button>
+        </div>
+        <textarea id="cuerpo" rows="22" spellcheck="true" placeholder="Escriba aquí. Use la barra de herramientas o Markdown directamente."></textarea>
+        <p class="ayuda">Markdown: <code>## Subtítulo</code> · <code>**negrita**</code> · <code>- lista</code> · <code>[texto](/areas/civil)</code> · <code>!!! aviso destacado</code></p>
+
+        <div class="metricas">
+          <div class="metrica"><strong id="m-palabras">0</strong><span>Palabras</span></div>
+          <div class="metrica"><strong id="m-lectura">0</strong><span>Min. lectura</span></div>
+          <div class="metrica"><strong id="m-h2">0</strong><span>Subtítulos</span></div>
+        </div>
+      </div>
+
+      <!-- ---------- formato ---------- -->
+      <div id="p-formato" class="oculto">
+        <p class="ayuda" style="margin-bottom:1.25rem">
+          Estos ajustes cambian la tipografía de <strong>este artículo</strong>. Los valores están acotados
+          a la escala del sitio: así puede adaptar cada pieza sin que ninguna se salga de la identidad del despacho.
+        </p>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="fuente">Tipografía del texto</label>
+            <select id="fuente">
+              <option value="serif">Serif — lectura larga (por defecto)</option>
+              <option value="sans">Sans — más técnica</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="tamano">Tamaño de letra</label>
+            <select id="tamano">
+              <option value="compacto">Compacto (16 px)</option>
+              <option value="normal">Normal (17 px)</option>
+              <option value="grande">Grande (19 px)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="interlineado">Interlineado</label>
+            <select id="interlineado">
+              <option value="compacto">Compacto</option>
+              <option value="normal">Normal</option>
+              <option value="amplio">Amplio</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="espaciado">Espaciado entre párrafos</label>
+            <select id="espaciado">
+              <option value="compacto">Compacto</option>
+              <option value="normal">Normal</option>
+              <option value="amplio">Amplio</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="ancho">Ancho de la columna</label>
+            <select id="ancho">
+              <option value="estrecho">Estrecho (60 caracteres)</option>
+              <option value="normal">Normal (68 caracteres)</option>
+              <option value="ancho">Ancho (78 caracteres)</option>
+            </select>
+          </div>
+          <div class="campo casilla" style="margin-top:1.4rem">
+            <input type="checkbox" id="indice">
+            <label for="indice">Mostrar índice de contenidos</label>
+          </div>
+        </div>
+        <p class="ayuda">El índice solo se dibuja si el artículo tiene tres subtítulos o más.</p>
+      </div>
+
+      <!-- ---------- seo ---------- -->
+      <div id="p-seo" class="oculto">
+        <div class="campo">
+          <label for="palabraClave">Búsqueda objetivo</label>
+          <input id="palabraClave" placeholder="Ej.: plazo para impugnar un despido">
+          <p class="ayuda">Lo que escribiría en Google quien necesita este artículo. Las comprobaciones de la derecha se hacen contra esto.</p>
+        </div>
+
+        <div class="campo">
+          <label for="slug">URL <span class="contador" id="c-slug"></span></label>
+          <input id="slug" placeholder="se-genera-desde-el-titular">
+        </div>
+
+        <div class="campo">
+          <label for="metaTitulo">Meta title <span class="contador" id="c-metaTitulo"></span></label>
+          <input id="metaTitulo" placeholder="Si lo deja vacío se usa el titular + el nombre del despacho">
+        </div>
+
+        <div class="campo">
+          <label for="metaDescripcion">Meta description <span class="contador" id="c-metaDescripcion"></span></label>
+          <textarea id="metaDescripcion" rows="3" placeholder="Si lo deja vacío se usa la entradilla"></textarea>
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="tipo">Tipo de contenido</label>
+            <select id="tipo">
+              <option value="BlogPosting">Artículo de blog</option>
+              <option value="NewsArticle">Noticia jurídica</option>
+              <option value="Article">Guía o análisis</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="autorCargo">Cargo del autor</label>
+            <input id="autorCargo" placeholder="Ej.: abogado del área laboral">
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="canonical">URL canónica propia</label>
+          <input id="canonical" placeholder="Solo si este texto se publicó antes en otro sitio">
+        </div>
+
+        <div class="campo casilla">
+          <input type="checkbox" id="noindex">
+          <label for="noindex">No indexar en buscadores</label>
+        </div>
+      </div>
+
+      <!-- ---------- social ---------- -->
+      <div id="p-social" class="oculto">
+        <div class="campo">
+          <label for="archivoImagen">Imagen destacada</label>
+          <input type="file" id="archivoImagen" accept="image/*">
+          <p class="ayuda" id="estado-imagen">Se usa en Google, en el listado y al compartir por WhatsApp o LinkedIn. Recomendado 1200×630 px.</p>
+        </div>
+        <div class="campo">
+          <label for="imagen">Ruta de la imagen</label>
+          <input id="imagen" placeholder="/assets/img/blog/...">
+        </div>
+        <div class="campo">
+          <label for="imagenAlt">Texto alternativo</label>
+          <input id="imagenAlt" placeholder="Describa la imagen para quien no puede verla">
+          <p class="ayuda">Obligatorio por accesibilidad, y lo lee Google.</p>
+        </div>
+        <div class="campo casilla">
+          <input type="checkbox" id="publicado" checked>
+          <label for="publicado">Publicado (si lo desmarca queda como borrador)</label>
+        </div>
+      </div>
+
+      <!-- ---------- vista previa ---------- -->
+      <div id="p-previa" class="oculto">
+        <div class="previsualizacion" id="previsualizacion"></div>
+      </div>
+
+      <div class="acciones-editor" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem">
+        <button id="btn-guardar">Guardar y publicar</button>
+        <button class="secundario" id="btn-borrador">Guardar como borrador</button>
+        <button class="peligro" id="btn-borrar">Eliminar</button>
+      </div>
+      <p class="ayuda">Al guardar se crea un commit en GitHub y Vercel republica el blog. Tarda alrededor de un minuto.</p>
+    </section>
+
+    <aside class="panel">
+      <h2>Análisis SEO</h2>
+
+      <div class="puntuacion">
+        <span class="cifra" id="nota">—</span>
+        <div style="flex:1">
+          <div class="detalle" id="nota-texto">Escriba el artículo para ver el análisis.</div>
+          <div class="barra-progreso"><div id="nota-barra"></div></div>
+        </div>
+      </div>
+
+      <div class="vista-google">
+        <div class="ruta" id="g-url">jurmiabogados.es › blog › …</div>
+        <div class="titulo" id="g-titulo">Titular del artículo</div>
+        <div class="desc" id="g-desc">Así se verá en los resultados de Google.</div>
+      </div>
+
+      <ul class="revision" id="revision"></ul>
+
+      <div class="grupo-revision" style="margin-bottom:.5rem">Al compartir el enlace</div>
+      <div class="tarjeta-social">
+        <div class="imagen" id="s-imagen">Sin imagen destacada</div>
+        <div class="cuerpo">
+          <div class="dominio">jurmiabogados.es</div>
+          <div class="tit" id="s-titulo">Titular del artículo</div>
+          <div class="des" id="s-desc">Entradilla del artículo.</div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<dialog id="dlg-interno">
+  <h3 style="margin:0 0 .75rem;font-size:1.05rem">Enlazar a una página del sitio</h3>
+  <p class="ayuda" style="margin:0 0 1rem">Los enlaces internos reparten autoridad entre páginas y llevan al lector hacia el formulario.</p>
+  <div class="campo">
+    <label for="destino-interno">Destino</label>
+    <select id="destino-interno">
+      <option value="/areas/civil">Derecho civil</option>
+      <option value="/areas/penal">Derecho penal</option>
+      <option value="/areas/laboral">Derecho laboral</option>
+      <option value="/areas/tributario">Derecho tributario</option>
+      <option value="/despachos/madrid">Despacho de Madrid</option>
+      <option value="/despachos/valencia">Despacho de Valencia</option>
+      <option value="/despachos/castellon">Despacho de Castellón</option>
+      <option value="/blog">Blog</option>
+      <option value="/#contacto">Formulario de contacto</option>
+    </select>
+  </div>
+  <div class="campo">
+    <label for="texto-interno">Texto del enlace</label>
+    <input id="texto-interno" placeholder="derecho laboral">
+  </div>
+  <div style="display:flex;gap:.5rem;justify-content:flex-end">
+    <button class="secundario" id="cancelar-interno">Cancelar</button>
+    <button id="aceptar-interno">Insertar</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+
+  var token = sessionStorage.getItem("jurmia_token") || null;
+  var usuario = JSON.parse(sessionStorage.getItem("jurmia_usuario") || "null");
+  var archivoActual = null, shaActual = null, sinGuardar = false, articulos = [];
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var CAMPOS = ["titulo","slug","fecha","autor","area","resumen","metaTitulo","metaDescripcion",
+                "imagen","imagenAlt","cuerpo","palabraClave","canonical","autorCargo","tipo",
+                "fuente","tamano","interlineado","espaciado","ancho"];
+  var CASILLAS = ["publicado","noindex","indice"];
+
+  function mensaje(destino, texto, tipo) {
+    $(destino).innerHTML = texto ? '<div class="mensaje ' + (tipo || "") + '">' + texto + "</div>" : "";
+  }
+
+  function api(cuerpo) {
+    return fetch("/api/admin", {
+      method: "POST",
+      headers: Object.assign({ "Content-Type": "application/json" }, token ? { Authorization: "Bearer " + token } : {}),
+      body: JSON.stringify(cuerpo)
+    }).then(function (r) {
+      return r.json().then(function (d) {
+        if (!r.ok) throw new Error(d.error || "Error " + r.status);
+        return d;
+      });
+    });
+  }
+
+  function alSlug(t) {
+    return (t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+  }
+
+  function normaliza(t) {
+    return (t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
+  /* Palabras sin carga semántica: no cuentan para las comprobaciones. */
+  var VACIAS = ["de","del","la","las","el","los","un","una","unos","unas","y","o","en","a",
+                "al","por","para","con","sin","que","se","su","sus","lo","es","como"];
+
+  /** Términos con contenido de la búsqueda objetivo. */
+  function terminos(clave) {
+    return normaliza(clave).split(/\s+/).filter(function (p) {
+      return p.length > 2 && VACIAS.indexOf(p) === -1;
+    });
+  }
+
+  /**
+   * Comprueba si un texto trata la búsqueda objetivo. Se buscan los términos por
+   * separado, no la frase exacta: en español casi nunca se escribe literal
+   * ("gastos de hipoteca" aparece como "gastos de la hipoteca").
+   */
+  function cubre(texto, lista) {
+    var n = normaliza(texto);
+    return lista.every(function (p) { return n.indexOf(p) !== -1; });
+  }
+
+  /* ---------------- acceso ---------------- */
+
+  function entrar() {
+    mensaje("mensaje-acceso", "");
+    if (!$("correo").value.trim()) {
+      mensaje("mensaje-acceso", "Escriba su correo electrónico.", "error"); return;
+    }
+    $("btn-entrar").disabled = true;
+    api({ accion: "entrar", correo: $("correo").value.trim(), clave: $("clave").value })
+      .then(function (d) {
+        token = d.token;
+        usuario = { nombre: d.nombre, correo: d.correo };
+        sessionStorage.setItem("jurmia_token", token);
+        sessionStorage.setItem("jurmia_usuario", JSON.stringify(usuario));
+        abrirPanel();
+      })
+      .catch(function (e) { mensaje("mensaje-acceso", e.message, "error"); })
+      .then(function () { $("btn-entrar").disabled = false; });
+  }
+
+  $("btn-entrar").addEventListener("click", entrar);
+  $("correo").addEventListener("keydown", function (e) { if (e.key === "Enter") $("clave").focus(); });
+  $("clave").addEventListener("keydown", function (e) { if (e.key === "Enter") entrar(); });
+
+  $("btn-salir").addEventListener("click", function () {
+    if (sinGuardar && !confirm("Hay cambios sin guardar. ¿Salir de todas formas?")) return;
+    sessionStorage.removeItem("jurmia_token");
+    sessionStorage.removeItem("jurmia_usuario");
+    location.reload();
+  });
+
+  function abrirPanel() {
+    $("acceso").classList.add("oculto");
+    $("panel").classList.remove("oculto");
+    if (usuario) $("sesion-nombre").textContent = usuario.nombre;
+    nuevo();
+    cargarLista();
+  }
+
+  /* ---------------- pestañas ---------------- */
+
+  $("pestanas").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    Array.prototype.forEach.call($("pestanas").children, function (x) { x.classList.remove("activa"); });
+    b.classList.add("activa");
+    ["p-contenido","p-formato","p-seo","p-social","p-previa"].forEach(function (id) {
+      $(id).classList.toggle("oculto", id !== b.dataset.panel);
+    });
+    if (b.dataset.panel === "p-previa") pintarPrevia();
+  });
+
+  /* ---------------- lista ---------------- */
+
+  function cargarLista() {
+    api({ accion: "listar" })
+      .then(function (d) { articulos = d.articulos; pintarLista(); })
+      .catch(function (e) {
+        if (/Sesión|acceso/.test(e.message)) {
+          sessionStorage.removeItem("jurmia_token");
+          sessionStorage.removeItem("jurmia_usuario");
+          location.reload();
+        }
+        mensaje("mensaje-editor", e.message, "error");
+      });
+  }
+
+  function pintarLista() {
+    var filtro = normaliza($("buscador").value);
+    var ul = $("lista"); ul.innerHTML = "";
+    var visibles = articulos.filter(function (a) { return !filtro || normaliza(a.titulo).indexOf(filtro) !== -1; });
+    $("lista-vacia").style.display = visibles.length ? "none" : "block";
+    visibles.forEach(function (a) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.innerHTML = "<strong>" + a.titulo + "</strong><span>" + (a.fecha || "") + " · " + a.area +
+        (a.publicado ? "" : ' · <span class="borrador">borrador</span>') + "</span>";
+      b.addEventListener("click", function () { abrir(a.archivo, b); });
+      if (a.archivo === archivoActual) b.classList.add("activo");
+      li.appendChild(b); ul.appendChild(li);
+    });
+  }
+
+  $("buscador").addEventListener("input", pintarLista);
+
+  function abrir(archivo, boton) {
+    if (sinGuardar && !confirm("Hay cambios sin guardar. ¿Abrir otro artículo?")) return;
+    api({ accion: "abrir", archivo: archivo }).then(function (d) {
+      archivoActual = d.archivo; shaActual = d.sha;
+      CAMPOS.forEach(function (c) { $(c).value = d.articulo[c] || ""; });
+      if (!$("fuente").value) $("fuente").value = "serif";
+      ["tamano","interlineado","espaciado","ancho"].forEach(function (c) { if (!$(c).value) $(c).value = "normal"; });
+      if (!$("tipo").value) $("tipo").value = "BlogPosting";
+      $("publicado").checked = d.articulo.publicado !== false;
+      $("noindex").checked = d.articulo.noindex === true;
+      $("indice").checked = d.articulo.indice === true;
+      Array.prototype.forEach.call(document.querySelectorAll(".lista button"), function (b) { b.classList.remove("activo"); });
+      if (boton) boton.classList.add("activo");
+      marcarGuardado(); mensaje("mensaje-editor", ""); revisar();
+      window.scrollTo(0, 0);
+    }).catch(function (e) { mensaje("mensaje-editor", e.message, "error"); });
+  }
+
+  function nuevo() {
+    if (sinGuardar && !confirm("Hay cambios sin guardar. ¿Empezar uno nuevo?")) return;
+    archivoActual = null; shaActual = null;
+    CAMPOS.forEach(function (c) { $(c).value = ""; });
+    $("fecha").value = new Date().toISOString().slice(0, 10);
+    $("area").value = "Civil";
+    $("tipo").value = "BlogPosting";
+    $("fuente").value = "serif";
+    ["tamano","interlineado","espaciado","ancho"].forEach(function (c) { $(c).value = "normal"; });
+    CASILLAS.forEach(function (c) { $(c).checked = (c === "publicado"); });
+    if (usuario) $("autor").value = usuario.nombre;
+    Array.prototype.forEach.call(document.querySelectorAll(".lista button"), function (b) { b.classList.remove("activo"); });
+    marcarGuardado(); mensaje("mensaje-editor", ""); revisar();
+  }
+  $("btn-nuevo").addEventListener("click", nuevo);
+
+  /* ---------------- barra de herramientas ---------------- */
+
+  function envolver(antes, despues, marcador) {
+    var t = $("cuerpo");
+    var i = t.selectionStart, f = t.selectionEnd;
+    var sel = t.value.slice(i, f) || marcador || "";
+    t.value = t.value.slice(0, i) + antes + sel + (despues || "") + t.value.slice(f);
+    t.focus();
+    t.selectionStart = i + antes.length;
+    t.selectionEnd = i + antes.length + sel.length;
+    alCambiar();
+  }
+
+  function alPrincipioDeLinea(prefijo) {
+    var t = $("cuerpo");
+    var i = t.selectionStart, f = t.selectionEnd;
+    var ini = t.value.lastIndexOf("\n", i - 1) + 1;
+    var lineas = t.value.slice(ini, f).split("\n").map(function (l) { return prefijo + l; }).join("\n");
+    t.value = t.value.slice(0, ini) + lineas + t.value.slice(f);
+    t.focus(); t.selectionStart = t.selectionEnd = ini + lineas.length;
+    alCambiar();
+  }
+
+  function insertar(texto) {
+    var t = $("cuerpo");
+    var antes = t.value.slice(0, t.selectionStart);
+    var sep = antes ? (antes.endsWith("\n\n") ? "" : antes.endsWith("\n") ? "\n" : "\n\n") : "";
+    var resto = t.value.slice(t.selectionEnd);
+    t.value = antes + sep + texto + "\n\n" + resto;
+    t.focus(); t.selectionStart = t.selectionEnd = (antes + sep + texto).length;
+    alCambiar();
+  }
+
+  var ACCIONES = {
+    h2: function () { alPrincipioDeLinea("## "); },
+    h3: function () { alPrincipioDeLinea("### "); },
+    negrita: function () { envolver("**", "**", "texto"); },
+    cursiva: function () { envolver("*", "*", "texto"); },
+    lista: function () { alPrincipioDeLinea("- "); },
+    numerada: function () { alPrincipioDeLinea("1. "); },
+    cita: function () { alPrincipioDeLinea("> "); },
+    dato: function () { insertar("!!! Dato relevante: plazo, artículo o cifra que conviene destacar."); },
+    separador: function () { insertar("---"); },
+    tabla: function () {
+      insertar("| Concepto | Plazo | Norma |\n| --- | --- | --- |\n| Despido | 20 días hábiles | Art. 59.3 ET |\n| Reclamación de cantidad | 1 año | Art. 59.2 ET |");
+    },
+    enlace: function () {
+      var url = prompt("Dirección del enlace:", "https://");
+      if (url) envolver("[", "](" + url + ")", "texto del enlace");
+    },
+    imagen: function () {
+      var url = prompt("Ruta de la imagen:", $("imagen").value || "/assets/img/blog/");
+      if (!url) return;
+      var alt = prompt("Texto alternativo (describa la imagen):", "");
+      insertar("![" + (alt || "") + "](" + url + ")");
+    },
+    faq: function () {
+      insertar("## Preguntas frecuentes\n\n### ¿Primera pregunta que hace todo el mundo?\n\nRespuesta clara y directa, de dos o tres frases.\n\n### ¿Segunda pregunta?\n\nRespuesta.");
+    },
+    interno: function () { $("dlg-interno").showModal(); }
+  };
+
+  $("herramientas").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    var f = ACCIONES[b.dataset.accion]; if (f) f();
+  });
+
+  $("cancelar-interno").addEventListener("click", function () { $("dlg-interno").close(); });
+  $("aceptar-interno").addEventListener("click", function () {
+    var destino = $("destino-interno").value;
+    var texto = $("texto-interno").value.trim() ||
+      $("destino-interno").selectedOptions[0].textContent.toLowerCase();
+    envolver("[" + texto + "](" + destino + ")", "");
+    $("texto-interno").value = "";
+    $("dlg-interno").close();
+  });
+
+  $("cuerpo").addEventListener("keydown", function (e) {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    var k = e.key.toLowerCase();
+    if (k === "b") { e.preventDefault(); ACCIONES.negrita(); }
+    if (k === "i") { e.preventDefault(); ACCIONES.cursiva(); }
+    if (k === "k") { e.preventDefault(); ACCIONES.enlace(); }
+    if (k === "s") { e.preventDefault(); guardar(); }
+  });
+
+  /* ---------------- vista previa ---------------- */
+
+  function linea(t) {
+    return t
+      .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">')
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>")
+      .replace(/`(.+?)`/g, "<code>$1</code>");
+  }
+
+  function aHtml(md) {
+    return md.replace(/\r/g, "").split(/\n{2,}/).map(function (b) {
+      b = b.trim(); if (!b) return "";
+      var esc = b.replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; });
+
+      if (/^!!!\s+/.test(esc)) return '<aside class="dato-clave">' + linea(esc.replace(/^!!!\s+/, "")) + "</aside>";
+      if (/^-{3,}$/.test(esc)) return "<hr>";
+      if (/^###\s+/.test(esc)) return "<h3>" + linea(esc.replace(/^###\s+/, "")) + "</h3>";
+      if (/^##\s+/.test(esc)) return "<h2>" + linea(esc.replace(/^##\s+/, "")) + "</h2>";
+      if (/^&gt;\s+/.test(esc)) return "<blockquote>" + linea(esc.replace(/^&gt;\s+/gm, "")) + "</blockquote>";
+
+      if (/^\|/.test(esc)) {
+        var filas = esc.split("\n").filter(function (f) { return !/^\|[\s:|-]+\|?$/.test(f); });
+        return "<table>" + filas.map(function (f, i) {
+          var celdas = f.split("|").slice(1, -1);
+          var et = i === 0 ? "th" : "td";
+          return "<tr>" + celdas.map(function (c) { return "<" + et + ">" + linea(c.trim()) + "</" + et + ">"; }).join("") + "</tr>";
+        }).join("") + "</table>";
+      }
+      if (/^-\s+/.test(esc)) {
+        return "<ul>" + esc.split("\n").map(function (l) { return "<li>" + linea(l.replace(/^-\s+/, "")) + "</li>"; }).join("") + "</ul>";
+      }
+      if (/^\d+\.\s+/.test(esc)) {
+        return "<ol>" + esc.split("\n").map(function (l) { return "<li>" + linea(l.replace(/^\d+\.\s+/, "")) + "</li>"; }).join("") + "</ol>";
+      }
+      return "<p>" + linea(esc).replace(/\n/g, "<br>") + "</p>";
+    }).join("\n");
+  }
+
+  var ESCALA = {
+    fuente: { serif: '"Source Serif 4", Georgia, serif', sans: '"Archivo", sans-serif' },
+    tamano: { compacto: "1rem", normal: "1.0625rem", grande: "1.1875rem" },
+    interlineado: { compacto: "1.55", normal: "1.72", amplio: "1.9" },
+    espaciado: { compacto: ".9rem", normal: "1.35rem", amplio: "1.9rem" },
+    ancho: { estrecho: "60ch", normal: "68ch", ancho: "78ch" }
+  };
+
+  function pintarPrevia() {
+    var p = $("previsualizacion");
+    p.style.fontFamily = ESCALA.fuente[$("fuente").value] || ESCALA.fuente.serif;
+    p.style.fontSize = ESCALA.tamano[$("tamano").value] || ESCALA.tamano.normal;
+    p.style.lineHeight = ESCALA.interlineado[$("interlineado").value] || ESCALA.interlineado.normal;
+    p.style.maxWidth = ESCALA.ancho[$("ancho").value] || ESCALA.ancho.normal;
+    var html = "<h1>" + ($("titulo").value || "Sin titular") + "</h1>";
+    if ($("resumen").value) html += '<p style="color:#35617f">' + $("resumen").value + "</p>";
+    if ($("imagen").value) html += '<img src="' + $("imagen").value + '" alt="' + $("imagenAlt").value + '">';
+    p.innerHTML = html + aHtml($("cuerpo").value);
+    var esp = ESCALA.espaciado[$("espaciado").value] || ESCALA.espaciado.normal;
+    Array.prototype.forEach.call(p.querySelectorAll("p"), function (x) { x.style.marginBottom = esp; });
+  }
+
+  /* ---------------- análisis SEO ---------------- */
+
+  function contador(id, valor, min, max) {
+    var e = $("c-" + id); if (!e) return;
+    var n = valor.length;
+    e.textContent = n + (max ? "/" + max : "");
+    e.className = "contador " + (n === 0 ? "" : n < min ? "aviso" : n > max ? "mal" : "ok");
+  }
+
+  function revisar() {
+    var titulo = $("titulo").value.trim();
+    var slug = $("slug").value.trim() || alSlug(titulo);
+    var resumen = $("resumen").value.trim();
+    var metaT = $("metaTitulo").value.trim() || (titulo ? titulo + " | Blog jurídico de JURMIA Abogados" : "");
+    var metaD = $("metaDescripcion").value.trim() || resumen;
+    var cuerpo = $("cuerpo").value;
+    var img = $("imagen").value.trim();
+
+    var limpio = cuerpo.replace(/[#*>|`]/g, " ");
+    var palabras = limpio.split(/\s+/).filter(Boolean).length;
+    var subtitulos = cuerpo.match(/^##\s+.*/gm) || [];
+    var parrafos = cuerpo.split(/\n{2,}/).filter(function (p) {
+      return p.trim() && !/^[#>|!-]/.test(p.trim());
+    });
+    var largos = parrafos.filter(function (p) { return p.split(/\s+/).length > 150; }).length;
+    var frases = limpio.split(/[.!?]+\s/).filter(function (f) { return f.trim().length > 3; });
+    var mediaFrase = frases.length ? Math.round(palabras / frases.length) : 0;
+    var internos = (cuerpo.match(/\]\(\/(areas|despachos|blog|#)/g) || []).length;
+    var externos = (cuerpo.match(/\]\(https?:\/\//g) || []).length;
+    var primero = normaliza(parrafos[0] || "");
+    var lista = terminos($("palabraClave").value);
+    var cuerpoNorm = normaliza(cuerpo);
+    var menciones = lista.length
+      ? Math.min.apply(null, lista.map(function (p) { return cuerpoNorm.split(p).length - 1; }))
+      : 0;
+    var densidad = (palabras && lista.length) ? (menciones * lista.length / palabras * 100) : 0;
+
+    contador("titulo", titulo, 25, 80);
+    contador("slug", slug, 3, 60);
+    contador("resumen", resumen, 80, 300);
+    contador("metaTitulo", metaT, 30, 60);
+    contador("metaDescripcion", metaD, 120, 160);
+
+    $("m-palabras").textContent = palabras;
+    $("m-lectura").textContent = Math.max(1, Math.round(palabras / 200));
+    $("m-h2").textContent = subtitulos.length;
+
+    $("g-url").textContent = "jurmiabogados.es › blog › " + (slug || "…");
+    $("g-titulo").textContent = metaT.length > 60 ? metaT.slice(0, 57) + "…" : (metaT || "Titular del artículo");
+    $("g-desc").textContent = metaD.length > 160 ? metaD.slice(0, 157) + "…" : (metaD || "Así se verá en los resultados de Google.");
+
+    $("s-titulo").textContent = metaT || "Titular del artículo";
+    $("s-desc").textContent = metaD || "Entradilla del artículo.";
+    $("s-imagen").style.backgroundImage = img ? 'url("' + img + '")' : "";
+    $("s-imagen").textContent = img ? "" : "Sin imagen destacada";
+
+    var grupos = [
+      ["Búsqueda objetivo", [
+        [!!lista.length, "Ha definido una búsqueda objetivo", "Rellénela en la pestaña SEO"],
+        [!lista.length || cubre(metaT, lista), "Aparece en el meta title", "Inclúyala, mejor al principio"],
+        [!lista.length || cubre(metaD, lista), "Aparece en la meta description", "Inclúyala"],
+        [!lista.length || cubre(slug, lista), "Aparece en la URL", "Ajuste el slug"],
+        [!lista.length || cubre(primero, lista), "Aparece en el primer párrafo", "Menciónela en la entrada"],
+        [!lista.length || cubre(subtitulos.join(" "), lista), "Aparece en algún subtítulo", "Úsela en un H2"],
+        [!lista.length || (densidad >= 0.5 && densidad <= 4), "Densidad natural (" + densidad.toFixed(1) + " %)", densidad > 4 ? "Repetida en exceso" : "Menciónela alguna vez más"]
+      ]],
+      ["Estructura y extensión", [
+        [palabras >= 900, "900 palabras o más (" + palabras + ")", palabras < 600 ? "Demasiado corto para posicionar" : "Le faltan " + (900 - palabras)],
+        [subtitulos.length >= 3, "Tres subtítulos o más (" + subtitulos.length + ")", "Divida el texto con ##"],
+        [largos === 0, "Sin párrafos interminables", largos + " párrafo(s) muy largo(s)"],
+        [mediaFrase > 0 && mediaFrase <= 25, "Frases legibles (" + mediaFrase + " palabras de media)", "Frases largas: acórtelas"],
+        [/^!!!/m.test(cuerpo) || /^\|/m.test(cuerpo) || /^-\s/m.test(cuerpo), "Incluye listas, tablas o avisos", "Añada una lista o un dato destacado"]
+      ]],
+      ["Enlaces e imagen", [
+        [internos >= 2, "Dos enlaces internos o más (" + internos + ")", "Enlace a las páginas de área"],
+        [externos >= 1, "Cita alguna fuente externa (" + externos + ")", "Enlace al BOE o al CENDOJ"],
+        [!!img, "Tiene imagen destacada", "Súbala en la pestaña Social"],
+        [!img || !!$("imagenAlt").value.trim(), "La imagen tiene texto alternativo", "Falta el alt"]
+      ]],
+      ["Fiabilidad", [
+        [!!$("autor").value.trim(), "Artículo firmado", "Añada el autor"],
+        [!!$("autorCargo").value.trim(), "El autor tiene cargo indicado", "Ej.: abogado del área laboral"],
+        [/\b(art\.|art[íi]culo|STS|Ley|Real Decreto|sentencia|BOE)\b/i.test(cuerpo), "Cita normas o sentencias", "Añada referencias concretas"],
+        [/##\s+Preguntas frecuentes/i.test(cuerpo), "Incluye preguntas frecuentes", "Google puede mostrarlas desplegadas"]
+      ]]
+    ];
+
+    var html = "", total = 0, cumplidos = 0;
+    grupos.forEach(function (g) {
+      html += '<li class="cabecera"><span class="grupo-revision">' + g[0] + "</span></li>";
+      g[1].forEach(function (p) {
+        total++; if (p[0]) cumplidos++;
+        html += '<li><span class="marca ' + (p[0] ? "ok" : "aviso") + '">' + (p[0] ? "\u2713" : "!") + "</span><span>" +
+          p[1] + (p[0] ? "" : ' <span class="ayuda">— ' + p[2] + "</span>") + "</span></li>";
+      });
+    });
+    $("revision").innerHTML = html;
+
+    var nota = Math.round(cumplidos / total * 100);
+    $("nota").textContent = nota;
+    $("nota").className = "cifra " + (nota >= 80 ? "ok" : nota >= 55 ? "aviso" : "mal");
+    $("nota-barra").style.width = nota + "%";
+    $("nota-barra").style.background = nota >= 80 ? "var(--verde)" : nota >= 55 ? "var(--ambar)" : "var(--rojo)";
+    $("nota-texto").textContent = cumplidos + " de " + total + " comprobaciones superadas.";
+  }
+
+  function marcarSinGuardar() { sinGuardar = true; $("estado-guardado").textContent = "Cambios sin guardar"; }
+  function marcarGuardado() { sinGuardar = false; $("estado-guardado").textContent = ""; }
+
+  function alCambiar() {
+    marcarSinGuardar();
+    revisar();
+    if (!$("p-previa").classList.contains("oculto")) pintarPrevia();
+  }
+
+  CAMPOS.forEach(function (c) {
+    $(c).addEventListener("input", alCambiar);
+    $(c).addEventListener("change", alCambiar);
+  });
+  CASILLAS.forEach(function (c) { $(c).addEventListener("change", alCambiar); });
+
+  $("titulo").addEventListener("blur", function () {
+    if (!$("slug").value.trim()) { $("slug").value = alSlug($("titulo").value); revisar(); }
+  });
+
+  window.addEventListener("beforeunload", function (e) {
+    if (sinGuardar) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  /* ---------------- guardar y borrar ---------------- */
+
+  function guardar(publicar) {
+    var articulo = {};
+    CAMPOS.forEach(function (c) { articulo[c] = $(c).value.trim(); });
+    articulo.publicado = (publicar === undefined) ? $("publicado").checked : publicar;
+    articulo.noindex = $("noindex").checked;
+    articulo.indice = $("indice").checked;
+    if (!articulo.slug) articulo.slug = alSlug(articulo.titulo);
+    $("publicado").checked = articulo.publicado;
+
+    $("btn-guardar").disabled = true; $("btn-borrador").disabled = true;
+    mensaje("mensaje-editor", "Guardando…");
+    api({ accion: "guardar", articulo: articulo, archivo: archivoActual, sha: shaActual })
+      .then(function (d) {
+        archivoActual = d.archivo; shaActual = d.sha;
+        marcarGuardado();
+        mensaje("mensaje-editor",
+          articulo.publicado
+            ? 'Guardado. La web se republica sola en un minuto: <a href="/blog/' + articulo.slug + '" target="_blank" rel="noopener">ver el artículo</a>.'
+            : "Guardado como borrador. No aparecerá en la web hasta que lo publique.",
+          "bien");
+        cargarLista();
+      })
+      .catch(function (e) { mensaje("mensaje-editor", e.message, "error"); })
+      .then(function () { $("btn-guardar").disabled = false; $("btn-borrador").disabled = false; });
+  }
+
+  $("btn-guardar").addEventListener("click", function () { guardar(true); });
+  $("btn-borrador").addEventListener("click", function () { guardar(false); });
+
+  $("btn-borrar").addEventListener("click", function () {
+    if (!archivoActual) { mensaje("mensaje-editor", "Este artículo todavía no se ha guardado.", "error"); return; }
+    if (!confirm("¿Eliminar este artículo? Desaparece de la web, aunque queda en el historial de GitHub.")) return;
+    api({ accion: "borrar", archivo: archivoActual })
+      .then(function () {
+        archivoActual = null; sinGuardar = false;
+        nuevo(); cargarLista();
+        mensaje("mensaje-editor", "Artículo eliminado.", "bien");
+      })
+      .catch(function (e) { mensaje("mensaje-editor", e.message, "error"); });
+  });
+
+  /* ---------------- imagen ---------------- */
+
+  $("archivoImagen").addEventListener("change", function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    $("estado-imagen").textContent = "Subiendo…";
+    var lector = new FileReader();
+    lector.onload = function () {
+      api({ accion: "subirImagen", nombre: f.name, base64: lector.result.split(",")[1] })
+        .then(function (d) {
+          $("imagen").value = d.ruta;
+          $("estado-imagen").textContent = "Imagen subida: " + d.ruta;
+          alCambiar();
+        })
+        .catch(function (err) { $("estado-imagen").textContent = err.message; });
+    };
+    lector.readAsDataURL(f);
+  });
+
+  if (token) abrirPanel();
+})();
+</script>
+</body>
+</html>
