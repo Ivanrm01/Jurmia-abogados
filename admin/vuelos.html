@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Reclamaciones aéreas — JURMIA Abogados</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tinta: #06365a; --tinta-oscura: #042439; --tinta-media: #35617f;
+    --piedra: #c3ced2; --piedra-clara: #e6ebed; --papel: #f4f6f7;
+    --verde: #1c6b4b; --ambar: #8a5a12; --rojo: #a12a2a;
+    --display: "Archivo", system-ui, sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--papel); color: var(--tinta-oscura);
+         font-family: var(--display); font-size: 15px; line-height: 1.55; }
+  a { color: var(--tinta); }
+
+  .barra { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 1rem;
+           justify-content: space-between; padding: .7rem 1.25rem; background: var(--tinta-oscura); color: #fff; }
+  .barra-izq { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+  .barra img { height: 24px; }
+  .barra-titulo { font-family: var(--mono); font-size: .7rem; letter-spacing: .16em;
+                  text-transform: uppercase; color: var(--piedra); white-space: nowrap; }
+  .barra a { color: var(--piedra); font-size: .8125rem; text-decoration: none; }
+  .barra a:hover { color: #fff; }
+  .barra-der { display: flex; align-items: center; gap: 1rem; font-size: .8125rem; color: var(--piedra); }
+
+  .envoltura { max-width: 1180px; margin: 0 auto; padding: 1.5rem 1.25rem 5rem; }
+  .oculto { display: none !important; }
+
+  h1 { font-size: 1.5rem; margin: 0 0 .35rem; }
+  h2 { font-size: 1.0625rem; margin: 0 0 .2rem; }
+  .rotulo { font-family: var(--mono); font-size: .6875rem; letter-spacing: .14em;
+            text-transform: uppercase; color: var(--tinta-media); display: block; margin-bottom: .5rem; }
+  .apunte { color: var(--tinta-media); font-size: .8125rem; margin: 0 0 1rem; }
+
+  .caja { background: #fff; border: 1px solid rgba(6,54,90,.16); padding: 1.25rem; margin-bottom: 1rem; }
+
+  label { display: block; font-family: var(--mono); font-size: .625rem; letter-spacing: .12em;
+          text-transform: uppercase; color: var(--tinta-media); margin-bottom: .3rem; }
+  input, select, textarea {
+    width: 100%; font-family: var(--display); font-size: 16px; color: var(--tinta-oscura);
+    background: var(--papel); border: 1px solid rgba(6,54,90,.2); padding: .55rem .65rem; border-radius: 2px;
+  }
+  textarea { font-family: var(--mono); font-size: 13px; line-height: 1.6; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--tinta); outline-offset: -1px; background: #fff; }
+  .campo { margin-bottom: .85rem; }
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .85rem; }
+
+  button { font-family: var(--display); font-size: .875rem; font-weight: 600; cursor: pointer;
+           padding: .6rem 1rem; border: 1px solid var(--tinta); background: var(--tinta); color: #fff;
+           border-radius: 2px; min-height: 42px; }
+  button:hover { background: #000; border-color: #000; }
+  button:disabled { opacity: .5; cursor: default; }
+  button.secundario { background: #fff; color: var(--tinta); }
+  button.secundario:hover { background: var(--piedra-clara); border-color: var(--tinta); color: var(--tinta); }
+  button.peligro { background: #fff; color: var(--rojo); border-color: var(--rojo); }
+  button.peligro:hover { background: var(--rojo); color: #fff; }
+  .botonera { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+  table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+  th { font-family: var(--mono); font-size: .625rem; letter-spacing: .1em; text-transform: uppercase;
+       color: var(--tinta-media); text-align: left; padding: .5rem .5rem; border-bottom: 1px solid rgba(6,54,90,.2); }
+  td { padding: .6rem .5rem; border-bottom: 1px solid rgba(6,54,90,.1); vertical-align: middle; }
+  tr.fila:hover { background: var(--piedra-clara); cursor: pointer; }
+  .num { font-family: var(--mono); }
+
+  .marca-estado { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em; text-transform: uppercase;
+                  padding: .2rem .45rem; border: 1px solid currentColor; white-space: nowrap; }
+  .e-nuevo { color: var(--tinta); } .e-encargo { color: var(--ambar); }
+  .e-reclamado { color: var(--ambar); } .e-demanda { color: var(--rojo); }
+  .e-cobrado { color: var(--verde); } .e-archivado { color: var(--tinta-media); }
+
+  .cifra { font-family: var(--mono); font-size: 2.5rem; line-height: 1; letter-spacing: -.03em; color: var(--tinta); }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px;
+          background: rgba(6,54,90,.16); border: 1px solid rgba(6,54,90,.16); margin-top: 1rem; }
+  .kpi { background: #fff; padding: .7rem .8rem; }
+  .kpi small { display: block; font-family: var(--mono); font-size: .5625rem; letter-spacing: .1em;
+               text-transform: uppercase; color: var(--tinta-media); }
+  .kpi b { font-family: var(--mono); font-size: 1.0625rem; font-weight: 500; }
+
+  .traza { list-style: none; margin: 1rem 0 0; padding: 0; border-top: 1px solid rgba(6,54,90,.12); }
+  .traza li { display: grid; grid-template-columns: 84px 1fr; gap: .75rem; padding: .7rem 0;
+              border-bottom: 1px solid rgba(6,54,90,.1); }
+  .traza-norma { font-family: var(--mono); font-size: .6875rem; color: var(--tinta-media); }
+  .traza b { display: flex; align-items: center; gap: .45rem; font-size: .875rem; }
+  .punto { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .traza p { margin: .2rem 0 0; font-size: .8125rem; color: var(--tinta-media); }
+
+  .reloj { height: 24px; background: var(--piedra-clara); border: 1px solid rgba(6,54,90,.2);
+           position: relative; margin-top: .4rem; }
+  .reloj i { position: absolute; inset: 0 auto 0 0; background: rgba(6,54,90,.25); }
+  .reloj > span { position: absolute; inset: 0; display: flex; align-items: center;
+                  justify-content: space-between; gap: .5rem; padding: 0 .6rem;
+                  font-family: var(--mono); font-size: .6875rem; }
+  .reloj > span > span { position: static; white-space: nowrap; }
+  .reloj > span > span:nth-child(2) { flex: 1; text-align: center; }
+
+  .aviso { border-left: 3px solid var(--ambar); background: #fdf8ef; padding: .7rem .9rem;
+           font-size: .8125rem; line-height: 1.55; margin-top: .85rem; }
+  .aviso.ok { border-left-color: var(--verde); background: #f0f7f3; }
+  .aviso.mal { border-left-color: var(--rojo); background: #fbf1f1; }
+  .aviso b { display: block; margin-bottom: .2rem; }
+
+  .doc { white-space: pre-wrap; font-family: var(--mono); font-size: 12px; line-height: 1.65;
+         background: #fbfcfc; border: 1px solid rgba(6,54,90,.16); padding: 1rem; max-height: 480px;
+         overflow: auto; margin-top: .75rem; }
+
+  .mensaje { font-family: var(--mono); font-size: .8125rem; padding: .6rem .8rem; margin-top: .8rem;
+             border-left: 3px solid var(--tinta); background: var(--piedra-clara); }
+  .mensaje.error { border-left-color: var(--rojo); background: #fbf1f1; color: var(--rojo); }
+  .filtros { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
+  .filtros select, .filtros input { width: auto; min-width: 160px; }
+
+  .seleccion {
+    display: none; align-items: center; gap: .75rem; flex-wrap: wrap;
+    background: #fbf1f1; border: 1px solid var(--rojo); padding: .6rem .85rem; margin-bottom: .75rem;
+  }
+  .seleccion.visible { display: flex; }
+  .seleccion b { font-family: var(--mono); font-size: .8125rem; color: var(--rojo); }
+  .casilla { width: 18px; height: 18px; accent-color: var(--tinta); cursor: pointer; margin: 0; }
+  td.col-sel, th.col-sel { width: 34px; }
+
+  @media (max-width: 860px) {
+    .barra { flex-wrap: wrap; gap: .5rem .75rem; padding: .6rem .9rem; }
+    .barra-titulo { display: none; }
+    .barra-der { margin-left: auto; min-width: 0; }
+    #sesion-nombre {
+      max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+  }
+  @media (max-width: 720px) {
+    .envoltura { padding: 1rem .9rem 5rem; }
+    .traza li { grid-template-columns: 1fr; gap: .2rem; }
+    table, thead, tbody, tr, td, th { display: block; }
+    thead { display: none; }
+    tr.fila { border: 1px solid rgba(6,54,90,.16); background: #fff; margin-bottom: .6rem; padding: .5rem; }
+    td { border: 0; padding: .2rem 0; }
+    td::before { content: attr(data-t) " "; font-family: var(--mono); font-size: .625rem;
+                 text-transform: uppercase; color: var(--tinta-media); }
+  }
+
+  /* --- raíl lateral de secciones: solo existe con sesión iniciada --- */
+  body.identificado { padding-left: 76px; }
+  .lateral { display: none; }
+  body.identificado .lateral {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 76px; z-index: 45;
+    background: var(--tinta-oscura); border-right: 1px solid rgba(255,255,255,.09);
+    display: flex; flex-direction: column; align-items: center; gap: .3rem;
+    padding: .7rem .35rem calc(.7rem + env(safe-area-inset-bottom, 0));
+  }
+  .lateral-marca { font-size: 1.05rem; margin-bottom: .45rem; opacity: .55; }
+  .lateral a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .22rem;
+    width: 100%; padding: .55rem .2rem; border-radius: 6px; text-decoration: none;
+    color: var(--piedra); opacity: .7; transition: background .15s ease, opacity .15s ease;
+  }
+  .lateral a:hover { background: rgba(255,255,255,.08); opacity: 1; }
+  .lateral a.activa { background: rgba(255,255,255,.15); opacity: 1; color: #fff; }
+  .lateral .ico { font-size: 1.3rem; line-height: 1; }
+  .lateral .txt {
+    font-family: var(--mono); font-size: .5625rem; letter-spacing: .07em; text-transform: uppercase;
+  }
+  @media (max-width: 760px) {
+    body.identificado { padding-left: 58px; }
+    body.identificado .lateral { width: 58px; }
+    .lateral .txt { display: none; }
+    .lateral .ico { font-size: 1.45rem; }
+    .lateral a { padding: .7rem .2rem; }
+  }
+
+
+  /* --- pantalla de acceso, idéntica en los dos paneles --- */
+  #acceso { display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; min-height: 100dvh; padding: 1.5rem; }
+  .tarjeta-acceso {
+    width: 100%; max-width: 400px; background: #fff; border: 1px solid rgba(6,54,90,.16);
+    padding: 2.25rem 1.75rem; margin: 0;
+  }
+  .tarjeta-acceso img { width: 168px; height: auto; display: block; margin: 0 auto 1.75rem; }
+  .tarjeta-acceso h1 { font-size: 1.25rem; margin: 0 0 .3rem; }
+  .tarjeta-acceso p { color: var(--tinta-media); font-size: .875rem; margin: 0 0 1.5rem; }
+  .tarjeta-acceso button { width: 100%; margin-top: .35rem; }
+</style>
+</head>
+<body>
+<nav class="lateral" aria-label="Secciones del panel">
+  <span class="lateral-marca" aria-hidden="true">⚖️</span>
+  <a href="/admin">
+    <span class="ico" aria-hidden="true">📝</span>
+    <span class="txt">Blog</span>
+  </a>
+  <a href="/admin/vuelos" class="activa" aria-current="page">
+    <span class="ico" aria-hidden="true">✈️</span>
+    <span class="txt">Vuelos</span>
+  </a>
+  <a href="/admin/revolving">
+    <span class="ico" aria-hidden="true">💳</span>
+    <span class="txt">Revolving</span>
+  </a>
+</nav>
+
+
+<div class="barra">
+  <div class="barra-izq">
+    <img src="/assets/img/jurmia-logo-blanco.png" alt="JURMIA Abogados">
+    <span class="barra-titulo">Reclamaciones aéreas</span>
+  </div>
+  <div class="barra-der">
+    <span id="sesion-nombre"></span>
+    <button class="secundario" id="btn-salir" style="min-height:34px;padding:.3rem .7rem">Salir</button>
+  </div>
+</div>
+
+<!-- ---------------- acceso ---------------- -->
+<div id="acceso">
+  <div class="tarjeta-acceso">
+    <img src="/assets/img/jurmia-logo.png" alt="JURMIA Abogados" width="1290" height="446">
+    <h1>Panel de administración</h1>
+    <p>Acceda con su correo del despacho.</p>
+    <div class="campo">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="campo">
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" autocomplete="current-password">
+    </div>
+    <button id="btn-entrar">Entrar</button>
+    <div id="mensaje-acceso"></div>
+  </div>
+</div>
+
+<!-- ---------------- listado ---------------- -->
+<div id="panel" class="envoltura oculto">
+
+  <div id="vista-lista">
+    <h1>Expedientes</h1>
+    <p class="apunte" id="resumen-lista">Cargando…</p>
+
+    <div class="filtros">
+      <select id="filtro-estado">
+        <option value="">Todos los estados</option>
+        <option value="nuevo">Nuevos</option>
+        <option value="encargo">Encargo firmado</option>
+        <option value="reclamado">Reclamado a la aerolínea</option>
+        <option value="demanda">En vía judicial</option>
+        <option value="cobrado">Cobrado</option>
+        <option value="archivado">Archivado</option>
+      </select>
+      <input id="filtro-texto" placeholder="Buscar por cliente, vuelo o referencia">
+      <button class="secundario" id="btn-recargar">Recargar</button>
+      <button class="secundario" id="btn-diagnostico" title="Comprueba el estado del servidor">Diagnóstico</button>
+    </div>
+
+    <div class="seleccion" id="barra-seleccion">
+      <b id="conteo-seleccion"></b>
+      <button class="peligro" id="btn-borrar-lote">Eliminar definitivamente</button>
+      <button class="secundario" id="btn-limpiar-seleccion">Quitar selección</button>
+    </div>
+
+    <div id="salida-diagnostico"></div>
+
+    <div class="caja" style="padding:.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-sel"><input type="checkbox" class="casilla" id="sel-todos" title="Seleccionar todo"></th>
+            <th>Referencia</th><th>Entrada</th><th>Cliente</th><th>Vuelo</th>
+            <th>Ruta</th><th>Importe</th><th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ---------------- detalle ---------------- -->
+  <div id="vista-detalle" class="oculto">
+    <button class="secundario" id="btn-volver" style="margin-bottom:1rem">← Volver al listado</button>
+
+    <div class="caja">
+      <span class="rotulo">Expediente <span id="det-id"></span></span>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div>
+          <div class="cifra" id="det-importe">—</div>
+          <p class="apunte" id="det-desglose" style="margin:.4rem 0 0"></p>
+        </div>
+        <div style="min-width:200px">
+          <label for="det-estado">Estado del expediente</label>
+          <select id="det-estado">
+            <option value="nuevo">Nuevo</option>
+            <option value="encargo">Encargo firmado</option>
+            <option value="reclamado">Reclamado a la aerolínea</option>
+            <option value="demanda">En vía judicial</option>
+            <option value="cobrado">Cobrado</option>
+            <option value="archivado">Archivado</option>
+          </select>
+        </div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><small>Distancia</small><b id="kpi-km">—</b></div>
+        <div class="kpi"><small>Probabilidad</small><b id="kpi-prob">—</b></div>
+        <div class="kpi"><small>Valor esperado</small><b id="kpi-esperado">—</b></div>
+        <div class="kpi"><small>Minuta</small><b id="kpi-minuta">—</b></div>
+      </div>
+      <div id="aviso-fecha"></div>
+      <div id="aviso-lec"></div>
+    </div>
+
+    <!-- 05 · valoración -->
+    <div class="caja">
+      <span class="rotulo">05 · Valoración</span>
+      <h2>Traza de la decisión</h2>
+      <p class="apunte">Cada paso es un artículo aplicado. Es el esqueleto de los fundamentos de la demanda.</p>
+      <ul class="traza" id="traza"></ul>
+
+      <div style="margin-top:1.25rem">
+        <label>Prescripción — art. 1964.2 CC</label>
+        <div class="reloj"><i id="reloj-barra"></i><span id="reloj-texto"></span></div>
+      </div>
+    </div>
+
+    <!-- comprobación -->
+    <div class="caja">
+      <span class="rotulo">Comprobación del retraso</span>
+      <h2>Fuentes abiertas</h2>
+      <p class="apunte">
+        Consulta primero AeroDataBox, que publica la hora programada y la hora real de llegada a puerta
+        con los datos del propio aeropuerto, y si no lo encuentra prueba con la red ADS-B de OpenSky.
+        Si la fuente trae las horas, rellena los campos sola. Sirve para triar y para preparar el
+        interrogatorio, no como prueba en sala.
+      </p>
+      <div class="rejilla">
+        <div class="campo">
+          <label for="v-llegada">Hora programada de llegada (local del destino)</label>
+          <input id="v-llegada" type="time" placeholder="18:35">
+        </div>
+        <div class="campo">
+          <label for="v-real">Hora real de llegada, si la comprueba usted</label>
+          <input id="v-real" type="time" placeholder="22:50">
+        </div>
+      </div>
+      <div class="botonera">
+        <button class="secundario" id="btn-comprobar">Comprobar vuelo</button>
+        <button class="secundario" id="btn-comprobar-aplicar">Comprobar y aplicar el retraso</button>
+        <button class="secundario" id="btn-manual">Calcular con las horas introducidas</button>
+      </div>
+      <div id="salida-comprobacion"></div>
+    </div>
+
+    <!-- datos -->
+    <div class="caja">
+      <span class="rotulo">Datos del expediente</span>
+      <h2>Cliente</h2>
+      <div class="rejilla">
+        <div class="campo"><label for="c-nombre">Nombre</label><input id="c-nombre"></div>
+        <div class="campo"><label for="c-dni">DNI o pasaporte</label><input id="c-dni"></div>
+        <div class="campo"><label for="c-telefono">Teléfono</label><input id="c-telefono"></div>
+        <div class="campo"><label for="c-email">Correo</label><input id="c-email"></div>
+        <div class="campo"><label for="c-direccion">Domicilio</label><input id="c-direccion"></div>
+        <div class="campo"><label for="c-iban">IBAN</label><input id="c-iban"></div>
+      </div>
+      <p class="apunte" id="c-observaciones" style="margin-top:.4rem"></p>
+
+      <h2 style="margin-top:1.25rem">Vuelo</h2>
+      <div class="rejilla">
+        <div class="campo"><label for="f-numero">Nº de vuelo</label><input id="f-numero"></div>
+        <div class="campo"><label for="f-aerolinea">Aerolínea</label><input id="f-aerolinea"></div>
+        <div class="campo"><label for="f-fecha">Fecha</label><input type="date" id="f-fecha"></div>
+        <div class="campo"><label for="f-origen">Origen (IATA)</label><input id="f-origen" maxlength="3"></div>
+        <div class="campo"><label for="f-destino">Destino (IATA)</label><input id="f-destino" maxlength="3"></div>
+        <div class="campo"><label for="f-localizador">Localizador</label><input id="f-localizador"></div>
+        <div class="campo">
+          <label for="f-ue">¿Transportista comunitario?</label>
+          <select id="f-ue"><option value="si">Sí</option><option value="no">No</option></select>
+        </div>
+      </div>
+
+      <h2 style="margin-top:1.25rem">Incidencia</h2>
+      <div class="rejilla">
+        <div class="campo"><label for="i-tipo">Tipo</label><select id="i-tipo"></select></div>
+        <div class="campo"><label for="i-minutos">Retraso en minutos</label><input type="number" id="i-minutos" min="0"></div>
+        <div class="campo"><label for="i-aviso">Días de preaviso</label><input type="number" id="i-aviso" min="0"></div>
+        <div class="campo">
+          <label for="i-reubicacion">Reubicación dentro de márgenes</label>
+          <select id="i-reubicacion"><option value="no">No</option><option value="si">Sí</option></select>
+        </div>
+        <div class="campo"><label for="i-pasajeros">Pasajeros</label><input type="number" id="i-pasajeros" min="1"></div>
+        <div class="campo"><label for="i-gastos">Gastos art. 9 (€)</label><input type="number" id="i-gastos" min="0"></div>
+        <div class="campo" style="grid-column:1/-1"><label for="i-causa">Causa alegada por la aerolínea</label><select id="i-causa"></select></div>
+      </div>
+
+      <h2 style="margin-top:1.25rem">Datos para los escritos</h2>
+      <div class="rejilla">
+        <div class="campo"><label for="d-letrado">Letrado</label><input id="d-letrado"></div>
+        <div class="campo"><label for="d-colegio">Colegio</label><input id="d-colegio"></div>
+        <div class="campo"><label for="d-colegiado">Nº de colegiado</label><input id="d-colegiado"></div>
+        <div class="campo"><label for="d-ciudad">Ciudad de firma</label><input id="d-ciudad"></div>
+        <div class="campo"><label for="d-partido">Partido judicial</label><input id="d-partido"></div>
+        <div class="campo"><label for="d-audiencia">Audiencia Provincial</label><input id="d-audiencia"></div>
+        <div class="campo"><label for="d-honorarios">Honorarios (%)</label><input type="number" id="d-honorarios" min="0" max="60"></div>
+        <div class="campo"><label for="d-reclamacion">Fecha de la reclamación previa</label><input type="date" id="d-reclamacion"></div>
+        <div class="campo">
+          <label for="d-respuesta">¿Contestó la aerolínea?</label>
+          <select id="d-respuesta"><option value="no">No</option><option value="si">Sí, denegando</option></select>
+        </div>
+      </div>
+
+      <div class="campo" style="margin-top:.5rem">
+        <label for="notas">Notas internas</label>
+        <textarea id="notas" rows="4"></textarea>
+      </div>
+
+      <div class="botonera" style="margin-top:.5rem">
+        <button id="btn-guardar">Guardar y recalcular</button>
+        <button class="peligro" id="btn-borrar">Borrar expediente</button>
+      </div>
+      <div id="mensaje-detalle"></div>
+    </div>
+
+    <!-- 06 · documentos -->
+    <div class="caja">
+      <span class="rotulo">06 · Documentos</span>
+      <h2>Escritos del expediente</h2>
+      <p class="apunte">Se generan con los datos actuales. Revíselos siempre: llevan marcadores entre corchetes.</p>
+      <div class="botonera" id="botones-doc"></div>
+      <div class="botonera" style="margin-top:.6rem" id="acciones-doc"></div>
+      <div class="doc oculto" id="doc-texto"></div>
+    </div>
+
+    <div class="caja">
+      <span class="rotulo">Historial</span>
+      <ul id="historial" style="margin:0;padding-left:1.1rem;font-size:.8125rem;color:var(--tinta-media)"></ul>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/aeropuertos.js"></script>
+<script src="/assets/js/vuelos-motor.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var M = window.MotorVuelos;
+  /* La sesión se guarda en localStorage, que es común a todas las pestañas, y
+     no en el almacén por pestaña: así el acceso vale para el panel del blog y
+     para el de vuelos aunque se abran por separado. El token lleva su propia
+     caducidad firmada, de modo que la seguridad no cambia. */
+  var almacenSesion = {
+    leer: function (clave) {
+      try { return localStorage.getItem(clave) || sessionStorage.getItem(clave) || null; }
+      catch (e) { return null; }
+    },
+    guardar: function (clave, valor) {
+      try { localStorage.setItem(clave, valor); } catch (e) {}
+    },
+    borrar: function (clave) {
+      try { localStorage.removeItem(clave); } catch (e) {}
+      try { sessionStorage.removeItem(clave); } catch (e) {}
+    }
+  };
+
+  var token = almacenSesion.leer("jurmia_token");
+  var usuario = JSON.parse(almacenSesion.leer("jurmia_usuario") || "null");
+  var expedientes = [], actual = null, docActual = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* Registro de escuchas tolerante a fallos: si algún día falta un elemento en
+     el HTML, se avisa por consola y el resto del panel sigue funcionando, en
+     lugar de abortar el script y dejar la interfaz muerta. */
+  function alPulsar(id, evento, fn) {
+    var el = $(id);
+    if (!el) { console.warn("Falta en el HTML el elemento:", id); return; }
+    el.addEventListener(evento, fn);
+  }
+
+
+  function mensaje(destino, texto, tipo) {
+    $(destino).innerHTML = texto ? '<div class="mensaje ' + (tipo || "") + '">' + texto + "</div>" : "";
+  }
+
+  function api(ruta, cuerpo) {
+    return fetch(ruta, {
+      method: "POST",
+      headers: Object.assign({ "Content-Type": "application/json" },
+        token ? { Authorization: "Bearer " + token } : {}),
+      body: JSON.stringify(cuerpo)
+    }).then(function (r) {
+      // Se lee como texto y se interpreta después: si la función serverless
+      // se cae, Vercel devuelve una página de error que no es JSON, y así el
+      // mensaje dice qué ha pasado en vez de un fallo de análisis.
+      return r.text().then(function (texto) {
+        var d = null;
+        if (texto) {
+          try { d = JSON.parse(texto); } catch (e) { d = null; }
+        }
+        if (d === null) {
+          throw new Error(
+            "el servidor respondió con HTTP " + r.status + " y un contenido que no es JSON" +
+            (texto ? ": " + texto.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 160) : " (respuesta vacía)")
+          );
+        }
+        if (!r.ok) throw new Error(d.error || "el servidor respondió con HTTP " + r.status);
+        return d;
+      });
+    });
+  }
+
+  /* ---------------- acceso ---------------- */
+
+  function entrar() {
+    mensaje("mensaje-acceso", "");
+    $("btn-entrar").disabled = true;
+    api("/api/admin", { accion: "entrar", correo: $("correo").value.trim(), clave: $("clave").value })
+      .then(function (d) {
+        token = d.token;
+        usuario = { nombre: d.nombre, correo: d.correo };
+        almacenSesion.guardar("jurmia_token", token);
+        almacenSesion.guardar("jurmia_usuario", JSON.stringify(usuario));
+        abrirPanel();
+      })
+      .catch(function (e) { mensaje("mensaje-acceso", e.message, "error"); })
+      .then(function () { $("btn-entrar").disabled = false; });
+  }
+
+  alPulsar("btn-entrar", "click", entrar);
+  alPulsar("clave", "keydown", function (e) { if (e.key === "Enter") entrar(); });
+  alPulsar("btn-salir", "click", function () {
+    almacenSesion.borrar("jurmia_token");
+    almacenSesion.borrar("jurmia_usuario");
+    location.reload();
+  });
+
+  function abrirPanel() {
+    document.body.classList.add("identificado");
+    $("acceso").classList.add("oculto");
+    $("panel").classList.remove("oculto");
+    if (usuario) $("sesion-nombre").textContent = usuario.nombre;
+    cargarLista();
+  }
+
+  /* ---------------- listado ---------------- */
+
+  var ESTADOS = {
+    nuevo: "Nuevo", encargo: "Encargo", reclamado: "Reclamado",
+    demanda: "Judicial", cobrado: "Cobrado", archivado: "Archivado"
+  };
+
+  function cargarLista() {
+    api("/api/expedientes", { accion: "listar" })
+      .then(function (d) {
+        expedientes = d.expedientes || [];
+        try {
+          pintarLista();
+        } catch (fallo) {
+          // Si la pintura falla, se muestra al menos el recuento y se deja
+          // rastro en la consola con el detalle real.
+          console.error("Fallo al pintar el listado:", fallo);
+          $("resumen-lista").textContent =
+            expedientes.length + " expedientes cargados, pero no se han podido mostrar (" +
+            (fallo && fallo.message ? fallo.message : "error desconocido") + ").";
+        }
+      })
+      .catch(function (e) {
+        if (/sesión/i.test(e.message)) {
+          almacenSesion.borrar("jurmia_token");
+          location.reload();
+          return;
+        }
+        $("resumen-lista").textContent = "No se pudo cargar el listado: " + e.message;
+      });
+  }
+
+  /* Formato de importe sin depender de Intl con opciones de moneda: Safari
+     aplica la regla estricta de decimales y lanza donde Chrome tolera. */
+  function importe(n) {
+    var x = Math.round(Number(n) || 0);
+    return x.toLocaleString("es-ES") + " €";
+  }
+
+  function pintarLista() {
+    var estado = $("filtro-estado").value;
+    var texto = $("filtro-texto").value.trim().toLowerCase();
+    var lista = expedientes.filter(function (e) {
+      if (estado && e.estado !== estado) return false;
+      if (!texto) return true;
+      return ((e.cliente || "") + " " + (e.vuelo || "") + " " + (e.id || "") + " " + (e.ruta || ""))
+        .toLowerCase().indexOf(texto) !== -1;
+    });
+
+    // La tabla se pinta primero: si algo falla en el resumen, los expedientes
+    // siguen a la vista, que es lo que de verdad importa.
+    $("tabla").innerHTML = lista.map(function (e) {
+      return '<tr class="fila" data-id="' + e.id + '">' +
+        '<td data-t="" class="col-sel"><input type="checkbox" class="casilla" data-sel="' + e.id +
+          '" aria-label="Seleccionar ' + e.id + '"></td>' +
+        '<td data-t="Ref" class="num">' + e.id + "</td>" +
+        '<td data-t="Entrada" class="num">' + (e.creado || "").slice(0, 10) + "</td>" +
+        '<td data-t="Cliente">' + (e.cliente || "—") + "</td>" +
+        '<td data-t="Vuelo" class="num">' + (e.vuelo || "—") + " · " + (e.fecha || "") + "</td>" +
+        '<td data-t="Ruta" class="num">' + (e.ruta || "—") + (e.verificado ? " ✓" : "") + "</td>" +
+        '<td data-t="Importe" class="num">' + importe(e.importe) + "</td>" +
+        '<td data-t="Estado"><span class="marca-estado e-' + e.estado + '">' +
+          (ESTADOS[e.estado] || e.estado) + "</span></td></tr>";
+    }).join("") || '<tr><td colspan="8" style="color:var(--tinta-media)">Sin expedientes que mostrar.</td></tr>';
+
+    var casilla = $("sel-todos");
+    if (casilla) casilla.checked = false;
+    actualizarSeleccion();
+
+    var vivos = expedientes.filter(function (e) { return e.estado !== "archivado" && e.estado !== "cobrado"; });
+    var cartera = vivos.reduce(function (s, e) { return s + (Number(e.importe) || 0); }, 0);
+    $("resumen-lista").textContent =
+      expedientes.length + (expedientes.length === 1 ? " expediente · " : " expedientes · ") +
+      vivos.length + " en curso · " + importe(cartera) + " reclamados pendientes";
+  }
+
+  function seleccionados() {
+    return Array.prototype.slice.call(document.querySelectorAll("input[data-sel]:checked"))
+      .map(function (c) { return c.getAttribute("data-sel"); });
+  }
+
+  function actualizarSeleccion() {
+    var n = seleccionados().length;
+    var barra = $("barra-seleccion");
+    if (n > 0) barra.classList.add("visible"); else barra.classList.remove("visible");
+    $("conteo-seleccion").textContent = n === 1
+      ? "1 expediente seleccionado"
+      : n + " expedientes seleccionados";
+  }
+
+  alPulsar("tabla", "change", function (e) {
+    if (e.target.matches("input[data-sel]")) actualizarSeleccion();
+  });
+
+  alPulsar("sel-todos", "change", function () {
+    var marcar = this.checked;
+    document.querySelectorAll("input[data-sel]").forEach(function (c) { c.checked = marcar; });
+    actualizarSeleccion();
+  });
+
+  alPulsar("btn-limpiar-seleccion", "click", function () {
+    document.querySelectorAll("input[data-sel]").forEach(function (c) { c.checked = false; });
+    $("sel-todos").checked = false;
+    actualizarSeleccion();
+  });
+
+  alPulsar("btn-borrar-lote", "click", function () {
+    var ids = seleccionados();
+    if (!ids.length) return;
+    var texto = ids.length === 1
+      ? "Se eliminará definitivamente el expediente " + ids[0] + ", con todos los datos del cliente."
+      : "Se eliminarán definitivamente " + ids.length + " expedientes, con todos los datos de sus clientes:\n\n" +
+        ids.join("\n");
+    if (!confirm(texto + "\n\nEsta acción no se puede deshacer. ¿Continuar?")) return;
+
+    var boton = this;
+    boton.disabled = true;
+    boton.textContent = "Eliminando…";
+    api("/api/expedientes", { accion: "borrar", ids: ids })
+      .then(function (d) {
+        $("resumen-lista").textContent = (d.borrados || ids.length) + " expediente(s) eliminado(s).";
+        cargarLista();
+      })
+      .catch(function (e) { alert(e.message); })
+      .then(function () {
+        boton.disabled = false;
+        boton.textContent = "Eliminar definitivamente";
+      });
+  });
+
+  alPulsar("filtro-estado", "change", pintarLista);
+  alPulsar("filtro-texto", "input", pintarLista);
+  alPulsar("btn-recargar", "click", cargarLista);
+
+  alPulsar("btn-diagnostico", "click", function () {
+    var caja = $("salida-diagnostico");
+    caja.innerHTML = '<div class="mensaje">Comprobando el servidor…</div>';
+    api("/api/expedientes", { accion: "diagnostico" })
+      .then(function (d) {
+        var filas = Object.keys(d.modulos).map(function (k) {
+          var ok = d.modulos[k] === "cargado";
+          return "<tr><td>" + k + '</td><td style="color:' + (ok ? "var(--verde)" : "var(--rojo)") + '">' +
+            d.modulos[k] + "</td></tr>";
+        }).join("");
+        var entorno = Object.keys(d.entorno).map(function (k) {
+          return "<tr><td>" + k + '</td><td style="color:' + (d.entorno[k] ? "var(--verde)" : "var(--tinta-media)") + '">' +
+            (d.entorno[k] ? "configurado" : "sin configurar") + "</td></tr>";
+        }).join("");
+        caja.innerHTML =
+          '<div class="caja"><span class="rotulo">Estado del servidor · Node ' + d.nodo + "</span>" +
+          '<table style="font-size:.8125rem"><tbody>' + filas + entorno + "</tbody></table>" +
+          '<p class="apunte" style="margin:.75rem 0 0">Los módulos deben aparecer todos como cargados. ' +
+          "Si alguno da error, falta ese archivo en el repositorio. Las claves sin configurar solo " +
+          "limitan la comprobación de vuelos.</p></div>";
+      })
+      .catch(function (e) {
+        caja.innerHTML = '<div class="mensaje error">' + e.message + "</div>";
+      });
+  });
+  alPulsar("tabla", "click", function (e) {
+    if (e.target.closest(".col-sel")) return;
+    var fila = e.target.closest("tr[data-id]");
+    if (fila) abrir(fila.getAttribute("data-id"));
+  });
+  alPulsar("btn-volver", "click", function () {
+    $("vista-detalle").classList.add("oculto");
+    $("vista-lista").classList.remove("oculto");
+    cargarLista();
+  });
+
+  /* ---------------- detalle ---------------- */
+
+  $("i-tipo").innerHTML = M.INCIDENCIAS.map(function (i) {
+    return '<option value="' + i.id + '">' + i.etiqueta + "</option>";
+  }).join("");
+  $("i-causa").innerHTML = M.CAUSAS.map(function (c) {
+    return '<option value="' + c.id + '">' + c.etiqueta + "</option>";
+  }).join("");
+
+  function abrir(id) {
+    mensaje("mensaje-detalle", "");
+    $("salida-comprobacion").innerHTML = "";
+    $("doc-texto").classList.add("oculto");
+    api("/api/expedientes", { accion: "abrir", id: id })
+      .then(function (d) {
+        actual = d.expediente;
+        pintarDetalle(d);
+        $("vista-lista").classList.add("oculto");
+        $("vista-detalle").classList.remove("oculto");
+        window.scrollTo(0, 0);
+      })
+      .catch(function (e) { alert(e.message); });
+  }
+
+  function pintarDetalle(d) {
+    var e = actual, r = e.calculo || {}, c = e.caso || {}, v = e.vuelo || {}, cl = e.cliente || {}, dd = e.despacho || {};
+
+    $("det-id").textContent = e.id;
+    $("det-estado").value = e.estado || "nuevo";
+    $("det-importe").textContent = M.euros(r.importeTotal || 0);
+    $("det-desglose").textContent =
+      (r.importeUnitario || 0) + " € × " + (c.pasajeros || 1) + " pasajero(s)" +
+      (c.gastos ? " + " + M.euros(c.gastos) + " de gastos" : "") +
+      " · " + (r.veredicto || "");
+
+    $("kpi-km").textContent = (r.km || 0).toLocaleString("es-ES") + " km";
+    $("kpi-prob").textContent = Math.round((r.probabilidad || 0) * 100) + " %";
+    $("kpi-esperado").textContent = M.euros(r.valorEsperado || 0);
+    var pct = Number(dd.honorarios) || 25;
+    $("kpi-minuta").textContent = M.euros(Math.round((r.importeTotal || 0) * pct / 100));
+
+    $("aviso-fecha").innerHTML = v.fecha ? "" :
+      '<div class="aviso mal"><b>Sin fecha de vuelo</b>' +
+      "Este expediente entró sin fecha, así que no puede calcularse la prescripción ni comprobarse el " +
+      "retraso. Pídasela al cliente, rellénela en Datos del expediente y guarde. Los expedientes nuevos " +
+      "ya no pueden enviarse sin ella.</div>";
+
+    $("aviso-lec").innerHTML = r.bajoUmbralLEC
+      ? '<div class="aviso"><b>Cuantía igual o inferior a 2.000 €</b>' +
+        "No es preceptiva la intervención de abogado ni procurador (art. 23.2.1.º LEC) y, salvo temeridad, " +
+        "los honorarios quedan excluidos de la condena en costas (art. 32.5 LEC). La minuta sale de la " +
+        "indemnización. Valore acumular a los demás pasajeros de la reserva para cruzar el umbral.</div>"
+      : "";
+
+    $("traza").innerHTML = (r.pasos || []).map(function (s) {
+      return "<li><div class=\"traza-norma\">" + s.norma + "</div><div>" +
+        '<b><span class="punto" style="background:' + (s.cumple ? "var(--verde)" : "var(--ambar)") + '"></span>' +
+        s.titulo + "</b><p>" + s.detalle + "</p></div></li>";
+    }).join("");
+
+    var p = d.prescripcion || M.prescripcion(v.fecha);
+    if (p) {
+      $("reloj-barra").style.width = p.consumido.toFixed(1) + "%";
+      $("reloj-barra").style.background = p.vencida ? "rgba(161,42,42,.3)" : "rgba(6,54,90,.25)";
+      $("reloj-texto").innerHTML = "<span>" + (v.fecha || "") + "</span><span><b>" +
+        (p.vencida ? "PRESCRITA" : p.dias.toLocaleString("es-ES") + " días") + "</b></span><span>" + p.limite + "</span>";
+    } else {
+      $("reloj-barra").style.width = "0%";
+      $("reloj-texto").innerHTML = '<span>Rellene «Fecha» en Datos del expediente → Vuelo y guarde</span>';
+    }
+
+    $("c-nombre").value = cl.nombre || ""; $("c-dni").value = cl.dni || "";
+    $("c-telefono").value = cl.telefono || ""; $("c-email").value = cl.email || "";
+    $("c-direccion").value = cl.direccion || ""; $("c-iban").value = cl.iban || "";
+    $("c-observaciones").textContent = cl.observaciones ? "Observaciones del cliente: " + cl.observaciones : "";
+
+    $("f-numero").value = v.numero || ""; $("f-aerolinea").value = v.aerolinea || "";
+    $("f-fecha").value = v.fecha || ""; $("f-origen").value = v.origen || "";
+    $("f-destino").value = v.destino || ""; $("f-localizador").value = v.localizador || "";
+    $("f-ue").value = v.companiaUE === false ? "no" : "si";
+    $("v-llegada").value = v.horaLlegadaPrevista || "";
+    $("v-real").value = v.horaLlegadaReal || "";
+
+    $("i-tipo").value = c.incidencia || "retraso";
+    $("i-minutos").value = c.minutos || 0;
+    $("i-aviso").value = c.avisoDias || 0;
+    $("i-reubicacion").value = c.reubicacionAjustada ? "si" : "no";
+    $("i-pasajeros").value = c.pasajeros || 1;
+    $("i-gastos").value = c.gastos || 0;
+    $("i-causa").value = c.causa || "ninguna";
+
+    $("d-letrado").value = dd.letrado || ""; $("d-colegio").value = dd.colegio || "";
+    $("d-colegiado").value = dd.colegiado || ""; $("d-ciudad").value = dd.ciudad || "";
+    $("d-partido").value = dd.partido || ""; $("d-audiencia").value = dd.audiencia || "";
+    $("d-honorarios").value = pct;
+    $("d-reclamacion").value = e.fechaReclamacion || "";
+    $("d-respuesta").value = e.respuestaAerolinea ? "si" : "no";
+    $("notas").value = e.notas || "";
+
+    $("botones-doc").innerHTML = (d.documentos || [
+      { id: "reclamacion", titulo: "Reclamación extrajudicial" },
+      { id: "aesa", titulo: "Reclamación ante AESA" },
+      { id: "encargo", titulo: "Hoja de encargo" },
+      { id: "demanda", titulo: "Demanda de juicio verbal" },
+      { id: "nota", titulo: "Nota interna" }
+    ]).map(function (t) {
+      return '<button class="secundario" data-doc="' + t.id + '">' + t.titulo + "</button>";
+    }).join("");
+
+    if (e.verificacion) pintarComprobacion(e.verificacion);
+
+    $("historial").innerHTML = (e.historial || []).slice().reverse().map(function (h) {
+      return "<li>" + h.fecha.slice(0, 16).replace("T", " ") + " · " + h.quien + " · " + h.que + "</li>";
+    }).join("") || "<li>Sin movimientos.</li>";
+  }
+
+  /* ---------------- guardar ---------------- */
+
+  alPulsar("btn-guardar", "click", function () {
+    if (!actual) return;
+    var boton = this;
+    boton.disabled = true;
+    mensaje("mensaje-detalle", "Guardando…");
+    api("/api/expedientes", {
+      accion: "actualizar",
+      id: actual.id,
+      cambios: {
+        estado: $("det-estado").value,
+        notas: $("notas").value,
+        fechaReclamacion: $("d-reclamacion").value,
+        respuestaAerolinea: $("d-respuesta").value === "si",
+        cliente: {
+          nombre: $("c-nombre").value, dni: $("c-dni").value, telefono: $("c-telefono").value,
+          email: $("c-email").value, direccion: $("c-direccion").value, iban: $("c-iban").value
+        },
+        vuelo: {
+          numero: $("f-numero").value, aerolinea: $("f-aerolinea").value, fecha: $("f-fecha").value,
+          origen: $("f-origen").value, destino: $("f-destino").value,
+          localizador: $("f-localizador").value, horaLlegadaPrevista: $("v-llegada").value,
+          horaLlegadaReal: $("v-real").value,
+          companiaUE: $("f-ue").value === "si"
+        },
+        caso: {
+          incidencia: $("i-tipo").value, minutos: $("i-minutos").value, avisoDias: $("i-aviso").value,
+          reubicacionAjustada: $("i-reubicacion").value === "si", pasajeros: $("i-pasajeros").value,
+          gastos: $("i-gastos").value, causa: $("i-causa").value
+        },
+        despacho: {
+          letrado: $("d-letrado").value, colegio: $("d-colegio").value, colegiado: $("d-colegiado").value,
+          ciudad: $("d-ciudad").value, partido: $("d-partido").value, audiencia: $("d-audiencia").value,
+          honorarios: $("d-honorarios").value
+        }
+      }
+    })
+      .then(function (d) {
+        actual = d.expediente;
+        pintarDetalle(d);
+        mensaje("mensaje-detalle", "Guardado y recalculado.");
+      })
+      .catch(function (e) { mensaje("mensaje-detalle", e.message, "error"); })
+      .then(function () { boton.disabled = false; });
+  });
+
+  alPulsar("btn-borrar", "click", function () {
+    if (!actual) return;
+    if (!confirm("Se borrará el expediente " + actual.id + " de forma definitiva, incluidos los datos del cliente. ¿Continuar?")) return;
+    api("/api/expedientes", { accion: "borrar", id: actual.id })
+      .then(function () {
+        actual = null;
+        $("vista-detalle").classList.add("oculto");
+        $("vista-lista").classList.remove("oculto");
+        cargarLista();
+      })
+      .catch(function (e) { mensaje("mensaje-detalle", e.message, "error"); });
+  });
+
+  /* ---------------- comprobación ---------------- */
+
+  function comprobar(aplicar) {
+    if (!actual) return;
+    if (!actual.vuelo || !actual.vuelo.fecha) {
+      $("salida-comprobacion").innerHTML =
+        '<div class="aviso mal"><b>Falta la fecha del vuelo</b>' +
+        "Rellénela en Datos del expediente → Vuelo, guarde y vuelva a intentarlo.</div>";
+      $("f-fecha").focus();
+      return;
+    }
+    $("salida-comprobacion").innerHTML = '<div class="mensaje">Consultando OpenSky…</div>';
+    // Primero se guarda la hora programada que haya escrito el letrado, porque
+    // es lo que permite calcular el retraso, y después se consulta.
+    api("/api/expedientes", {
+      accion: "actualizar", id: actual.id,
+      cambios: { vuelo: { horaLlegadaPrevista: $("v-llegada").value } }
+    })
+      .then(function () {
+        return api("/api/expedientes", { accion: "comprobar", id: actual.id, aplicar: !!aplicar });
+      })
+      .then(function (d) {
+        actual = d.expediente;
+        pintarComprobacion(d.verificacion);
+        pintarDetalle({ expediente: actual, prescripcion: null });
+      })
+      .catch(function (e) {
+        $("salida-comprobacion").innerHTML = '<div class="aviso mal"><b>No se ha podido comprobar</b>' + e.message + "</div>";
+      });
+  }
+
+  function pintarComprobacion(w) {
+    if (!w) { $("salida-comprobacion").innerHTML = ""; return; }
+    if (!w.encontrado) {
+      var sugerencia = w.aeroDataBox === false
+        ? "<br><br>No hay ninguna clave de AeroDataBox configurada, así que solo se ha podido consultar " +
+          "OpenSky, que bloquea el tráfico de Vercel. Suscríbase al plan gratuito de AeroDataBox en " +
+          "RapidAPI y añada AERODATABOX_KEY en las variables de entorno: es la fuente que de verdad " +
+          "funciona desde aquí."
+        : "";
+      var detalle = (w.intentos || []).length
+        ? '<div class="aviso"><b>Fuentes consultadas</b>' +
+          w.intentos.map(function (i) { return i.fuente + ": " + i.resultado; }).join("<br>") + "</div>"
+        : "";
+      $("salida-comprobacion").innerHTML =
+        '<div class="aviso mal"><b>' + (w.error ? "No se pudo consultar" : "Vuelo no localizado") + "</b>" +
+        (w.error || "") + sugerencia + "</div>" + detalle +
+        (w.avisos || []).map(function (a) { return '<div class="aviso">' + a + "</div>"; }).join("") +
+        '<div class="aviso"><b>Alternativa inmediata</b>' +
+        "Busque la hora real de llegada en la aplicación de la aerolínea o en el histórico del " +
+        "aeropuerto, escríbala arriba y pulse «Calcular con las horas introducidas». El resultado " +
+        "es igual de válido y además queda documentado con su captura.</div>";
+      return;
+    }
+    var retraso = w.retrasoMin != null
+      ? M.formatoMinutos(Math.max(0, w.retrasoMin))
+      : "no calculable sin la hora programada";
+    $("salida-comprobacion").innerHTML =
+      '<div class="aviso ok"><b>Vuelo localizado · ' + w.indicativo +
+      (w.fuente ? " · " + w.fuente : "") + "</b>" +
+      (w.llegadaPrevistaLocal ? "Llegada prevista: " + w.llegadaPrevistaLocal + "<br>" : "") +
+      "Llegada real: " + w.aterrizajeLocal + (w.claseHora ? " (" + w.claseHora + ")" : "") + "<br>" +
+      "<b style='display:inline'>Retraso calculado: " + retraso + "</b><br>" +
+      [w.compania, w.modelo, w.matricula, w.icao24 ? "aeronave " + w.icao24 : "",
+       w.origenDetectado ? "desde " + w.origenDetectado : "",
+       w.terminal ? "terminal " + w.terminal : "", w.estado ? "estado: " + w.estado : ""]
+        .filter(Boolean).join(" · ") +
+      (w.corroboracion ? " · ruta confirmada por adsbdb: " + w.corroboracion.origen + "–" + w.corroboracion.destino : "") +
+      "</div>" +
+      (w.avisos || []).map(function (a) { return '<div class="aviso">' + a + "</div>"; }).join("");
+  }
+
+  alPulsar("btn-manual", "click", function () {
+    if (!actual) return;
+    var prevista = $("v-llegada").value, real = $("v-real").value;
+    if (!prevista || !real) {
+      $("salida-comprobacion").innerHTML =
+        '<div class="aviso mal"><b>Faltan datos</b>' +
+        "Rellene la hora programada y la hora real de llegada, ambas en hora local del aeropuerto de " +
+        "destino. Las saca de la tarjeta de embarque y del panel del aeropuerto o de la aplicación de " +
+        "la aerolínea.</div>";
+      return;
+    }
+    var aMin = function (h) { var p = h.split(":"); return (+p[0]) * 60 + (+p[1]); };
+    var minutos = aMin(real) - aMin(prevista);
+    if (minutos < 0) minutos += 1440;  // aterrizó pasada la medianoche
+
+    api("/api/expedientes", {
+      accion: "actualizar", id: actual.id,
+      cambios: {
+        vuelo: { horaLlegadaPrevista: prevista, horaLlegadaReal: real },
+        caso: { minutos: minutos }
+      }
+    })
+      .then(function (d) {
+        actual = d.expediente;
+        pintarDetalle(d);
+        $("salida-comprobacion").innerHTML =
+          '<div class="aviso ok"><b>Retraso calculado a mano: ' + M.formatoMinutos(minutos) + "</b>" +
+          "Programada " + prevista + ", real " + real + (minutos > 720 ? ", con llegada al día siguiente" : "") +
+          ". Aplicado al expediente y recalculada la compensación. Conserve la captura que acredite " +
+          "la hora real: es la que tendrá valor probatorio.</div>";
+      })
+      .catch(function (e) {
+        $("salida-comprobacion").innerHTML = '<div class="aviso mal"><b>No se pudo guardar</b>' + e.message + "</div>";
+      });
+  });
+
+  alPulsar("btn-comprobar", "click", function () { comprobar(false); });
+  alPulsar("btn-comprobar-aplicar", "click", function () { comprobar(true); });
+
+  /* ---------------- documentos ---------------- */
+
+  alPulsar("botones-doc", "click", function (ev) {
+    var b = ev.target.closest("button[data-doc]");
+    if (!b || !actual) return;
+    var tipo = b.getAttribute("data-doc");
+    $("doc-texto").classList.remove("oculto");
+    $("doc-texto").textContent = "Generando…";
+    api("/api/expedientes", { accion: "documento", id: actual.id, tipo: tipo })
+      .then(function (d) {
+        docActual = d;
+        $("doc-texto").textContent = d.texto;
+        $("acciones-doc").innerHTML =
+          '<button class="secundario" id="btn-copiar">Copiar</button>' +
+          '<button class="secundario" id="btn-descargar">Descargar para Word</button>';
+        alPulsar("btn-copiar", "click", copiar);
+        alPulsar("btn-descargar", "click", descargar);
+      })
+      .catch(function (e) { $("doc-texto").textContent = e.message; });
+  });
+
+  function copiar() {
+    var ta = document.createElement("textarea");
+    ta.value = docActual.texto;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); $("btn-copiar").textContent = "Copiado"; } catch (e) {}
+    document.body.removeChild(ta);
+    setTimeout(function () { if ($("btn-copiar")) $("btn-copiar").textContent = "Copiar"; }, 1800);
+  }
+
+  function descargar() {
+    var esc = docActual.texto.replace(/[&<>]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c];
+    });
+    var html = '<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8">' +
+      "<style>body{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.5;white-space:pre-wrap}</style>" +
+      "</head><body>" + esc + "</body></html>";
+    var blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = actual.id + "-" + docActual.titulo.toLowerCase().replace(/[^a-z0-9]+/g, "-") + ".doc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  }
+
+  /* ---------------- arranque ---------------- */
+
+  // Arranque: con sesión guardada se entra directo, sin volver a pedir la clave.
+  try {
+    if (token) abrirPanel();
+  } catch (e) {
+    console.error("No se pudo restaurar la sesión:", e);
+  }
+})();
+</script>
+</body>
+</html>
