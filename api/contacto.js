@@ -3,7 +3,7 @@
  * a través del SMTP de IONOS (véase api/_correo.js).
  *
  * Variables de entorno necesarias en Vercel:
- *   SMTP_USUARIO     buzón de IONOS, p. ej. web@jurmiabogados.es
+ *   SMTP_USUARIO     buzón de IONOS, p. ej. info@jurmiabogados.es
  *   SMTP_CLAVE       contraseña de ese buzón
  *   CORREO_DESTINO   dirección donde se reciben las consultas
  *
