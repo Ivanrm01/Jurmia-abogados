@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tarjeta revolving: pagas y la deuda no baja | Reclámala | JURMIA Abogados</title>
+<meta name="description" content="Si pagas cada mes y tu deuda no se reduce, tu tarjeta revolving puede ser nula. Compruébalo en un minuto con tres preguntas. Estudio gratuito por abogado colegiado.">
+<link rel="canonical" href="https://www.jurmiabogados.es/tarjetas-revolving">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="JURMIA Abogados">
+<meta property="og:title" content="Pagas cada mes y la deuda no baja. Eso tiene nombre.">
+<meta property="og:description" content="Comprueba en un minuto si tu tarjeta revolving es nula. Tres preguntas, sin compromiso.">
+<meta property="og:url" content="https://www.jurmiabogados.es/tarjetas-revolving">
+<meta property="og:image" content="https://www.jurmiabogados.es/assets/img/jurmia-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#06365a">
+<link rel="apple-touch-icon" href="/assets/img/icono-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/estilos.css">
+<style>
+  /* ---------- portada ---------- */
+  .portada-rev { background: var(--tinta-oscura); color: var(--blanco); padding: clamp(2.5rem, 7vw, 4.5rem) 0 clamp(2rem, 5vw, 3rem); }
+  .portada-rev .rotulo { color: var(--piedra); }
+  .portada-rev h1 { font-size: clamp(2rem, 1.2rem + 4.2vw, 3.75rem); line-height: 1.02; letter-spacing: -0.03em; margin: 0.6rem 0 0; }
+  .portada-rev h1 em { font-style: normal; color: var(--piedra); }
+  .portada-rev .entradilla { color: rgba(255,255,255,0.82); max-width: 46ch; margin-top: 1.25rem; }
+
+  .ejemplo {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.18); margin-top: 2.25rem; max-width: 34rem;
+  }
+  .ejemplo div { background: var(--tinta-oscura); padding: 0.9rem 1rem; }
+  .ejemplo small { display: block; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.1em;
+                   text-transform: uppercase; color: var(--piedra); }
+  .ejemplo b { font-family: var(--mono); font-size: clamp(1rem, 3.5vw, 1.375rem); font-weight: 500; }
+  .ejemplo-pie { font-size: 0.8125rem; color: rgba(255,255,255,0.65); margin-top: 0.75rem; max-width: 44ch; }
+
+  .sellos { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 2rem;
+            font-family: var(--mono); font-size: 0.75rem; color: var(--piedra); }
+  .sellos span::before { content: "— "; }
+
+  /* ---------- formulario ---------- */
+  .paso { border-top: 1px solid var(--linea); padding-block: clamp(1.75rem, 4vw, 2.5rem); }
+  .paso:first-of-type { border-top: 0; padding-top: 0; }
+  .paso-cabecera { display: flex; align-items: baseline; gap: 0.9rem; margin-bottom: 1.35rem; }
+  .paso-numero { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; color: var(--tinta-media);
+                 border: 1px solid var(--linea-fuerte); padding: 0.25rem 0.5rem; }
+  .paso-cabecera h2 { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem); }
+  .paso-cabecera p { font-size: 0.875rem; color: var(--tinta-media); margin: 0.35rem 0 0; }
+
+  .fichas { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .fichas button {
+    font-family: var(--display); font-size: 0.9375rem; padding: 0.7rem 1rem; cursor: pointer;
+    border: 1px solid var(--linea-fuerte); background: var(--blanco); color: var(--tinta-oscura);
+    border-radius: var(--radio); min-height: 46px;
+  }
+  .fichas button:hover { border-color: var(--tinta); }
+  .fichas button[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: var(--blanco); }
+
+  .marcas { display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .marca-op {
+    display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.85rem 1rem; cursor: pointer;
+    border: 1px solid var(--linea-fuerte); background: var(--blanco); border-radius: var(--radio);
+    font-size: 0.9375rem; line-height: 1.4;
+  }
+  .marca-op input { margin: 0.1rem 0 0; width: 20px; height: 20px; accent-color: var(--tinta); flex: none; }
+  .marca-op[data-marcado="si"] { border-color: var(--tinta); background: var(--piedra-clara); }
+
+  .extras { border: 1px dashed var(--linea-fuerte); padding: 1rem 1.15rem; margin-top: 1.5rem; }
+  .extras > summary { cursor: pointer; font-weight: 600; font-size: 0.9375rem; list-style: none; }
+  .extras > summary::-webkit-details-marker { display: none; }
+  .extras > summary::before { content: "＋ "; font-family: var(--mono); color: var(--tinta-media); }
+  .extras[open] > summary::before { content: "− "; }
+  .extras p { font-size: 0.8125rem; color: var(--tinta-media); margin: 0.5rem 0 1rem; }
+
+  .resultado { border: 2px solid var(--tinta); background: var(--blanco); padding: clamp(1.5rem, 4vw, 2.25rem); margin-top: 2rem; }
+  .resultado-cifra { font-family: var(--mono); font-size: clamp(1.75rem, 6vw, 2.75rem); line-height: 1.05;
+                     color: var(--tinta); letter-spacing: -0.03em; }
+  .resultado-nota { color: var(--tinta-media); font-size: 0.9375rem; margin-top: 0.75rem; max-width: 56ch; }
+  .via { display: inline-block; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em;
+         text-transform: uppercase; border: 1px solid currentColor; padding: 0.25rem 0.5rem; margin-bottom: 0.9rem; }
+
+  /* ---------- explicación ---------- */
+  .trampa { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 2rem; }
+  .trampa article { border-top: 3px solid var(--tinta); padding-top: 1rem; }
+  .trampa h3 { font-size: 1.0625rem; margin: 0 0 0.5rem; }
+  .trampa p { font-size: 0.9375rem; color: var(--tinta-media); margin: 0; }
+  .trampa span { font-family: var(--mono); font-size: 0.6875rem; color: var(--tinta-media); letter-spacing: 0.1em; }
+
+  /* ---------- preguntas frecuentes ---------- */
+  .faq { margin-top: 1.75rem; border-top: 1px solid var(--linea); }
+  .faq details { border-bottom: 1px solid var(--linea); }
+  .faq summary {
+    cursor: pointer; list-style: none; padding: 1.15rem 2.5rem 1.15rem 0; position: relative;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem); font-weight: 600; line-height: 1.4;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; position: absolute; right: 0.35rem; top: 50%; transform: translateY(-50%);
+    font-family: var(--mono); font-size: 1.35rem; color: var(--tinta-media); line-height: 1;
+  }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details[open] summary { color: var(--tinta); }
+  .faq-cuerpo { padding: 0 2.5rem 1.35rem 0; color: var(--tinta-media); font-size: 0.9375rem; line-height: 1.65; }
+  .faq-cuerpo p { margin: 0 0 0.75rem; }
+  .faq-cuerpo p:last-child { margin-bottom: 0; }
+
+  .oculto { display: none !important; }
+  @media (max-width: 720px) {
+    body { padding-bottom: 4.5rem; }
+    .paso-cabecera { flex-direction: column; gap: 0.5rem; }
+    .ejemplo { grid-template-columns: 1fr; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "Service",
+  "name": "Reclamación de tarjetas revolving por usura o falta de transparencia",
+  "provider": { "@type": "Attorney", "name": "JURMIA Abogados", "url": "https://www.jurmiabogados.es/" },
+  "areaServed": { "@type": "Country", "name": "España" },
+  "url": "https://www.jurmiabogados.es/tarjetas-revolving"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿Qué es exactamente una tarjeta revolving?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Es una tarjeta de crédito en la que usted devuelve el dinero en cuotas fijas y bajas, y el capital pendiente se recompone cada vez que la usa. Como la cuota apenas cubre los intereses, la deuda puede mantenerse durante años aunque se pague religiosamente todos los meses." } },
+    { "@type": "Question", "name": "¿Cuándo es nula por usura?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cuando la TAE pactada supera en más de seis puntos porcentuales el tipo medio que el Banco de España publicaba para este producto en el año de contratación, criterio fijado por la sentencia del Pleno del Tribunal Supremo 258/2023, de 15 de febrero. Para los contratos anteriores a 2010 la comparación se hace con el 19,32 por ciento." } },
+    { "@type": "Question", "name": "¿Y si mi interés no llega a ese umbral?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sigue habiendo vía. Las sentencias del Pleno 154/2025 y 155/2025, de 30 de enero, permiten anular la cláusula de intereses por falta de transparencia cuando el consumidor no pudo comprender la carga económica ni el efecto de recomposición de la deuda, aunque el interés no sea usurario." } },
+    { "@type": "Question", "name": "He perdido el contrato, ¿puedo reclamar igual?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. La entidad está obligada a conservarlo y a entregárselo. Nosotros se lo requerimos formalmente al amparo del derecho de acceso del Reglamento General de Protección de Datos, y si no lo aporta, esa falta se hace valer en juicio en su contra." } },
+    { "@type": "Question", "name": "¿Cuánto se puede recuperar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Declarada la nulidad solo se debe el capital que efectivamente se gastó, de modo que procede la devolución de todo lo pagado por encima. La sentencia 350/2025, de 5 de marzo, limita esa devolución a lo abonado en los cinco años anteriores a la reclamación, computados pago a pago, así que cada mes que pasa se pierde un tramo." } },
+    { "@type": "Question", "name": "Dejé de pagar y estoy en un fichero de morosos. ¿Empeora mi situación?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Al contrario. Si la deuda se discute judicialmente deja de ser cierta, vencida y exigible, que es lo que exige la ley para figurar en esos ficheros, de modo que cabe pedir la baja e incluso una indemnización por la inclusión indebida." } },
+    { "@type": "Question", "name": "¿Cuánto cuesta y cuánto tarda?",
+      "acceptedAnswer": { "@type": "Answer", "text": "El estudio de viabilidad es gratuito y sin compromiso. Si el caso se acepta, los honorarios son un porcentaje sobre lo que efectivamente se recupere, de modo que si no se obtiene resultado no hay que pagar nada. La vía extrajudicial suele resolverse en semanas y la judicial entre uno y dos años según el juzgado." } },
+    { "@type": "Question", "name": "¿Me pueden demandar por reclamar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Reclamar es un derecho y no genera responsabilidad alguna. Si la entidad ya le ha demandado o ha iniciado un procedimiento monitorio, avísenos cuanto antes: los plazos de oposición son muy breves y perderlos sí tiene consecuencias." } }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
+
+<header class="cabecera fijada">
+  <div class="envoltura cabecera-fila">
+    <a class="marca" href="/" aria-label="JURMIA Abogados, inicio">
+      <img src="/assets/img/jurmia-logo.png" alt="JURMIA Abogados" width="1290" height="446"
+           style="height: 50px; width: auto; max-width: none; display: block;">
+    </a>
+    <button class="abrir-menu" id="abrir-menu" aria-expanded="false" aria-controls="navegacion">Menú</button>
+    <nav class="navegacion" id="navegacion" aria-label="Principal">
+      <a href="/areas/civil">Civil</a>
+      <a href="/areas/penal">Penal</a>
+      <a href="/areas/laboral">Laboral</a>
+      <a href="/areas/tributario">Tributario</a>
+      <a href="/blog">Blog</a>
+      <a href="/reclamacion-vuelos">Vuelos</a>
+      <a href="/tarjetas-revolving">Revolving</a>
+      <a class="boton" href="#empezar">Comprobar mi tarjeta</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="portada-rev">
+    <div class="envoltura">
+      <span class="rotulo">Tarjetas revolving</span>
+      <h1>Paga todos los meses<br><em>y la deuda no baja.</em></h1>
+      <p class="entradilla">
+        No es mala suerte ni mala cabeza: es cómo está diseñado el producto. Si el interés era
+        desproporcionado, o si nadie le explicó dónde se metía, el contrato puede ser nulo. Y entonces
+        solo debe el dinero que gastó de verdad.
+      </p>
+
+      <div class="ejemplo">
+        <div><small>Gastó</small><b>4.000 €</b></div>
+        <div><small>Ha pagado ya</small><b>9.500 €</b></div>
+        <div><small>Aún le reclaman</small><b>1.800 €</b></div>
+      </div>
+      <p class="ejemplo-pie">
+        Caso real de una tarjeta contratada en 2016 al 26,82 % TAE. Con el contrato anulado, esa persona
+        no debe nada y recupera la diferencia.
+      </p>
+
+      <div style="margin-top:2rem">
+        <a class="boton boton-claro" href="#empezar">Comprobar mi tarjeta en un minuto</a>
+      </div>
+
+      <div class="sellos">
+        <span>Sin coste si no se recupera nada</span>
+        <span>Lo lleva un abogado colegiado</span>
+        <span>Sin compromiso</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="envoltura" style="max-width: 60rem;">
+      <span class="rotulo">Por qué pasa</span>
+      <h2>La trampa está en la cuota, no en el gasto</h2>
+      <div class="trampa">
+        <article>
+          <span>01</span>
+          <h3>La cuota es baja a propósito</h3>
+          <p>Pagar 40 € al mes parece cómodo. Pero de esos 40 € casi todo se va en intereses y apenas
+            unos céntimos al capital que usted debe.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>La deuda se recompone</h3>
+          <p>Cada vez que usa la tarjeta, el capital vuelve a subir. Por eso puede pagar durante ocho
+            años y seguir debiendo casi lo mismo que el primer día.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>No hay fecha de final</h3>
+          <p>A diferencia de un préstamo, no existe una última cuota. El contrato es indefinido, y ahí
+            es donde el pasajero se convierte en deudor cautivo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="seccion" id="empezar" style="background: var(--piedra-clara);">
+    <div class="envoltura" style="max-width: 54rem;">
+      <span class="rotulo">Comprobación</span>
+      <h2>Tres preguntas y ya está</h2>
+      <p style="color: var(--tinta-media); margin-top: 0.75rem; max-width: 52ch;">
+        No hace falta que busque el contrato ni que recuerde cifras exactas. Con lo que tenga en la
+        cabeza nos basta para decirle si merece la pena.
+      </p>
+
+      <div class="formulario" id="calculadora" style="margin-top: 2rem;">
+
+        <!-- 01 -->
+        <div class="paso">
+          <div class="paso-cabecera">
+            <span class="paso-numero">01</span>
+            <div>
+              <h2>¿De quién es la tarjeta?</h2>
+              <p>Si no está en la lista, escríbala abajo.</p>
+            </div>
+          </div>
+
+          <div class="fichas" id="entidades" role="group" aria-label="Entidad emisora"></div>
+
+          <div class="campo oculto" style="margin-top: 1rem; max-width: 24rem;" id="caja-otra">
+            <label for="entidad-otra">Nombre de la entidad o de la tarjeta</label>
+            <input id="entidad-otra" placeholder="Ikea, Alcampo, Creditea…">
+          </div>
+
+          <div class="campo" style="margin-top: 1.5rem;">
+            <label id="etiqueta-epoca">¿Más o menos cuándo la contrató?</label>
+            <div class="fichas" id="epoca" role="group" aria-labelledby="etiqueta-epoca">
+              <button type="button" data-id="pre2010" aria-pressed="false">Antes de 2010</button>
+              <button type="button" data-id="2010-2015" aria-pressed="false">Entre 2010 y 2015</button>
+              <button type="button" data-id="2016-2020" aria-pressed="false">Entre 2016 y 2020</button>
+              <button type="button" data-id="post2020" aria-pressed="false">De 2021 en adelante</button>
+              <button type="button" data-id="nose" aria-pressed="false">No lo recuerdo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="paso">
+          <div class="paso-cabecera">
+            <span class="paso-numero">02</span>
+            <div>
+              <h2>¿Cómo está hoy?</h2>
+              <p>Elija lo que más se parezca a su caso.</p>
+            </div>
+          </div>
+          <div class="fichas" id="situacion" role="group" aria-label="Situación actual"></div>
+        </div>
+
+        <!-- 03 -->
+        <div class="paso">
+          <div class="paso-cabecera">
+            <span class="paso-numero">03</span>
+            <div>
+              <h2>¿Le suena alguna de estas?</h2>
+              <p>Marque las que reconozca. Cada una es un indicio de que no le informaron bien, y eso
+                por sí solo puede anular el contrato.</p>
+            </div>
+          </div>
+          <div class="marcas" id="indicios"></div>
+
+          <details class="extras">
+            <summary>Si tiene los papeles a mano, esto afina mucho la valoración</summary>
+            <p>Todo opcional. Lo que no sepa lo pediremos nosotros a la entidad.</p>
+            <div class="campo-doble">
+              <div class="campo">
+                <label for="tae">TAE del contrato (%)</label>
+                <input type="number" id="tae" step="0.01" min="0" max="100" placeholder="26,82" inputmode="decimal">
+              </div>
+              <div class="campo">
+                <label for="anos">Años que lleva o llevó pagando</label>
+                <input type="number" id="anos" min="0" max="40" placeholder="8" inputmode="numeric">
+              </div>
+            </div>
+            <div class="campo-doble" style="margin-top: 1.15rem;">
+              <div class="campo">
+                <label for="dispuesto">Dinero que llegó a gastar (€)</label>
+                <input type="number" id="dispuesto" min="0" step="100" placeholder="4000" inputmode="decimal">
+              </div>
+              <div class="campo">
+                <label for="pagado">Dinero que ha pagado en total (€)</label>
+                <input type="number" id="pagado" min="0" step="100" placeholder="9500" inputmode="decimal">
+              </div>
+            </div>
+            <div class="campo" style="margin-top: 1.15rem; max-width: 22rem;">
+              <label for="pendiente">Deuda que aún le reclaman (€)</label>
+              <input type="number" id="pendiente" min="0" step="100" placeholder="1800" inputmode="decimal">
+            </div>
+          </details>
+        </div>
+
+        <!-- resultado -->
+        <div class="resultado oculto" id="resultado" role="status" aria-live="polite">
+          <span class="via" id="resultado-via">Valoración preliminar</span>
+          <div class="resultado-cifra" id="resultado-cifra">—</div>
+          <p class="resultado-nota" id="resultado-nota"></p>
+        </div>
+
+        <!-- 04 -->
+        <div class="paso" id="caja-contacto">
+          <div class="paso-cabecera">
+            <span class="paso-numero">04</span>
+            <div>
+              <h2>¿Dónde le contamos el resultado?</h2>
+              <p>Un abogado del despacho revisa su caso y le responde en 24 horas laborables.</p>
+            </div>
+          </div>
+
+          <div class="campo-doble">
+            <div class="campo">
+              <label for="nombre">Nombre y apellidos</label>
+              <input id="nombre" autocomplete="name" required>
+            </div>
+            <div class="campo">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" type="tel" inputmode="tel" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <div class="campo" style="margin-top: 1.15rem;">
+            <label for="email">Correo electrónico</label>
+            <input id="email" type="email" inputmode="email" autocomplete="email"
+                   autocapitalize="off" spellcheck="false" required>
+          </div>
+
+          <div class="campo" style="margin-top: 1.15rem;">
+            <label for="observaciones">¿Quiere contarnos algo más? (opcional)</label>
+            <textarea id="observaciones" rows="3" maxlength="2000"
+              placeholder="Me llaman a diario, tengo otras dos tarjetas, me ha llegado una carta del juzgado…"></textarea>
+          </div>
+
+          <label class="consentimiento" style="margin-top: 1.35rem;">
+            <input type="checkbox" id="consentimiento">
+            <span>He leído y acepto la <a href="/privacidad">política de privacidad</a>. Autorizo a JURMIA
+              Abogados a tratar mis datos para valorar la viabilidad de la reclamación y ponerse en
+              contacto conmigo.</span>
+          </label>
+
+          <input type="text" id="empresa" class="trampa" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <button type="button" class="boton" id="btn-enviar">Que estudien mi caso gratis</button>
+            <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--tinta-media);">
+              Sin compromiso
+            </span>
+          </div>
+
+          <div class="aviso-envio" id="aviso-envio-revolving"></div>
+        </div>
+      </div>
+
+      <p style="font-size: 0.8125rem; color: var(--tinta-media); margin-top: 1.5rem; max-width: 62ch;">
+        La valoración de esta página es una estimación automática a partir de lo que usted nos cuenta.
+        No es asesoramiento jurídico ni garantiza resultado alguno: el estudio lo hace un abogado
+        después, con el contrato y los extractos delante.
+      </p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="envoltura" style="max-width: 50rem;">
+      <span class="rotulo">Preguntas frecuentes</span>
+      <h2>Lo que nos preguntan siempre</h2>
+
+      <div class="faq">
+        <details>
+          <summary>¿Qué es exactamente una tarjeta revolving?</summary>
+          <div class="faq-cuerpo">
+            <p>Es una tarjeta de crédito en la que usted devuelve el dinero en cuotas fijas y bajas, y el
+              capital pendiente se recompone cada vez que la utiliza.</p>
+            <p>Como la cuota apenas cubre los intereses, la deuda puede mantenerse casi intacta durante
+              años aunque pague religiosamente todos los meses. Muchas se contrataron en la caja de un
+              supermercado o de una gasolinera, a cambio de un descuento, sin que nadie explicara nada.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Cuándo es nula por usura?</summary>
+          <div class="faq-cuerpo">
+            <p>Cuando la TAE supera en más de seis puntos el tipo medio que el Banco de España publicaba
+              para este producto el año en que se firmó. Lo fijó el Pleno del Tribunal Supremo en la
+              sentencia 258/2023, de 15 de febrero.</p>
+            <p>Si el contrato es anterior a 2010, la comparación se hace con el 19,32 %. Declarada la
+              usura, el contrato es nulo de raíz y usted solo debe el dinero que gastó.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Mi interés no llega a ese umbral. ¿Entonces no puedo hacer nada?</summary>
+          <div class="faq-cuerpo">
+            <p>Sí puede. Es el cambio más importante de los últimos años: las sentencias del Pleno
+              154/2025 y 155/2025, de 30 de enero, permiten anular la cláusula de intereses por falta de
+              transparencia aunque el tipo no sea usurario.</p>
+            <p>Basta con que no se le explicara de forma comprensible qué carga económica asumía y cómo
+              funciona el sistema de recomposición de la deuda. Por eso las preguntas del paso 3 importan
+              tanto: describen precisamente eso.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>He perdido el contrato. ¿Puedo reclamar igual?</summary>
+          <div class="faq-cuerpo">
+            <p>Sí, y es lo más habitual. La entidad está obligada a conservarlo y a entregárselo.</p>
+            <p>Se lo requerimos formalmente amparándonos en el derecho de acceso del Reglamento General de
+              Protección de Datos. Y si no lo aporta, esa ausencia se hace valer en juicio en su contra,
+              porque es ella quien tiene que probar que le informó bien.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Cuánto puedo recuperar?</summary>
+          <div class="faq-cuerpo">
+            <p>Todo lo que haya pagado por encima del dinero que efectivamente gastó, más la deuda
+              pendiente que quedaría sin efecto.</p>
+            <p>Hay un límite temporal que conviene conocer: la sentencia 350/2025, de 5 de marzo, permite
+              reclamar lo abonado en los cinco años anteriores a la reclamación, contando pago a pago. Por
+              eso cada mes que pasa se pierde un tramo, y esperar sale caro.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Dejé de pagar y me han metido en un fichero de morosos.</summary>
+          <div class="faq-cuerpo">
+            <p>Eso juega a su favor, no en su contra. Para figurar en esos ficheros la deuda tiene que ser
+              cierta, vencida y exigible, y una deuda discutida en los tribunales no lo es.</p>
+            <p>Se puede pedir la baja inmediata y, además, una indemnización por la inclusión indebida.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Me ha llegado una carta del juzgado. ¿Es tarde?</summary>
+          <div class="faq-cuerpo">
+            <p>No, pero corre prisa de verdad. Si es un procedimiento monitorio, el plazo para oponerse es
+              de veinte días hábiles y no se puede recuperar.</p>
+            <p>La buena noticia es que el juez está obligado a revisar de oficio si las cláusulas son
+              abusivas. Escríbanos hoy mismo indicándolo en el formulario.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Cuánto cuesta y cuánto tarda?</summary>
+          <div class="faq-cuerpo">
+            <p>El estudio es gratuito y sin compromiso. Si aceptamos el caso, cobramos un porcentaje de lo
+              que se recupere: si no se obtiene nada, usted no paga nada.</p>
+            <p>La vía extrajudicial suele resolverse en semanas. Si hay que demandar, cuente entre uno y
+              dos años según el juzgado, aunque muchas entidades pagan antes de llegar a juicio.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Tengo que ir al despacho?</summary>
+          <div class="faq-cuerpo">
+            <p>No es necesario. Todo puede hacerse por teléfono, correo electrónico y firma digital, esté
+              donde esté.</p>
+            <p>Si prefiere vernos en persona, tenemos despacho en Madrid, Valencia y Castellón.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="franja-cta">
+    <div class="envoltura">
+      <h2>Lo lleva un abogado, no una plataforma.</h2>
+      <p>Estudiamos el caso, reclamamos a la entidad y, si no paga, demandamos. Sin coste inicial y con
+        honorarios ligados al resultado.</p>
+      <a class="boton boton-claro" href="#empezar">Comprobar mi tarjeta</a>
+    </div>
+  </section>
+</main>
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie-rejilla">
+      <div>
+        <img src="/assets/img/jurmia-logo-blanco.png" alt="JURMIA Abogados" width="1290" height="446" style="width:150px;height:auto">
+        <p style="margin-top:1.25rem;max-width:34ch">Despacho de abogados en Madrid, Valencia y Castellón, con actuación en toda España.</p>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+        <ul>
+          <li><a href="/areas/civil">Derecho civil</a></li>
+          <li><a href="/areas/penal">Derecho penal</a></li>
+          <li><a href="/areas/laboral">Derecho laboral</a></li>
+          <li><a href="/areas/tributario">Derecho tributario</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Reclamaciones</h4>
+        <ul>
+          <li><a href="/reclamacion-vuelos">Vuelos retrasados</a></li>
+          <li><a href="/tarjetas-revolving">Tarjetas revolving</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Información legal</h4>
+        <ul>
+          <li><a href="/blog">Blog jurídico</a></li>
+          <li><a href="/aviso-legal">Aviso legal</a></li>
+          <li><a href="/privacidad">Política de privacidad</a></li>
+          <li><a href="/politica-cookies">Política de cookies</a></li>
+          <li><a href="#" data-cookies="configurar">Configurar cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie-legal">
+      <span>© <span id="anio">2026</span> JURMIA Abogados. Todos los derechos reservados</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/cookies.js" defer></script>
+<script src="/assets/js/revolving-motor.js" defer></script>
+<script src="/assets/js/tarjetas-revolving.js" defer></script>
+</body>
+</html>
