@@ -6,7 +6,7 @@
  * desde el buzón del despacho, sin intermediarios ni verificación de dominio.
  *
  * Variables de entorno necesarias en Vercel:
- *   SMTP_USUARIO     buzón completo de IONOS, p. ej. web@jurmiabogados.es
+ *   SMTP_USUARIO     buzón completo de IONOS, p. ej. info@jurmiabogados.es
  *   SMTP_CLAVE       contraseña de ese buzón
  *   CORREO_DESTINO   dirección donde se quieren recibir los avisos
  *
