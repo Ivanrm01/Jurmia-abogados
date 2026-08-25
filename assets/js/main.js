@@ -8,8 +8,8 @@
      Cambie estos tres datos y la barra queda lista.
      El teléfono va sin espacios y con prefijo internacional.
      El de WhatsApp, igual pero sin el signo +.                            */
-  var TELEFONO = "+34000000000";
-  var WHATSAPP = "34000000000";
+  var TELEFONO = "+34667824641";
+  var WHATSAPP = "+34675672559";
   var TEXTO_WHATSAPP = "Hola, me gustaría plantear una consulta jurídica.";
 
   (function barraMovil() {
