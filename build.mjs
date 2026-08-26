@@ -651,8 +651,6 @@ function sitemap(articulos, temas) {
     ["/reclamacion-vuelos", "0.9", hoy],
     ["/tarjetas-revolving", "0.9", hoy],
     ["/blog", "0.8", articulos[0]?.actualizado || hoy],
-    ["/aviso-legal", "0.2", hoy],
-    ["/privacidad", "0.2", hoy],
     ["/politica-cookies", "0.2", hoy],
   ];
   const temaUrls = temas.map((t) => ["/blog/tema/" + alSlug(t), "0.5", hoy]);
