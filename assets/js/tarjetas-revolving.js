@@ -256,6 +256,11 @@
         });
       })
       .then(function (d) {
+        if (window.gtag) window.gtag("event", "generate_lead", {
+          tipo_consulta: "revolving",
+          origen: "landing_revolving",
+          entidad: nombreEntidad() || "sin_indicar"
+        });
         aviso("Recibido. Su referencia es " + d.referencia +
           ". Un abogado estudiará el caso y le responderá en 24 horas laborables.");
         $("caja-contacto").querySelectorAll("input, textarea, button").forEach(function (x) { x.disabled = true; });
