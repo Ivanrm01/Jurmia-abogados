@@ -231,12 +231,10 @@ const PIE = `<footer class="pie">
         <h4>Información legal</h4>
         <ul>
           <li><a href="/blog">Blog jurídico</a></li>
-          <li><a href="/reclamacion-vuelos">Reclamar un vuelo</a></li>
-          <li><a href="/tarjetas-revolving">Tarjetas revolving</a></li>
           <li><a href="/aviso-legal">Aviso legal</a></li>
           <li><a href="/privacidad">Política de privacidad</a></li>
           <li><a href="/politica-cookies">Política de cookies</a></li>
-          <li><a href="#" data-cookies="configurar">Configurar cookies</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </div>
     </div>
