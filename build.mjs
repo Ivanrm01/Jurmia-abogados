@@ -234,7 +234,7 @@ const PIE = `<footer class="pie">
           <li><a href="/aviso-legal">Aviso legal</a></li>
           <li><a href="/privacidad">Política de privacidad</a></li>
           <li><a href="/politica-cookies">Política de cookies</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
         </ul>
       </div>
     </div>
