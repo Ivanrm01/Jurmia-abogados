@@ -18,7 +18,7 @@
  * ---------------------------------------------------------------------------
  */
 window.JURMIA_COOKIES = {
-  ga4: "",                     // Google Analytics 4, p. ej. "G-XXXXXXXXXX"
+  ga4: "G-5C3L8EGHDV",                     // Google Analytics 4, p. ej. "G-XXXXXXXXXX"
   metaPixel: "",    // Meta (Facebook) Pixel, p. ej. "123456789012345"
   googleAds: "",    // Google Ads, p. ej. "AW-XXXXXXXXX"
   linkedIn: ""      // LinkedIn Insight Tag, p. ej. "1234567"
