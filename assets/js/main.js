@@ -140,6 +140,10 @@
         .then(function (res) {
           if (!res.ok) throw new Error(res.cuerpo && res.cuerpo.error);
           form.reset();
+          if (window.gtag) window.gtag("event", "generate_lead", {
+            tipo_consulta: "contacto_general",
+            origen: "home"
+          });
           mostrarAviso("Consulta enviada. Le respondemos en un plazo de 24 horas laborables.", false);
         })
         .catch(function () {
