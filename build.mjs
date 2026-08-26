@@ -659,7 +659,7 @@ function sitemap(articulos, temas) {
   for (let i = 2; i <= totalPaginas; i++) paginaUrls.push(["/blog/pagina/" + i, "0.4", hoy]);
   const posts = articulos.map((a) => ["/blog/" + a.slug, "0.7", a.actualizado]);
 
-  const cuerpo = [...fijas, ...temaUrls, ...posts]
+  const cuerpo = [...fijas, ...temaUrls, ...paginaUrls, ...posts]
     .map(
       ([u, p, m]) =>
         `  <url><loc>${DOMINIO}${u}</loc><lastmod>${m}</lastmod><changefreq>monthly</changefreq><priority>${p}</priority></url>`
