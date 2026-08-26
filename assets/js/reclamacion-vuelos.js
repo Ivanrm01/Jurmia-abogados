@@ -273,6 +273,15 @@
         });
       })
       .then(function (d) {
+        if (window.gtag) {
+          var ev = M.evaluar(datosCaso());
+          window.gtag("event", "generate_lead", {
+            tipo_consulta: "reclamacion_vuelo",
+            origen: "landing_vuelos",
+            value: (ev && ev.importe) || 0,
+            currency: "EUR"
+          });
+        }
         aviso("Recibido. Su referencia es " + d.referencia +
           ". Un abogado revisará el vuelo y le responderá en 24 horas laborables.");
         $("caja-contacto").querySelectorAll("input, textarea, button").forEach(function (x) { x.disabled = true; });
