@@ -654,6 +654,9 @@ function sitemap(articulos, temas) {
     ["/politica-cookies", "0.2", hoy],
   ];
   const temaUrls = temas.map((t) => ["/blog/tema/" + alSlug(t), "0.5", hoy]);
+  const totalPaginas = Math.max(1, Math.ceil(articulos.length / POR_PAGINA));
+  const paginaUrls = [];
+  for (let i = 2; i <= totalPaginas; i++) paginaUrls.push(["/blog/pagina/" + i, "0.4", hoy]);
   const posts = articulos.map((a) => ["/blog/" + a.slug, "0.7", a.actualizado]);
 
   const cuerpo = [...fijas, ...temaUrls, ...posts]
