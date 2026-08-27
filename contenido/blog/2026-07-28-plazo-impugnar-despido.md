@@ -2,16 +2,24 @@
 titulo: "Veinte días hábiles: el plazo que hace perder más despidos de lo que parece"
 slug: "plazo-para-impugnar-un-despido"
 fecha: "2026-07-28"
-actualizado: "2026-07-28"
+actualizado: "2026-08-27"
 autor: "JURMIA Abogados"
 area: "Laboral"
 resumen: "El plazo para impugnar un despido es de veinte días hábiles y es de caducidad, no de prescripción. Explicamos cómo se cuenta, qué lo suspende y qué hacer en los primeros días."
 metaTitulo: "Plazo para impugnar un despido: 20 días hábiles | JURMIA Abogados"
 metaDescripcion: "Cómo se cuentan los 20 días hábiles para impugnar un despido, qué días no computan, cómo suspende la papeleta de conciliación y qué hacer nada más recibir la carta."
+tipo: "BlogPosting"
+noindex: false
+fuente: "serif"
+tamano: "normal"
+interlineado: "normal"
+espaciado: "normal"
+ancho: "normal"
+indice: false
 publicado: true
 ---
 
-Cada año llegan al despacho asuntos laborales sólidos que ya no se pueden defender. No porque el despido fuera correcto, sino porque han pasado más de veinte días hábiles desde la carta. Es el error más caro y más evitable del derecho laboral español.
+Cada año llegan al despacho asuntos laborales sólidos que ya no se pueden defender. No porque el despido fuera correcto, sino porque han pasado más de veinte días hábiles desde la carta.
 
 ## Qué dice la norma
 
