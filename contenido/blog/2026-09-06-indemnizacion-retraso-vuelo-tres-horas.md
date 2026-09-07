@@ -17,7 +17,7 @@ interlineado: "normal"
 espaciado: "normal"
 ancho: "normal"
 indice: false
-publicado: false
+publicado: true
 ---
 
 La indemnización por retraso de vuelo está regulada en el Reglamento (CE) 261/2004 y va de 250 a 600 euros por pasajero. La discusión rara vez está en el importe: está en si el retraso computa y en si la aerolínea consigue eximirse de pagarlo.
@@ -114,7 +114,7 @@ Ahí la diferencia entre una plataforma y un despacho es sencilla. La plataforma
 
 Comprobamos su caso sin coste: vuelo, distancia, hora real de llegada y causa alegada por la compañía. Si tiene recorrido, se lo decimos con la cifra y el escenario probable. Si no lo tiene, también se lo diremos antes de empezar.
 
-[formulario de contacto](/#contacto)Comprobamos su caso sin coste: vuelo, distancia, hora real de llegada y causa alegada por la compañía.
+[Comprobamos su caso sin coste](https://www.jurmiabogados.es/#contacto): vuelo, distancia, hora real de llegada y causa alegada por la compañía.
 
 ## Preguntas frecuentes
 
