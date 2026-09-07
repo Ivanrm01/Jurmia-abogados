@@ -53,6 +53,8 @@ Dos precisiones que deciden muchos casos:
 | Intracomunitarios de más de 1.500 km, y demás vuelos entre 1.500 y 3.500 km | 400 € | 3 horas de retraso |
 | Resto de vuelos de más de 3.500 km | 600 € | 4 horas de retraso |
 
+La distancia se calcula por el método de la ruta ortodrómica entre el aeropuerto de salida y el destino final, no por la ruta que siguió el avión. Si no la conoce, puede [calcular la distancia de su vuelo](https://www.jurmiabogados.es/reclamacion-vuelos) con el número de vuelo.
+
 La reducción del 50 % del artículo 7.2 solo opera cuando la compañía ofrece un transporte alternativo que cumple esos límites. No es una rebaja que la aerolínea pueda aplicar unilateralmente porque el retraso «no fue tan grave».
 
 ## Además del dinero: el derecho de asistencia
@@ -111,6 +113,8 @@ El escenario cambia cuando la compañía niega el derecho alegando una circunsta
 Ahí la diferencia entre una plataforma y un despacho es sencilla. La plataforma gestiona hasta donde llega el trámite y subcontrata cuando el asunto entra en el juzgado, quedándose un porcentaje de lo que usted recupere. Aquí el abogado que estudia el caso el primer día es el que firma la demanda si hay que demandarla.
 
 Comprobamos su caso sin coste: vuelo, distancia, hora real de llegada y causa alegada por la compañía. Si tiene recorrido, se lo decimos con la cifra y el escenario probable. Si no lo tiene, también se lo diremos antes de empezar.
+
+[formulario de contacto](/#contacto)Comprobamos su caso sin coste: vuelo, distancia, hora real de llegada y causa alegada por la compañía.
 
 ## Preguntas frecuentes
 
