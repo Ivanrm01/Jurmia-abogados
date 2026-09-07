@@ -2,11 +2,11 @@
 titulo: "Vuelo retrasado más de 3 horas: cuándo hay indemnización y cuánto"
 slug: "indemnizacion-retraso-vuelo-tres-horas"
 fecha: "2026-09-06"
-actualizado: "2026-09-06"
+actualizado: "2026-09-07"
 autor: "JURMIA ABOGADOS"
 area: "Civil"
-resumen: "Tres horas de retraso en la llegada abren el derecho a una compensación de entre 250 y 600 euros. Pero el umbral se mide en el destino final, no en la salida, y hay causas que eximen a la aerolínea. Esto es lo que decide si su caso tiene recorrido, y el plazo que tiene para usarlo."
-metaTitulo: "Vuelo retrasado más de 3 horas: cuándo hay indemnización"
+resumen: "La indemnización por retraso de vuelo llega a 600 euros, pero solo si el retraso se mide donde corresponde —la llegada al destino final— y la aerolínea no acredita una causa que la exima. Esto es lo que decide si su caso tiene recorrido, y el plazo que tiene para usarlo."
+metaTitulo: "Indemnización por retraso de vuelo: cuándo y cuánto"
 metaDescripcion: "Cuándo un retraso de vuelo da derecho a indemnización, cuánto corresponde según la distancia, cuándo la aerolínea no paga y qué plazo tiene para reclamar."
 palabraClave: "indemnización por retraso de vuelo"
 tipo: "BlogPosting"
@@ -20,7 +20,9 @@ indice: false
 publicado: false
 ---
 
-Lo que cuenta es la **hora de llegada al destino final**, no la de salida. Si el avión despegó con cuatro horas de retraso pero recuperó tiempo y aterrizó con dos y media, no hay compensación. Si salió con una hora de retraso y llegó con tres y cuarto, la hay.
+La indemnización por retraso de vuelo está regulada en el Reglamento (CE) 261/2004 y va de 250 a 600 euros por pasajero. La discusión rara vez está en el importe: está en si el retraso computa y en si la aerolínea consigue eximirse de pagarlo.
+
+> Lo que cuenta es la **hora de llegada al destino final**, no la de salida. Si el avión despegó con cuatro horas de retraso pero recuperó tiempo y aterrizó con dos y media, no hay compensación. Si salió con una hora de retraso y llegó con tres y cuarto, la hay.
 
 ## Qué vuelos están cubiertos
 
@@ -43,7 +45,7 @@ Dos precisiones que deciden muchos casos:
 1. **La hora de llegada** es aquella en la que se abre al menos una de las puertas del avión y los pasajeros pueden salir, no la del contacto con la pista ni la del *in block* que registra la compañía (asunto Germanwings, C-452/13). Son minutos que a menudo cruzan la frontera de las tres horas.
 2. **Con vuelos en conexión** bajo una única reserva, el retraso se mide en el destino final. Si el primer tramo se retrasa poco pero le hace perder el enlace y llega ocho horas tarde, hay derecho a compensación (asunto Folkerts, C-11/11).
 
-## Cuánto corresponde
+## Cuánto es la indemnización por retraso de vuelo
 
 | Distancia del vuelo | Compensación | Se reduce a la mitad si el transporte alternativo llega con menos de |
 |---|---|---|
@@ -78,13 +80,15 @@ Aun apreciada la circunstancia extraordinaria, la compañía debe probar además
 
 ## El plazo para reclamar, y por qué conviene no dormirse
 
-En España, la acción para reclamar la compensación del Reglamento 261/2004 se rige por el plazo general del artículo 1964 del Código Civil: **cinco años**. El Tribunal de Justicia remitió esta cuestión al derecho de cada Estado en el asunto Cuadrench Moré (C-139/11).
+En España, la acción para reclamar la indemnización por retraso de vuelo se rige por el plazo general del artículo 1964 del Código Civil: **cinco años**. El Tribunal de Justicia remitió esta cuestión al derecho de cada Estado en el asunto Cuadrench Moré (C-139/11).
 
-> Ese plazo va a cambiar. El nuevo reglamento que reforma el 261/2004 fue aprobado por el Parlamento Europeo el 7 de julio de 2026 y por el Consejo el 13 de julio, y fija un plazo europeo de **nueve meses** para presentar la reclamación. Todavía no se aplica: entrará en vigor veinte días después de su publicación en el Diario Oficial de la Unión Europea y sus disposiciones serán aplicables doce meses más tarde, previsiblemente en 2027. Hasta entonces rigen las reglas actuales. Pero si tiene vuelos de años anteriores sin reclamar, el margen para hacerlo con el plazo de cinco años se está agotando.
+> Ese plazo va a cambiar. El nuevo reglamento que reforma el 261/2004 fija un plazo europeo de **nueve meses** para reclamar. Lo aprobó el Parlamento Europeo el 7 de julio de 2026 y el Consejo el 13 de julio.
+
+Todavía no se aplica. Entrará en vigor veinte días después de su publicación en el Diario Oficial de la Unión Europea y sus disposiciones serán aplicables doce meses más tarde, previsiblemente en 2027. Hasta entonces rigen las reglas actuales. Pero si tiene vuelos de años anteriores sin reclamar, el margen se está agotando.
 
 ## Qué cambia con la reforma y qué no
 
-Conviene despejar la confusión que han generado algunos titulares:
+Conviene despejar la confusión que han generado algunos titulares sobre la indemnización por retraso de vuelo:
 
 - **Se mantiene** el umbral general de tres horas y **se mantienen** los importes de 250, 400 y 600 euros. La propuesta de elevar el umbral a cuatro y seis horas, que defendió el Consejo, no prosperó.
 - **Se añade** la obligación de la aerolínea de informar proactivamente al pasajero de que tiene derecho a reclamar tras la incidencia, con plazos tasados para responder a la reclamación.
@@ -94,7 +98,7 @@ Conviene despejar la confusión que han generado algunos titulares:
 ## Cómo se reclama, en orden
 
 1. **Reúna la prueba mientras está en el aeropuerto.** Tarjeta de embarque, localizador, fotografías del panel de salidas con la hora, capturas de la aplicación de seguimiento del vuelo, los correos y SMS de la compañía, y los tickets de todo lo que gaste.
-2. **Reclame por escrito a la aerolínea**, por su canal formal, con la cuantía concreta y el fundamento. Guarde el número de expediente. Las llamadas al teléfono de atención no dejan rastro utilizable.
+2. **Reclame por escrito a la aerolínea** la indemnización por retraso de vuelo, por su canal formal, con la cuantía concreta y el fundamento. Guarde el número de expediente. Las llamadas al teléfono de atención no dejan rastro utilizable.
 3. **Reclamación ante AESA.** La Agencia Estatal de Seguridad Aérea tramita la queja gratuitamente, pero su resolución no es vinculante ni ejecutiva: no obliga a la compañía a pagar. Sirve como antecedente y como elemento de presión, no como vía de cobro.
 4. **Demanda judicial.** Es la única vía que termina en un pago exigible. Se tramita por juicio verbal y puede interponerse ante el tribunal del lugar de salida o del de llegada, a elección del pasajero (asunto Rehder, C-204/08).
 
@@ -102,7 +106,9 @@ Conviene despejar la confusión que han generado algunos titulares:
 
 Seamos claros: si su vuelo se retrasó, la causa es evidente y la aerolínea paga a la primera reclamación, no necesita a nadie. Reclame usted mismo y quédese con los 250 o 400 euros íntegros.
 
-El escenario cambia cuando la compañía niega el derecho alegando una circunstancia extraordinaria que no acredita, cuando ofrece un bono en lugar del dinero, cuando no contesta, o cuando además hay gastos de alojamiento, comidas y un enlace perdido que nadie ha cuantificado. Ahí la diferencia entre una plataforma y un despacho es sencilla: la plataforma gestiona hasta donde llega el trámite y subcontrata cuando el asunto entra en el juzgado, quedándose un porcentaje de lo que usted recupere. Aquí el abogado que estudia el caso el primer día es el que firma la demanda si hay que demandarla.
+El escenario cambia cuando la compañía niega el derecho alegando una circunstancia extraordinaria que no acredita, cuando ofrece un bono en lugar del dinero o cuando sencillamente no contesta. También cuando, además de la compensación, hay gastos de alojamiento, comidas y un enlace perdido que nadie ha cuantificado.
+
+Ahí la diferencia entre una plataforma y un despacho es sencilla. La plataforma gestiona hasta donde llega el trámite y subcontrata cuando el asunto entra en el juzgado, quedándose un porcentaje de lo que usted recupere. Aquí el abogado que estudia el caso el primer día es el que firma la demanda si hay que demandarla.
 
 Comprobamos su caso sin coste: vuelo, distancia, hora real de llegada y causa alegada por la compañía. Si tiene recorrido, se lo decimos con la cifra y el escenario probable. Si no lo tiene, también se lo diremos antes de empezar.
 
@@ -121,7 +127,7 @@ No. La compensación se paga en metálico, por transferencia o cheque. Solo pued
 No de forma automática. La aerolínea debe acreditar que las condiciones meteorológicas concretas afectaban a ese vuelo y que adoptó todas las medidas razonables para reducir el retraso. Una borrasca genérica en el país de destino no basta.
 
 ### ¿Cuánto tiempo tengo para reclamar?
-Hoy, en España, cinco años desde el vuelo. Cuando resulte aplicable el nuevo reglamento europeo, previsiblemente en 2027, el plazo será de nueve meses. Los vuelos antiguos pendientes conviene reclamarlos ahora.
+Hoy, en España, la indemnización por retraso de vuelo puede reclamarse durante cinco años desde el vuelo. Cuando resulte aplicable el nuevo reglamento europeo, previsiblemente en 2027, el plazo será de nueve meses. Los vuelos antiguos pendientes conviene reclamarlos ahora.
 
 ### Volé con una aerolínea de bajo coste y el billete costó 40 euros. ¿Cobro menos?
 No. La compensación depende únicamente de la distancia del vuelo, no del precio pagado. Puede perfectamente superar varias veces el importe del billete.
