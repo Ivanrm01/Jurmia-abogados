@@ -17,7 +17,7 @@ interlineado: "normal"
 espaciado: "normal"
 ancho: "normal"
 indice: false
-publicado: false
+publicado: true
 ---
 
 Te presentas a una oposición, resuelves el ejercicio conforme a las bases y, al publicarse las notas, descubres que cada pregunta tenía un peso diferente, que citar literalmente determinados artículos sumaba puntos o que no hacerlo suponía una penalización. Nada de eso se había comunicado antes.
