@@ -6,7 +6,7 @@ actualizado: "2026-10-17"
 autor: "JURMIA ABOGADOS"
 area: "Laboral"
 resumen: "La excedencia voluntaria, la forzosa y la destinada al cuidado no ofrecen la misma protección al regresar. Explicamos sus requisitos y la diferencia entre reserva de puesto y preferencia de reingreso."
-metaTitulo: "Excedencias del artículo 46 del Estatuto | JURMIA"
+metaTitulo: "Excedencias del artículo 46 del Estatuto"
 metaDescripcion: "Guía breve del artículo 46 del Estatuto de los Trabajadores: excedencia voluntaria, forzosa y por cuidado, duración y derechos al reingreso."
 palabraClave: "excedencias artículo 46 Estatuto de los Trabajadores"
 tipo: "BlogPosting"
@@ -17,7 +17,7 @@ interlineado: "normal"
 espaciado: "normal"
 ancho: "normal"
 indice: false
-publicado: false
+publicado: true
 ---
 
 Pedir una excedencia significa dejar de trabajar durante un tiempo sin extinguir necesariamente el contrato. Pero **no todas las excedencias permiten volver de la misma manera**. Esa es la diferencia que más importa antes de tomar la decisión.
