@@ -8,6 +8,7 @@ area: "Civil"
 resumen: "Si aparecen deudas en una herencia, renunciar no es siempre la única salida. Explicamos la aceptación pura y simple, el beneficio de inventario, los riesgos de actuar como heredero y los plazos que conviene vigilar."
 metaTitulo: "Herencia con deudas: renuncia o inventario | JURMIA Abogados"
 metaDescripcion: "¿La herencia tiene deudas? Compara renuncia, aceptación pura y simple y beneficio de inventario. Qué revisar antes de decidir y qué plazos vigilar."
+palabraClave: "herencia con deudas beneficio de inventario"
 tipo: "BlogPosting"
 noindex: false
 fuente: "serif"
