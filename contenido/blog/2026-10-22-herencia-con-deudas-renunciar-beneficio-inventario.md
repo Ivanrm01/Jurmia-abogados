@@ -17,7 +17,7 @@ interlineado: "normal"
 espaciado: "normal"
 ancho: "normal"
 indice: false
-publicado: false
+publicado: true
 ---
 
 Una vivienda con hipoteca, un préstamo pendiente o deudas que nadie conocía pueden cambiar por completo la decisión de heredar. Antes de firmar, la pregunta no es solo cuánto vale lo que deja el fallecido: también hay que saber **qué se debe, quién puede reclamarlo y con qué patrimonio responderías**.
