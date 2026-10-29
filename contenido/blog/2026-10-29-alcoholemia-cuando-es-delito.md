@@ -22,7 +22,7 @@ publicado: true
 
 Das positivo en un control de alcoholemia y surge la primera pregunta: **¿me pondrán una multa o tendré que acudir al juzgado?** La respuesta depende de la tasa, de cómo conducías y de las pruebas disponibles. Hay una cifra que marca una vía penal por sí misma, pero no funciona como una frontera que haga inocua cualquier tasa inferior.
 
-!!! En España, conducir con una tasa **superior a 0,60 mg/l en aire espirado** o **superior a 1,2 g/l en sangre** constituye delito conforme al artículo 379.2 del Código Penal. También puede existir delito con una tasa menor si se prueba que conducías bajo la influencia del alcohol.
+!!! En España, conducir con una tasa superior a 0,60 mg/l en aire espirado o superior a 1,2 g/l en sangre constituye delito conforme al artículo 379.2 del Código Penal. También puede existir delito con una tasa menor si se prueba que conducías bajo la influencia del alcohol.
 
 ## Cuándo se tramita como infracción administrativa
 
