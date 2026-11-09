@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog jurídico de JURMIA Abogados</title>
+    <link>https://www.jurmiabogados.es/blog</link>
+    <atom:link href="https://www.jurmiabogados.es/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Novedades y análisis en derecho civil, penal, laboral y tributario, Ley de Segunda Oportunidad y reclamaciones de vuelos.</description>
+    <language>es-ES</language>
+    <lastBuildDate>Mon, 09 Nov 2026 23:00:07 GMT</lastBuildDate>
+    <item>
+      <title>Deudas con Hacienda y Seguridad Social en la segunda oportunidad: qué se puede cancelar</title>
+      <link>https://www.jurmiabogados.es/blog/deudas-hacienda-seguridad-social-segunda-oportunidad</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/deudas-hacienda-seguridad-social-segunda-oportunidad</guid>
+      <description>El límite de 10.000 euros por acreedor público, los créditos subordinados y las excepciones que pueden impedir la exoneración.</description>
+      <category>Ley de Segunda Oportunidad</category>
+      <pubDate>Mon, 09 Nov 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Alcoholemia: ¿cuándo pasa de multa a delito?</title>
+      <link>https://www.jurmiabogados.es/blog/alcoholemia-cuando-es-delito</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/alcoholemia-cuando-es-delito</guid>
+      <description>Una tasa positiva no siempre implica un delito, pero una cifra inferior a 0,60 mg/l tampoco lo descarta. Explicamos los límites, las penas, las pruebas y qué revisar tras un control.</description>
+      <category>Penal</category>
+      <pubDate>Thu, 29 Oct 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Herencia con deudas: ¿renunciar o aceptar a beneficio de inventario?</title>
+      <link>https://www.jurmiabogados.es/blog/herencia-con-deudas-renunciar-beneficio-inventario</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/herencia-con-deudas-renunciar-beneficio-inventario</guid>
+      <description>Si aparecen deudas en una herencia, renunciar no es siempre la única salida. Explicamos la aceptación pura y simple, el beneficio de inventario, los riesgos de actuar como heredero y los plazos que conviene vigilar.</description>
+      <category>Civil</category>
+      <pubDate>Thu, 22 Oct 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Excedencias del artículo 46: cuánto duran y cómo volver al trabajo</title>
+      <link>https://www.jurmiabogados.es/blog/excedencias-articulo-46-estatuto-trabajadores</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/excedencias-articulo-46-estatuto-trabajadores</guid>
+      <description>La excedencia voluntaria, la forzosa y la destinada al cuidado no ofrecen la misma protección al regresar. Explicamos sus requisitos y la diferencia entre reserva de puesto y preferencia de reingreso.</description>
+      <category>Laboral</category>
+      <pubDate>Sat, 17 Oct 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Suspendiste una oposición sin conocer los criterios: ¿puedes reclamar?</title>
+      <link>https://www.jurmiabogados.es/blog/reclamar-oposicion-criterios-correccion-no-publicados</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/reclamar-oposicion-criterios-correccion-no-publicados</guid>
+      <description>Una nota baja no basta para impugnar una oposición. La reclamación cobra fuerza cuando el tribunal introduce reglas relevantes después del examen o no permite conocer cómo las aplicó.</description>
+      <category>Laboral</category>
+      <pubDate>Sun, 27 Sep 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Vuelo retrasado más de 3 horas: cuándo hay indemnización y cuánto</title>
+      <link>https://www.jurmiabogados.es/blog/indemnizacion-retraso-vuelo-tres-horas</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/indemnizacion-retraso-vuelo-tres-horas</guid>
+      <description>La indemnización por retraso de vuelo llega a 600 euros, pero solo si el retraso se mide donde corresponde —la llegada al destino final— y la aerolínea no acredita una causa que la exima. Esto es lo que decide si su caso tiene recorrido, y el plazo que tiene para usarlo.</description>
+      <category>Vuelos</category>
+      <pubDate>Sun, 06 Sep 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Le llega una liquidación de Hacienda: tiene un mes y tres decisiones que tomar</title>
+      <link>https://www.jurmiabogados.es/blog/como-recurrir-una-liquidacion-de-hacienda</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/como-recurrir-una-liquidacion-de-hacienda</guid>
+      <description>Reposición o reclamación económico-administrativa, con o sin suspensión, y qué hacer con la sanción que llega después. Guía práctica de los primeros treinta días.</description>
+      <category>Tributario</category>
+      <pubDate>Tue, 04 Aug 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Veinte días hábiles: el plazo que hace perder más despidos de lo que parece</title>
+      <link>https://www.jurmiabogados.es/blog/plazo-para-impugnar-un-despido</link>
+      <guid isPermaLink="true">https://www.jurmiabogados.es/blog/plazo-para-impugnar-un-despido</guid>
+      <description>El plazo para impugnar un despido es de veinte días hábiles y es de caducidad, no de prescripción. Explicamos cómo se cuenta, qué lo suspende y qué hacer en los primeros días.</description>
+      <category>Laboral</category>
+      <pubDate>Tue, 28 Jul 2026 09:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
