@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Seguridad del panel — JURMIA Abogados</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,300..600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tinta: #06365a; --tinta-oscura: #042439; --tinta-media: #35617f;
+    --piedra: #c3ced2; --piedra-clara: #e6ebed; --papel: #f4f6f7;
+    --verde: #1c6b4b; --ambar: #8a5a12; --rojo: #a12a2a;
+    --linea: rgba(6,54,90,.16);
+    --display: "Archivo", system-ui, sans-serif;
+    --serif: "Source Serif 4", Georgia, serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--papel); color: var(--tinta-oscura);
+         font-family: var(--display); font-size: 15px; line-height: 1.55; }
+  a { color: var(--tinta); }
+
+  .barra { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 1rem;
+           justify-content: space-between; padding: .7rem 1.25rem; background: var(--tinta-oscura); color: #fff; }
+  .barra-izq { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+  .barra img { height: 24px; }
+  .barra-titulo { font-family: var(--mono); font-size: .7rem; letter-spacing: .16em;
+                  text-transform: uppercase; color: var(--piedra); white-space: nowrap; }
+  .barra-der { display: flex; align-items: center; gap: 1rem; font-size: .8125rem; color: var(--piedra); }
+
+  .envoltura { max-width: 1180px; margin: 0 auto; padding: 1.5rem 1.25rem 5rem; }
+  .oculto { display: none !important; }
+
+  h1 { font-size: 1.5rem; margin: 0 0 .35rem; }
+  h2 { font-size: 1.0625rem; margin: 0; }
+  .apunte { color: var(--tinta-media); font-size: .8125rem; margin: 0 0 1rem; }
+  .apunte:last-child { margin-bottom: 0; }
+
+  label { display: block; font-family: var(--mono); font-size: .625rem; letter-spacing: .12em;
+          text-transform: uppercase; color: var(--tinta-media); margin-bottom: .3rem; }
+  input, select { width: 100%; font-family: var(--display); font-size: 16px; color: var(--tinta-oscura);
+          background: var(--papel); border: 1px solid rgba(6,54,90,.2); padding: .55rem .65rem; border-radius: 2px; }
+  input:focus, select:focus { outline: 2px solid var(--tinta); outline-offset: -1px; background: #fff; }
+  .campo { margin-bottom: .85rem; }
+
+  button, a.boton { font-family: var(--display); font-size: .875rem; font-weight: 600; cursor: pointer;
+           padding: .6rem 1rem; border: 1px solid var(--tinta); background: var(--tinta); color: #fff;
+           border-radius: 2px; min-height: 42px; text-decoration: none; display: inline-flex; align-items: center; }
+  button:hover, a.boton:hover { background: #000; border-color: #000; }
+  button:disabled { opacity: .5; cursor: default; }
+  button.secundario, a.boton.secundario { background: #fff; color: var(--tinta); }
+  button.secundario:hover, a.boton.secundario:hover { background: var(--piedra-clara); border-color: var(--tinta); color: var(--tinta); }
+  button.peligro { background: #fff; color: var(--rojo); border-color: var(--rojo); }
+  button.peligro:hover { background: var(--rojo); color: #fff; }
+  button.mini { min-height: 32px; padding: .3rem .65rem; font-size: .78rem; }
+  .botonera { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+
+  .rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+  .ancha { grid-column: 1 / -1; }
+  .tarjeta { background: #fff; border: 1px solid var(--linea); }
+  .tarjeta-cab { display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+                 padding: .85rem 1.1rem; border-bottom: 1px solid rgba(6,54,90,.1); }
+  .tarjeta-cuerpo { padding: 1rem 1.1rem; }
+  .tarjeta-cuerpo > p { font-size: .875rem; margin: 0 0 .85rem; }
+  .tarjeta-cuerpo > p:last-child { margin-bottom: 0; }
+
+  .marca { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em; text-transform: uppercase;
+           padding: .2rem .45rem; border: 1px solid currentColor; white-space: nowrap; display: inline-block; }
+  .m-verde { color: var(--verde); } .m-rojo { color: var(--rojo); } .m-ambar { color: var(--ambar); }
+  .m-gris { color: var(--tinta-media); } .m-tinta { color: var(--tinta); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .8125rem; }
+  th { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+       color: var(--tinta-media); text-align: left; padding: .5rem .55rem; border-bottom: 1px solid rgba(6,54,90,.2); font-weight: 500; }
+  td { padding: .55rem .55rem; border-bottom: 1px solid rgba(6,54,90,.08); vertical-align: middle; }
+  tr:last-child td { border-bottom: 0; }
+  tr.fallo td { background: #fdf6f6; }
+  .num { font-family: var(--mono); font-size: .75rem; white-space: nowrap; }
+  .suave { color: var(--tinta-media); }
+  .tabla-scroll { overflow-x: auto; }
+
+  .mensaje { font-family: var(--mono); font-size: .8125rem; padding: .6rem .8rem; margin: 0 0 1rem;
+             border-left: 3px solid var(--tinta); background: var(--piedra-clara); }
+  .mensaje.error { border-left-color: var(--rojo); background: #fbf1f1; color: var(--rojo); }
+  .mensaje.bien { border-left-color: var(--verde); background: #f0f7f3; color: var(--verde); }
+  .error-linea { color: var(--rojo); font-size: .8125rem; margin-top: .6rem; }
+  .error-linea:empty { display: none; }
+  .aviso { border-left: 3px solid var(--ambar); background: #fdf8ef; padding: .7rem .9rem; font-size: .8125rem; margin: 0 0 .85rem; }
+  .aviso.ok { border-left-color: var(--verde); background: #f0f7f3; }
+
+  .formulario { display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-end; margin-top: .25rem; }
+  .formulario .campo { margin: 0; flex: 1 1 200px; max-width: 280px; }
+
+  .qr { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; margin: .5rem 0 1rem; }
+  .qr img { width: 190px; height: 190px; border: 1px solid var(--linea); padding: 6px; background: #fff; image-rendering: pixelated; }
+  .clave-manual { font-family: var(--mono); font-size: .95rem; letter-spacing: .08em; background: var(--papel);
+                  border: 1px dashed var(--piedra); padding: .5rem .7rem; word-break: break-all; }
+  .input-codigo { font-family: var(--mono) !important; font-size: 1.35rem !important; letter-spacing: .3em; text-align: center; max-width: 180px; }
+  .codigos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; max-width: 420px; margin: .75rem 0 1rem; }
+  .codigos span { font-family: var(--mono); font-size: 1rem; letter-spacing: .06em; background: var(--papel);
+                  border: 1px solid var(--linea); padding: .45rem .6rem; text-align: center; }
+
+  .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--linea);
+          border: 1px solid var(--linea); margin-bottom: .9rem; }
+  .kpi { background: #fff; padding: .6rem .7rem; }
+  .kpi small { display: block; font-family: var(--mono); font-size: .5625rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-media); }
+  .kpi b { font-family: var(--mono); font-size: 1.05rem; font-weight: 500; }
+  .reparto { display: flex; height: 8px; background: var(--piedra-clara); margin: .35rem 0 .35rem; overflow: hidden; }
+  .reparto i { display: block; height: 100%; }
+  .leyenda { display: flex; gap: .9rem; flex-wrap: wrap; font-size: .75rem; color: var(--tinta-media); margin-bottom: .9rem; }
+  .leyenda span::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: .35rem; background: var(--c); vertical-align: -1px; }
+  hr { border: 0; border-top: 1px solid rgba(6,54,90,.1); margin: 1rem 0; }
+  .texto-literal { font-family: var(--serif); font-size: .8125rem; background: var(--papel); border-left: 3px solid var(--piedra);
+                   padding: .5rem .7rem; margin-top: .35rem; color: var(--tinta-oscura); max-height: 180px; overflow: auto; }
+  .historial td:first-child { white-space: nowrap; }
+  .historial td:nth-child(2) { min-width: 150px; }
+  details summary { cursor: pointer; font-size: .78rem; color: var(--tinta); }
+
+  @media (max-width: 960px) { .rejilla { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) {
+    .barra { flex-wrap: wrap; gap: .5rem .75rem; padding: .6rem .9rem; }
+    .barra-titulo { display: none; }
+    .barra-der { margin-left: auto; min-width: 0; }
+    #sesion-nombre { max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  }
+  @media (max-width: 720px) {
+    .envoltura { padding: 1rem .9rem 5rem; }
+    .kpis { grid-template-columns: 1fr; }
+    .codigos { grid-template-columns: 1fr 1fr; }
+    .tabla-movil table, .tabla-movil thead, .tabla-movil tbody, .tabla-movil tr, .tabla-movil td { display: block; }
+    .tabla-movil thead { display: none; }
+    .tabla-movil tr { border-bottom: 1px solid rgba(6,54,90,.12); padding: .45rem 0; }
+    .tabla-movil td { border: 0; padding: .12rem 0; }
+    .tabla-movil td[data-t]::before { content: attr(data-t) " · "; font-family: var(--mono); font-size: .6rem; text-transform: uppercase; color: var(--tinta-media); }
+  }
+
+  /* --- raíl lateral de secciones: solo existe con sesión iniciada --- */
+  body.identificado { padding-left: 76px; }
+  .lateral { display: none; }
+  body.identificado .lateral {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 76px; z-index: 45;
+    background: var(--tinta-oscura); border-right: 1px solid rgba(255,255,255,.09);
+    display: flex; flex-direction: column; align-items: center; gap: .3rem;
+    padding: .7rem .35rem calc(.7rem + env(safe-area-inset-bottom, 0));
+  }
+  .lateral a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .22rem;
+    width: 100%; padding: .55rem .2rem; border-radius: 6px; text-decoration: none;
+    color: var(--piedra); opacity: .7; transition: background .15s ease, opacity .15s ease;
+  }
+  .lateral a:hover { background: rgba(255,255,255,.08); opacity: 1; }
+  .lateral a.activa { background: rgba(255,255,255,.15); opacity: 1; color: #fff; }
+  .lateral .ico { font-size: 1.3rem; line-height: 1; }
+  .lateral .txt { font-family: var(--mono); font-size: .5625rem; letter-spacing: .07em; text-transform: uppercase; }
+  @media (max-width: 760px) {
+    body.identificado { padding-left: 58px; }
+    body.identificado .lateral { width: 58px; }
+    .lateral .txt { display: none; }
+    .lateral .ico { font-size: 1.45rem; }
+    .lateral a { padding: .7rem .2rem; }
+  }
+
+  /* --- pantalla de acceso, idéntica en todos los paneles --- */
+  #acceso { display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; min-height: 100dvh; padding: 1.5rem; }
+  .tarjeta-acceso {
+    width: 100%; max-width: 400px; background: #fff; border: 1px solid rgba(6,54,90,.16);
+    padding: 2.25rem 1.75rem; margin: 0;
+  }
+  .tarjeta-acceso img { width: 168px; height: auto; display: block; margin: 0 auto 1.75rem; }
+  .tarjeta-acceso h1 { font-size: 1.25rem; margin: 0 0 .3rem; }
+  .tarjeta-acceso p { color: var(--tinta-media); font-size: .875rem; margin: 0 0 1.5rem; }
+  .tarjeta-acceso button { width: 100%; margin-top: .35rem; justify-content: center; }
+  .tarjeta-acceso .mensaje { margin: .8rem 0 0; }
+</style>
+</head>
+<body>
+<nav class="lateral" aria-label="Secciones del panel">
+  <a href="/admin">
+    <span class="ico" aria-hidden="true">📝</span>
+    <span class="txt">Blog</span>
+  </a>
+  <a href="/admin/vuelos">
+    <span class="ico" aria-hidden="true">✈️</span>
+    <span class="txt">Vuelos</span>
+  </a>
+  <a href="/admin/revolving">
+    <span class="ico" aria-hidden="true">💳</span>
+    <span class="txt">Revolving</span>
+  </a>
+  <a href="/admin/segunda-oportunidad">
+    <span class="ico" aria-hidden="true">⚖️</span>
+    <span class="txt">LSO</span>
+  </a>
+  <a href="/admin/seguridad" class="activa" aria-current="page">
+    <span class="ico" aria-hidden="true">🛡️</span>
+    <span class="txt">Seguridad</span>
+  </a>
+</nav>
+
+<div class="barra">
+  <div class="barra-izq">
+    <img src="/assets/img/jurmia-logo-blanco.png" alt="JURMIA Abogados">
+    <span class="barra-titulo">Seguridad del panel</span>
+  </div>
+  <div class="barra-der">
+    <span id="sesion-nombre"></span>
+    <button class="secundario" id="btn-salir" style="min-height:34px;padding:.3rem .7rem">Salir</button>
+  </div>
+</div>
+
+<!-- ---------------- acceso ---------------- -->
+<div id="acceso">
+  <div class="tarjeta-acceso">
+    <img src="/assets/img/jurmia-logo.png" alt="JURMIA Abogados" width="1290" height="446">
+    <h1>Panel de administración</h1>
+    <p>Acceda con su correo del despacho.</p>
+    <div class="campo">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="campo">
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" autocomplete="current-password">
+    </div>
+    <button id="btn-entrar">Entrar</button>
+    <div id="mensaje-acceso"></div>
+  </div>
+</div>
+
+<!-- ---------------- panel ---------------- -->
+<div id="panel" class="envoltura oculto">
+  <div class="botonera" style="justify-content:space-between;margin-bottom:.35rem">
+    <h1>Seguridad</h1>
+    <button class="secundario mini" id="btn-actualizar">Actualizar</button>
+  </div>
+  <p class="apunte">Verificación en dos pasos de cada persona, sesiones abiertas, últimos accesos al panel y
+    registro de los consentimientos de cookies de la web.</p>
+  <div id="mensaje"></div>
+  <div id="contenido"><p class="apunte">Cargando…</p></div>
+</div>
+
+<script src="/assets/js/panel-acceso.js?v=20261126"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (t) {
+    return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  };
+  var usuario = null;
+  try { usuario = JSON.parse(localStorage.getItem("jurmia_usuario") || "null"); } catch (e) { usuario = null; }
+  var datos = null;
+  var ui = { fase: "estado", qr: null, codigos: null, quitar: null };
+
+  /* ---------------- utilidades ---------------- */
+
+  function fechaHora(v) {
+    if (!v) return "—";
+    var d = new Date(v);
+    return isNaN(d) ? "—" : d.toLocaleString("es-ES", {
+      timeZone: "Europe/Madrid", day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
+    });
+  }
+  function hace(v) {
+    var min = Math.round((Date.now() - Date.parse(v)) / 60000);
+    if (!isFinite(min)) return "";
+    if (min < 1) return "ahora";
+    if (min < 60) return "hace " + min + " min";
+    if (min < 1440) return "hace " + Math.round(min / 60) + " h";
+    var d = Math.round(min / 1440);
+    return "hace " + d + " día" + (d === 1 ? "" : "s");
+  }
+  function dispositivo(ua) {
+    ua = ua || "";
+    var so = /iPhone|iPad/.test(ua) ? "iPhone/iPad" : /Android/.test(ua) ? "Android" : /Windows/.test(ua) ? "Windows"
+      : /Macintosh|Mac OS X/.test(ua) ? "Mac" : /Linux/.test(ua) ? "Linux" : "";
+    var nav = /Edg\//.test(ua) ? "Edge" : /OPR\//.test(ua) ? "Opera" : /Firefox\/|FxiOS/.test(ua) ? "Firefox"
+      : /Chrome\/|CriOS/.test(ua) ? "Chrome" : /Safari\//.test(ua) ? "Safari" : "";
+    if (nav && so) return nav + " en " + so;
+    return nav || so || (ua ? "Otro" : "—");
+  }
+  function mensaje(texto, tipo) {
+    $("mensaje").innerHTML = texto ? '<div class="mensaje ' + (tipo || "") + '">' + esc(texto) + "</div>" : "";
+    if (texto) window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function mensajeAcceso(texto, tipo) {
+    $("mensaje-acceso").innerHTML = texto ? '<div class="mensaje ' + (tipo || "") + '">' + esc(texto) + "</div>" : "";
+  }
+
+  /** Llamada a /api/seguridad con la sesión. Si caduca, panel-acceso.js pide la contraseña y la repite. */
+  function api(cuerpo, comoTexto) {
+    return fetch("/api/seguridad", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: "Bearer " + (JurmiaAcceso.token() || "") },
+      body: JSON.stringify(cuerpo)
+    }).then(function (r) {
+      if (comoTexto && r.ok) {
+        return r.text().then(function (t) {
+          return { texto: t, filas: r.headers.get("X-Filas"), truncado: r.headers.get("X-Truncado") === "si" };
+        });
+      }
+      return r.text().then(function (t) {
+        var d = null;
+        try { d = t ? JSON.parse(t) : null; } catch (e) { d = null; }
+        if (r.status === 401) { location.reload(); throw new Error("Vuelva a entrar."); }
+        if (!d) throw new Error("El servidor respondió con HTTP " + r.status + ".");
+        if (!r.ok) { var err = new Error(d.error || "HTTP " + r.status); err.datos = d; throw err; }
+        return d;
+      });
+    });
+  }
+
+  function descargar(nombre, contenido, tipo) {
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([contenido], { type: tipo || "text/plain;charset=utf-8" }));
+    a.download = nombre;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  }
+
+  /* ---------------- acceso ---------------- */
+
+  function entrar() {
+    mensajeAcceso("");
+    if (!$("correo").value.trim()) { mensajeAcceso("Escriba su correo electrónico.", "error"); return; }
+    $("btn-entrar").disabled = true;
+    JurmiaAcceso.entrar($("correo").value.trim(), $("clave").value)
+      .then(function (d) { usuario = { nombre: d.nombre, correo: d.correo }; abrirPanel(); })
+      .catch(function (e) { mensajeAcceso(e.message, "error"); })
+      .then(function () { $("btn-entrar").disabled = false; });
+  }
+  $("btn-entrar").addEventListener("click", entrar);
+  $("correo").addEventListener("keydown", function (e) { if (e.key === "Enter") $("clave").focus(); });
+  $("clave").addEventListener("keydown", function (e) { if (e.key === "Enter") entrar(); });
+  $("btn-salir").addEventListener("click", function () { JurmiaAcceso.salir(); });
+  $("btn-actualizar").addEventListener("click", function () { cargar(); });
+
+  function abrirPanel() {
+    document.body.classList.add("identificado");
+    $("acceso").classList.add("oculto");
+    $("panel").classList.remove("oculto");
+    if (usuario) $("sesion-nombre").textContent = usuario.nombre;
+    cargar();
+  }
+
+  function cargar() {
+    return api({ accion: "estado" })
+      .then(function (d) {
+        datos = d;
+        if (d.yo) { usuario = d.yo; $("sesion-nombre").textContent = d.yo.nombre; }
+        pintar();
+      })
+      .catch(function (e) {
+        $("contenido").innerHTML = '<div class="mensaje error">No se pudo cargar: ' + esc(e.message) + "</div>";
+      });
+  }
+
+  /* ================================================================== */
+  /* Pintura                                                             */
+  /* ================================================================== */
+
+  function pintar() {
+    var d = datos;
+    $("contenido").innerHTML =
+      '<div class="rejilla">' +
+        '<section class="tarjeta ancha" id="t-2fa"></section>' +
+        '<section class="tarjeta" id="t-equipo"></section>' +
+        '<section class="tarjeta" id="t-consent"></section>' +
+        '<section class="tarjeta ancha" id="t-sesiones"></section>' +
+        '<section class="tarjeta ancha" id="t-accesos"></section>' +
+      "</div>";
+    pintar2FA();
+    pintarEquipo();
+    pintarConsentimientos();
+    pintarSesiones();
+    pintarAccesos();
+  }
+
+  function cabecera(titulo, marca) {
+    return '<div class="tarjeta-cab"><h2>' + esc(titulo) + "</h2>" + (marca || "") + "</div>";
+  }
+
+  /* ---------------- mi verificación en dos pasos ---------------- */
+
+  function pintar2FA() {
+    var d2 = datos.dosPasos;
+    var activa = d2.activo || ui.fase === "codigos";
+    var h = cabecera("Mi verificación en dos pasos",
+      '<span class="marca ' + (activa ? "m-verde" : "m-rojo") + '">' + (activa ? "Activada" : "Sin activar") + "</span>");
+    h += '<div class="tarjeta-cuerpo">';
+
+    if (ui.fase === "codigos" && ui.codigos) {
+      h += '<div class="aviso ok">' + (ui.codigosNuevos
+        ? "Códigos de recuperación renovados. Los anteriores ya no sirven."
+        : "Verificación en dos pasos activada. A partir de ahora le pediremos el código al entrar. Hemos cerrado sus sesiones abiertas en otros dispositivos.") +
+        "</div>" +
+        "<p><b>Guarde ahora estos códigos de recuperación</b> fuera del ordenador (impresos, o en su gestor de contraseñas). " +
+        "Cada uno sirve una sola vez para entrar si pierde o cambia de móvil. No se volverán a mostrar.</p>" +
+        '<div class="codigos">' + ui.codigos.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("") + "</div>" +
+        '<div class="botonera">' +
+          '<button class="secundario" data-a="descargar-codigos">Descargar como .txt</button>' +
+          '<button class="secundario" data-a="copiar-codigos">Copiar</button>' +
+          '<button data-a="codigos-guardados">Ya los he guardado</button>' +
+        "</div>";
+    } else if (ui.fase === "qr" && ui.qr) {
+      h += "<p><b>1.</b> Abra la app de autenticación del móvil (Google Authenticator, Microsoft Authenticator…), " +
+        "pulse «+» o «Añadir cuenta» y escanee este código.</p>" +
+        '<div class="qr"><img alt="Código QR para añadir el panel de JURMIA Abogados a su app de autenticación" src="data:image/svg+xml;base64,' +
+        btoa(ui.qr.qr) + '">' +
+        '<div style="flex:1 1 260px;min-width:0"><p class="apunte" style="margin:0 0 .4rem">¿No puede escanearlo? Añada la cuenta a mano con esta clave (tipo «basada en tiempo»):</p>' +
+        '<div class="clave-manual">' + esc(ui.qr.secreto) + "</div>" +
+        '<p class="apunte" style="margin:.6rem 0 0">Si está en el móvil: <a href="' + esc(ui.qr.uri) + '">abrir directamente en la app</a>. ' +
+        "El código QR caduca en " + esc(ui.qr.caducaMin || 10) + " minutos.</p></div></div>" +
+        "<p><b>2.</b> Escriba el código de 6 cifras que aparece ahora en la app.</p>" +
+        '<div class="formulario"><div class="campo"><label for="f-codigo">Código</label>' +
+        '<input id="f-codigo" class="input-codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></div>' +
+        '<button data-a="confirmar">Confirmar y activar</button>' +
+        '<button class="secundario" data-a="cancelar">Cancelar</button></div>' +
+        '<div class="error-linea" id="err-2fa" role="alert"></div>';
+    } else if (d2.activo) {
+      h += "<p>Activada desde el " + esc(fechaHora(d2.desde)) + ". Para entrar hace falta su contraseña y el código de su app. " +
+        "Le quedan <b>" + esc(d2.codigosRestantes) + "</b> códigos de recuperación." +
+        (d2.codigosRestantes < 3 ? ' <span class="marca m-ambar">Son pocos: genere códigos nuevos</span>' : "") + "</p>";
+      if (ui.fase === "desactivar" || ui.fase === "regenerar") {
+        var esDes = ui.fase === "desactivar";
+        h += '<p class="apunte">' + (esDes
+          ? "Para desactivarla, confirme que es usted: su contraseña y un código de la app (o uno de recuperación)."
+          : "Para generar 8 códigos nuevos (los anteriores dejarán de servir), confirme con su contraseña y el código de la app.") + "</p>" +
+          '<div class="formulario">' +
+            '<div class="campo"><label for="f-clave">Contraseña</label><input id="f-clave" type="password" autocomplete="current-password"></div>' +
+            '<div class="campo"><label for="f-cod">' + (esDes ? "Código de la app o de recuperación" : "Código de la app") + "</label>" +
+            '<input id="f-cod" autocomplete="one-time-code" maxlength="11" spellcheck="false" autocapitalize="off"></div>' +
+            (esDes ? '<button class="peligro" data-a="desactivar">Desactivar</button>' : '<button data-a="regenerar">Generar códigos nuevos</button>') +
+            '<button class="secundario" data-a="cancelar">Cancelar</button>' +
+          "</div>" +
+          '<div class="error-linea" id="err-2fa" role="alert"></div>';
+      } else {
+        h += '<div class="botonera">' +
+          '<button class="secundario" data-a="fase-regenerar">Códigos de recuperación nuevos</button>' +
+          '<button class="peligro" data-a="fase-desactivar">Desactivar</button></div>';
+      }
+    } else {
+      h += "<p>Con la verificación en dos pasos, para entrar hace falta su contraseña <b>y</b> un código de 6 cifras " +
+        "que cambia cada 30 segundos en su móvil. Aunque alguien averigüe la contraseña, no podrá entrar.</p>" +
+        '<p class="apunte">Necesita una app de autenticación gratuita: Google Authenticator, Microsoft Authenticator o similar. ' +
+        "Cada persona del despacho la activa en su propia cuenta, con su propio móvil.</p>" +
+        '<div class="formulario"><div class="campo"><label for="f-clave">Su contraseña actual</label>' +
+        '<input id="f-clave" type="password" autocomplete="current-password"></div>' +
+        '<button data-a="iniciar">Activar</button></div>' +
+        '<div class="error-linea" id="err-2fa" role="alert"></div>';
+    }
+    h += "</div>";
+    var t = $("t-2fa");
+    t.innerHTML = h;
+
+    var cod = $("f-codigo");
+    if (cod) {
+      cod.addEventListener("input", function () {
+        cod.value = cod.value.replace(/\D/g, "").slice(0, 6);
+        if (cod.value.length === 6) accion("confirmar");
+      });
+      cod.addEventListener("keydown", function (e) { if (e.key === "Enter") accion("confirmar"); });
+      setTimeout(function () { cod.focus(); }, 0);
+    }
+    var clave = $("f-clave");
+    if (clave) {
+      clave.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter") return;
+        if ($("f-cod")) $("f-cod").focus(); else accion("iniciar");
+      });
+      if (ui.fase !== "estado") setTimeout(function () { clave.focus(); }, 0);
+    }
+    var fcod = $("f-cod");
+    if (fcod) fcod.addEventListener("keydown", function (e) { if (e.key === "Enter") accion(ui.fase); });
+  }
+
+  function textoCodigos() {
+    return "Códigos de recuperación · Panel de JURMIA Abogados\n" +
+      "Cuenta: " + ((usuario && usuario.correo) || "") + "\n" +
+      "Generados el " + fechaHora(new Date().toISOString()) + "\n" +
+      "Cada código sirve una sola vez. Guárdelos fuera del ordenador.\n\n" +
+      (ui.codigos || []).join("\n") + "\n";
+  }
+
+  function ocupado(boton, si, texto) {
+    if (!boton) return;
+    if (si) { boton.dataset.texto = boton.textContent; boton.textContent = texto || "Comprobando…"; boton.disabled = true; }
+    else { boton.textContent = boton.dataset.texto || boton.textContent; boton.disabled = false; }
+  }
+
+  function error2FA(texto) { var e = $("err-2fa"); if (e) e.textContent = texto || ""; }
+
+  function accion(a, boton) {
+    var v = function (id) { var el = $(id); return el ? el.value.trim() : ""; };
+    switch (a) {
+      case "iniciar":
+        if (!$("f-clave").value) { error2FA("Escriba su contraseña."); return; }
+        ocupado(boton, true, "Preparando…");
+        api({ accion: "2fa-iniciar", clave: $("f-clave").value })
+          .then(function (d) { ui.fase = "qr"; ui.qr = d; pintar2FA(); })
+          .catch(function (e) { ocupado(boton, false); $("f-clave").value = ""; error2FA(e.message); });
+        return;
+      case "confirmar": {
+        var c = v("f-codigo").replace(/\D/g, "");
+        if (c.length !== 6) { error2FA("El código tiene 6 cifras."); return; }
+        var b = document.querySelector('[data-a="confirmar"]');
+        if (b && b.disabled) return;
+        ocupado(b, true);
+        api({ accion: "2fa-confirmar", codigo: c })
+          .then(function (d) {
+            ui.fase = "codigos"; ui.codigos = d.codigos; ui.codigosNuevos = false; ui.qr = null;
+            datos.dosPasos = { activo: true, desde: new Date().toISOString(), codigosRestantes: d.codigos.length };
+            pintar2FA();
+          })
+          .catch(function (e) {
+            ocupado(b, false);
+            if (e.datos && e.datos.reiniciar) { ui.fase = "estado"; ui.qr = null; pintar2FA(); error2FA(e.message); return; }
+            $("f-codigo").value = ""; $("f-codigo").focus(); error2FA(e.message);
+          });
+        return;
+      }
+      case "fase-desactivar": ui.fase = "desactivar"; pintar2FA(); return;
+      case "fase-regenerar": ui.fase = "regenerar"; pintar2FA(); return;
+      case "cancelar": ui.fase = "estado"; ui.qr = null; pintar2FA(); return;
+      case "desactivar":
+      case "regenerar": {
+        if (!$("f-clave").value || !v("f-cod")) { error2FA("Escriba la contraseña y el código."); return; }
+        var bt = document.querySelector('[data-a="' + a + '"]');
+        ocupado(bt, true);
+        api({ accion: a === "desactivar" ? "2fa-desactivar" : "2fa-regenerar", clave: $("f-clave").value, codigo: v("f-cod") })
+          .then(function (d) {
+            if (a === "desactivar") {
+              ui.fase = "estado";
+              mensaje("Verificación en dos pasos desactivada. Puede volver a activarla cuando quiera (por ejemplo, con un móvil nuevo).", "bien");
+              cargar();
+            } else {
+              ui.fase = "codigos"; ui.codigos = d.codigos; ui.codigosNuevos = true;
+              datos.dosPasos.codigosRestantes = d.codigos.length;
+              pintar2FA();
+            }
+          })
+          .catch(function (e) { ocupado(bt, false); $("f-cod").value = ""; error2FA(e.message); });
+        return;
+      }
+      case "descargar-codigos":
+        descargar("codigos-recuperacion-panel-jurmia.txt", textoCodigos());
+        return;
+      case "copiar-codigos":
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(textoCodigos()).then(function () {
+            var b2 = document.querySelector('[data-a="copiar-codigos"]'); if (b2) b2.textContent = "Copiados";
+          }, function () { error2FA("No se han podido copiar. Use «Descargar como .txt»."); });
+        }
+        return;
+      case "codigos-guardados":
+        ui.fase = "estado"; ui.codigos = null; cargar();
+        return;
+    }
+  }
+
+  /* ---------------- equipo ---------------- */
+
+  function pintarEquipo() {
+    var filas = datos.equipo.map(function (p) {
+      return "<tr>" +
+        '<td data-t="Persona"><b>' + esc(p.nombre) + "</b>" + (p.yo ? ' <span class="suave">(usted)</span>' : "") +
+        '<div class="suave" style="font-size:.75rem">' + esc(p.correo) + "</div></td>" +
+        '<td data-t="2 pasos">' + (p.dosPasos
+          ? '<span class="marca m-verde">Activada</span><div class="suave" style="font-size:.72rem;margin-top:.2rem">desde ' + esc(fechaHora(p.desde)) + "</div>"
+          : '<span class="marca m-rojo">Sin activar</span>') + "</td>" +
+        '<td data-t="Sesiones" class="num">' + esc(p.sesiones) + "</td>" +
+        '<td data-t="Última entrada" class="num">' + (p.ultimaEntrada ? esc(hace(p.ultimaEntrada)) : "—") + "</td>" +
+        '<td style="text-align:right">' + (!p.yo && p.dosPasos
+          ? '<button class="secundario mini" data-quitar="' + esc(p.correo) + '">Quitar 2 pasos</button>' : "") + "</td>" +
+        "</tr>";
+    }).join("");
+
+    var h = cabecera("Equipo") + '<div class="tarjeta-cuerpo">' +
+      '<p class="apunte">Las cuentas de ADMIN_USUARIOS. Cada una activa la verificación en su propio móvil.</p>' +
+      '<div class="tabla-movil"><table><thead><tr><th>Persona</th><th>2 pasos</th><th>Sesiones</th><th>Última entrada</th><th></th></tr></thead>' +
+      "<tbody>" + filas + "</tbody></table></div>";
+
+    if (ui.quitar) {
+      var p = datos.equipo.find(function (x) { return x.correo === ui.quitar; });
+      h += "<hr><p><b>Quitar la verificación a " + esc(p ? p.nombre : ui.quitar) + "</b></p>" +
+        '<p class="apunte">Solo si ha perdido el móvil <b>y</b> sus códigos de recuperación. Se cerrarán sus sesiones; ' +
+        "después podrá entrar solo con la contraseña y volver a activarla con el móvil nuevo. Confirme con <b>su</b> contraseña y el código de <b>su</b> app.</p>" +
+        '<div class="formulario">' +
+          '<div class="campo"><label for="q-clave">Su contraseña</label><input id="q-clave" type="password" autocomplete="current-password"></div>' +
+          '<div class="campo"><label for="q-cod">Código de su app</label><input id="q-cod" inputmode="numeric" maxlength="6" autocomplete="one-time-code"></div>' +
+          '<button class="peligro" data-a-eq="quitar">Quitar verificación</button>' +
+          '<button class="secundario" data-a-eq="cancelar">Cancelar</button>' +
+        "</div>" +
+        '<div class="error-linea" id="err-quitar" role="alert"></div>';
+    }
+    h += "</div>";
+    var t = $("t-equipo");
+    t.innerHTML = h;
+    if (ui.quitar) setTimeout(function () { $("q-clave").focus(); }, 0);
+  }
+
+  /* ---------------- sesiones abiertas ---------------- */
+
+  function pintarSesiones() {
+    var ses = datos.sesiones || [];
+    var mias = ses.filter(function (x) { return x.correo === datos.yo.correo; }).length;
+    var filas = ses.map(function (x) {
+      var esta = x.id === datos.estaSesion;
+      return "<tr>" +
+        '<td data-t="Persona">' + esc(x.nombre) + (esta ? ' <span class="marca m-tinta">Esta sesión</span>' : "") + "</td>" +
+        '<td data-t="Dispositivo">' + esc(dispositivo(x.navegador)) + "</td>" +
+        '<td data-t="IP" class="num">' + esc(x.ip) + (x.ip === datos.tuIP ? ' <span class="suave">(su conexión)</span>' : "") + "</td>" +
+        '<td data-t="Entró" class="num">' + esc(fechaHora(x.creada)) + "</td>" +
+        '<td data-t="Actividad" class="num">' + esc(hace(x.actividad)) + "</td>" +
+        '<td data-t="Cómo" class="suave">' + (x.via === "clave" ? "Solo contraseña" : x.via === "recuperacion" ? "Código de recuperación" : "2 pasos") + "</td>" +
+        '<td style="text-align:right"><button class="secundario mini" data-cerrar="' + esc(x.id) + '">Cerrar</button></td>' +
+        "</tr>";
+    }).join("");
+
+    $("t-sesiones").innerHTML = cabecera("Sesiones abiertas", '<span class="marca m-gris">' + ses.length + "</span>") +
+      '<div class="tarjeta-cuerpo">' +
+      '<p class="apunte">Se cierran solas tras ' + esc(datos.inactividadMin) + " minutos sin actividad y, como máximo, a las " +
+      esc(datos.duracionMaxHoras) + " horas. Si ve una que no reconoce, ciérrela y cambie la contraseña en Vercel.</p>" +
+      (ses.length
+        ? '<div class="tabla-scroll tabla-movil"><table><thead><tr><th>Persona</th><th>Dispositivo</th><th>IP</th><th>Entró</th><th>Actividad</th><th>Cómo entró</th><th></th></tr></thead><tbody>' +
+          filas + "</tbody></table></div>"
+        : '<p class="apunte">No hay sesiones abiertas.</p>') +
+      '<div class="botonera" style="margin-top:.9rem">' +
+        (mias > 1 ? '<button class="secundario" data-a-ses="otras">Cerrar mis otras sesiones</button>' : "") +
+        '<button class="secundario" data-a-ses="todas">Cerrar sesión en todos mis dispositivos</button>' +
+      "</div></div>";
+  }
+
+  /* ---------------- últimos accesos ---------------- */
+
+  function pintarAccesos() {
+    var acc = datos.accesos || [];
+    var etiqueta = function (a) {
+      if (a.tipo === "entrada") return '<span class="marca m-verde">Correcto</span>';
+      if (a.tipo === "fallo") return '<span class="marca m-rojo">Fallido</span>';
+      if (a.tipo === "bloqueo") return '<span class="marca m-rojo">Bloqueado</span>';
+      return '<span class="marca m-gris">Cambio</span>';
+    };
+    var filas = acc.map(function (a) {
+      return '<tr class="' + (a.ok ? "" : "fallo") + '">' +
+        '<td data-t="Fecha" class="num">' + esc(fechaHora(a.fecha)) + "</td>" +
+        '<td data-t="Resultado">' + etiqueta(a) + "</td>" +
+        '<td data-t="Detalle">' + esc(a.motivo) + "</td>" +
+        '<td data-t="Cuenta" class="suave">' + esc(a.nombre || a.correo || "—") +
+          (!a.ok && a.correo && !a.nombre ? '<div style="font-size:.7rem">correo escrito</div>' : "") + "</td>" +
+        '<td data-t="IP" class="num">' + esc(a.ip) + (a.ip === datos.tuIP ? ' <span class="suave">(usted)</span>' : "") + "</td>" +
+        '<td data-t="Dispositivo" class="suave">' + esc(dispositivo(a.navegador)) + "</td>" +
+        "</tr>";
+    }).join("");
+    $("t-accesos").innerHTML = cabecera("Últimos accesos") + '<div class="tarjeta-cuerpo">' +
+      '<p class="apunte">Entradas al panel de todo el equipo, correctas y fallidas, y los cambios de seguridad. ' +
+      "Si ve muchos fallos que no son suyos, cambien las contraseñas y activen la verificación en dos pasos. " +
+      "Ocho fallos desde una misma conexión la bloquean 15 minutos; veinte contra una cuenta, una hora.</p>" +
+      (acc.length
+        ? '<div class="tabla-scroll tabla-movil"><table><thead><tr><th>Fecha</th><th>Resultado</th><th>Detalle</th><th>Cuenta</th><th>IP</th><th>Dispositivo</th></tr></thead><tbody>' +
+          filas + "</tbody></table></div>"
+        : '<p class="apunte">Todavía no hay accesos registrados.</p>') +
+      "</div>";
+  }
+
+  /* ---------------- registro de consentimientos ---------------- */
+
+  function pintarConsentimientos() {
+    var c = datos.consentimientos;
+    var t = $("t-consent");
+    var h = cabecera("Registro de consentimientos de cookies") + '<div class="tarjeta-cuerpo">';
+    h += '<p class="apunte">La prueba que exige el artículo 7.1 del RGPD, por si la pide la AEPD: cada vez que un visitante ' +
+      "acepta, rechaza o elige cookies queda anotado con la fecha, lo que decidió, el botón que pulsó y el texto que tenía delante. " +
+      "No se guarda su IP, solo una huella irreversible.</p>";
+    if (!c) {
+      h += '<div class="aviso">No se puede leer el registro ahora mismo. Pruebe con «Actualizar».</div>';
+    } else {
+      var tot = c.reparto.todas + c.reparto.ninguna + c.reparto.parcial || 1;
+      var pc = function (n) { return Math.round((n / tot) * 100); };
+      h += '<div class="kpis">' +
+        '<div class="kpi"><small>Decisiones</small><b>' + esc(c.total.toLocaleString("es-ES")) + "</b></div>" +
+        '<div class="kpi"><small>Últimos 30 días</small><b>' + esc(c.ultimos30.toLocaleString("es-ES")) + "</b></div>" +
+        '<div class="kpi"><small>La última</small><b style="font-size:.85rem">' + (c.ultimo ? esc(hace(c.ultimo)) : "—") + "</b></div>" +
+        "</div>";
+      if (c.muestra) {
+        h += '<div class="suave" style="font-size:.75rem">De las últimas ' + esc(c.muestra) + " decisiones:</div>" +
+          '<div class="reparto">' +
+            '<i style="width:' + pc(c.reparto.todas) + '%;background:var(--verde)"></i>' +
+            '<i style="width:' + pc(c.reparto.parcial) + '%;background:var(--ambar)"></i>' +
+            '<i style="width:' + pc(c.reparto.ninguna) + '%;background:var(--tinta-media)"></i>' +
+          "</div>" +
+          '<div class="leyenda">' +
+            '<span style="--c:var(--verde)">Aceptan todas ' + pc(c.reparto.todas) + "%</span>" +
+            '<span style="--c:var(--ambar)">Eligen ' + pc(c.reparto.parcial) + "%</span>" +
+            '<span style="--c:var(--tinta-media)">Rechazan todas ' + pc(c.reparto.ninguna) + "%</span>" +
+          "</div>";
+      }
+      var hoy = new Date();
+      var haceUnAno = new Date(hoy.getTime() - 365 * 864e5);
+      var iso = function (x) {   // fecha local AAAA-MM-DD
+        return x.getFullYear() + "-" + ("0" + (x.getMonth() + 1)).slice(-2) + "-" + ("0" + x.getDate()).slice(-2);
+      };
+      h += '<div class="formulario">' +
+          '<div class="campo" style="flex-basis:140px"><label for="c-desde">Desde</label><input type="date" id="c-desde" value="' + iso(haceUnAno) + '"></div>' +
+          '<div class="campo" style="flex-basis:140px"><label for="c-hasta">Hasta</label><input type="date" id="c-hasta" value="' + iso(hoy) + '"></div>' +
+          '<button data-a-c="csv">Descargar CSV</button>' +
+        "</div>" +
+        '<p class="apunte" style="margin-top:.6rem">Para Excel (separado por «;»). Cada fila lleva el identificador del texto mostrado; ' +
+        'los textos literales van en <a href="#" data-a-c="textos">este otro CSV</a>. Se conserva ' + esc(c.conservacionAnios) +
+        " años y lo anterior se borra solo.</p>" +
+        "<hr>" +
+        '<div class="formulario"><div class="campo" style="max-width:none;flex-basis:280px"><label for="c-id">Buscar un visitante por su identificador</label>' +
+        '<input id="c-id" placeholder="p. ej. 3f2b6c1e-8a4d-4e7b-9c2a-1d5e6f7a8b9c" spellcheck="false" autocapitalize="off"></div>' +
+        '<button class="secundario" data-a-c="buscar">Buscar</button></div>' +
+        '<p class="apunte" style="margin-top:.45rem">El visitante lo ve en «Configurar cookies», al pie de la web.</p>' +
+        '<div id="c-resultado"></div>';
+    }
+    h += '<div class="error-linea" id="err-consent" role="alert"></div></div>';
+    t.innerHTML = h;
+    var cid = $("c-id");
+    if (cid) cid.addEventListener("keydown", function (e) { if (e.key === "Enter") accionConsent("buscar"); });
+  }
+
+  function accionConsent(a, boton) {
+    var err = $("err-consent");
+    err.textContent = "";
+    if (a === "csv") {
+      ocupado(boton, true, "Preparando…");
+      api({ accion: "consentimientos-csv", desde: $("c-desde").value, hasta: $("c-hasta").value }, true)
+        .then(function (r) {
+          // El navegador quita el BOM al leer la respuesta; se vuelve a poner para que Excel lea bien los acentos
+          descargar("consentimientos-cookies-" + $("c-desde").value + "-a-" + $("c-hasta").value + ".csv",
+            "\uFEFF" + r.texto.replace(/^\uFEFF/, ""), "text/csv;charset=utf-8");
+          if (r.truncado) err.textContent = "El archivo trae las " + r.filas + " decisiones más recientes del periodo. Acorte las fechas para descargar el resto.";
+          else if (r.filas === "0") err.textContent = "No hay decisiones en esas fechas.";
+        })
+        .catch(function (e) { err.textContent = e.message; })
+        .then(function () { ocupado(boton, false); });
+    }
+    if (a === "textos") {
+      api({ accion: "consentimientos-textos" }, true)
+        .then(function (r) { descargar("consentimientos-cookies-textos.csv", "\uFEFF" + r.texto.replace(/^\uFEFF/, ""), "text/csv;charset=utf-8"); })
+        .catch(function (e) { err.textContent = e.message; });
+    }
+    if (a === "buscar") {
+      var id = $("c-id").value.trim();
+      if (!id) { err.textContent = "Escriba el identificador."; return; }
+      $("c-resultado").innerHTML = '<p class="apunte">Buscando…</p>';
+      api({ accion: "consentimientos-buscar", id: id })
+        .then(function (r) {
+          if (!r.registros.length) {
+            $("c-resultado").innerHTML = '<div class="aviso">No hay ninguna decisión con ese identificador.</div>';
+            return;
+          }
+          $("c-resultado").innerHTML = '<div class="tabla-movil historial" style="margin-top:.6rem"><table><thead><tr><th>Fecha</th><th>Decisión</th><th>Opción</th></tr></thead><tbody>' +
+            r.registros.map(function (x) {
+              var dec = x.decision === "todas" ? "Acepta todas" : x.decision === "ninguna" ? "Rechaza todas"
+                : "Analíticas: " + (x.analitica ? "sí" : "no") + " · Publicidad: " + (x.marketing ? "sí" : "no");
+              return "<tr>" +
+                '<td data-t="Fecha" class="num">' + esc(fechaHora(x.fecha)) + "</td>" +
+                '<td data-t="Decisión">' + esc(dec) + '<div class="suave" style="font-size:.72rem">versión ' + esc(x.version) + " · " + esc(x.pagina) + "</div></td>" +
+                '<td data-t="Opción">' + esc(x.opcionTexto) +
+                  (x.textoMostrado ? "<details><summary>Texto que se le mostró</summary><div class=\"texto-literal\">" + esc(x.textoMostrado) + "</div></details>" : "") +
+                "</td></tr>";
+            }).join("") + "</tbody></table></div>" +
+            '<p class="botonera" style="margin-top:.6rem"><button class="secundario mini" data-a-c="json">Descargar este historial (JSON)</button></p>';
+          ui.historial = r;
+        })
+        .catch(function (e) { $("c-resultado").innerHTML = ""; err.textContent = e.message; });
+    }
+    if (a === "json" && ui.historial) {
+      descargar("consentimiento-" + ui.historial.identificador + ".json", JSON.stringify(ui.historial, null, 2), "application/json");
+    }
+  }
+
+  /* ---------------- clics ---------------- */
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-a],[data-quitar],[data-a-eq],[data-cerrar],[data-a-ses],[data-a-c]");
+    if (!b || !$("contenido").contains(b)) return;
+    if (b.tagName === "A") e.preventDefault();
+    mensaje("");
+
+    if (b.dataset.a) { accion(b.dataset.a, b); return; }
+    if (b.dataset.aC) { accionConsent(b.dataset.aC, b); return; }
+
+    if (b.dataset.quitar) { ui.quitar = b.dataset.quitar; pintarEquipo(); return; }
+    if (b.dataset.aEq === "cancelar") { ui.quitar = null; pintarEquipo(); return; }
+    if (b.dataset.aEq === "quitar") {
+      var errq = $("err-quitar");
+      if (!$("q-clave").value || !$("q-cod").value.trim()) { errq.textContent = "Escriba su contraseña y el código de su app."; return; }
+      ocupado(b, true);
+      api({ accion: "quitar-2fa", correo: ui.quitar, clave: $("q-clave").value, codigo: $("q-cod").value.trim() })
+        .then(function (d) {
+          var quien = ui.quitar;
+          ui.quitar = null;
+          mensaje("Verificación quitada a " + quien + (d.sesionesCerradas ? " y cerradas sus " + d.sesionesCerradas + " sesiones" : "") +
+            ". Puede entrar con su contraseña y volver a activarla.", "bien");
+          cargar();
+        })
+        .catch(function (e2) { ocupado(b, false); $("q-cod").value = ""; errq.textContent = e2.message; });
+      return;
+    }
+
+    if (b.dataset.cerrar) {
+      var propia = b.dataset.cerrar === datos.estaSesion;
+      if (propia && !confirm("Es la sesión que está usando ahora: tendrá que volver a entrar. ¿Continuar?")) return;
+      ocupado(b, true, "Cerrando…");
+      api({ accion: "cerrar-sesion", id: b.dataset.cerrar })
+        .then(function (d) {
+          if (d.propia) { JurmiaAcceso.salir(); return; }
+          mensaje("Sesión cerrada.", "bien");
+          cargar();
+        })
+        .catch(function (e2) { ocupado(b, false); mensaje(e2.message, "error"); });
+      return;
+    }
+
+    if (b.dataset.aSes) {
+      var todas = b.dataset.aSes === "todas";
+      if (todas && !confirm("Se cerrará su sesión en todos los ordenadores y móviles, incluido este. ¿Continuar?")) return;
+      ocupado(b, true, "Cerrando…");
+      api({ accion: "cerrar-mias", incluida: todas })
+        .then(function (d) {
+          if (todas) { JurmiaAcceso.salir(); return; }
+          mensaje(d.cerradas ? "Cerradas " + d.cerradas + " sesiones en otros dispositivos." : "No había otras sesiones abiertas.", "bien");
+          cargar();
+        })
+        .catch(function (e2) { ocupado(b, false); mensaje(e2.message, "error"); });
+    }
+  });
+
+  // Arranque: con sesión guardada se entra directo, sin volver a pedir la clave.
+  if (JurmiaAcceso.token()) abrirPanel();
+})();
+</script>
+</body>
+</html>
